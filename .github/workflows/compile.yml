@@ -1,24 +1,36 @@
-name: Compile Thesis
+name: Compila Tesi con XeLaTeX e Biber
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  compile-latex:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Clona il repository
+        uses: actions/checkout@v4
 
-    - name: Compile LaTeX
-      uses: xu-cheng/latex-action@v3
-      with:
-        root_file: main.tex
-        latexmk_use_xelatex: true
+      - name: Installa LaTeX completo con Biber
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-full biber
 
-    - name: Upload PDF
-      uses: actions/upload-artifact@v4
-      with:
-        name: Tesi-PDF
-        path: main.pdf
+      - name: Compila LaTeX (1° passaggio)
+        run: xelatex -interaction=nonstopmode main.tex
+
+      - name: Esegui Biber
+        run: biber main
+
+      - name: Compila LaTeX (2° e 3° passaggio)
+        run: |
+          xelatex -interaction=nonstopmode main.tex
+          xelatex -interaction=nonstopmode main.tex
+
+      - name: Carica il PDF generato
+        uses: actions/upload-artifact@v4
+        with:
+          name: tesi-pdf
+          path: main.pdf
