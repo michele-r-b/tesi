@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
   build:
@@ -16,18 +17,11 @@ jobs:
       - name: Installa LaTeX completo con Biber
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-full biber
+          sudo apt-get install -y texlive-full
 
-      - name: Compila LaTeX (1° passaggio)
-        run: xelatex -interaction=nonstopmode main.tex
-
-      - name: Esegui Biber
-        run: biber main
-
-      - name: Compila LaTeX (2° e 3° passaggio)
+      - name: Compila la tesi con latexmk
         run: |
-          xelatex -interaction=nonstopmode main.tex
-          xelatex -interaction=nonstopmode main.tex
+          latexmk -xelatex -interaction=nonstopmode -file-line-error main.tex
 
       - name: Carica il PDF generato
         uses: actions/upload-artifact@v4
