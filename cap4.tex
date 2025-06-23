@@ -1,0 +1,42 @@
+\chapter{Gestione di Dispositivi Multimarca}
+\section{La sfida dell'interoperabilità}
+Uno dei principali ostacoli alla diffusione della domotica è rappresentato dalla mancanza di interoperabilità tra dispositivi di marche diverse. Le barriere tecnologiche sono spesso dovute all'utilizzo di protocolli proprietari, all'assenza di standard comuni e a una frammentazione dell'ecosistema. Tuttavia, iniziative come lo standard Matter e le alleanze tra produttori stanno contribuendo a superare tali ostacoli, promuovendo la compatibilità tra dispositivi.
+
+\section{Soluzioni generiche per la gestione multimarca}
+Per garantire la coesistenza e il funzionamento congiunto di dispositivi di produttori diversi, sono state sviluppate soluzioni generiche quali:
+\begin{itemize}
+    \item \textbf{Gateway universali}: dispositivi in grado di tradurre i protocolli tra sistemi differenti;
+    \item \textbf{Piattaforme open-source}: come Home Assistant o OpenHAB, che permettono una personalizzazione spinta e ampia compatibilità;
+    \item \textbf{Standard Matter}: protocollo aperto sviluppato da CSA (Connectivity Standards Alliance) per unificare l'ecosistema IoT domestico, garantendo interoperabilità nativa.
+\end{itemize}
+
+\section{Soluzioni native basate sugli smartphone}
+Numerosi produttori hanno sviluppato piattaforme integrate nei sistemi operativi mobili, che permettono il controllo centralizzato dei dispositivi domestici:
+\begin{itemize}
+    \item \textbf{Apple HomeKit}: orientato alla sicurezza e alla privacy, con integrazione tramite l'app Casa e l'assistente Siri;
+    \item \textbf{Google Home}: supporta un'ampia gamma di dispositivi e l'assistente vocale Google Assistant;
+    \item \textbf{Amazon Alexa}: piattaforma versatile con ampia compatibilità e controllo vocale tramite dispositivi Echo;
+    \item \textbf{Samsung SmartThings}: combina compatibilità con dispositivi Zigbee/Z-Wave e automazioni intelligenti.
+\end{itemize}
+
+\section{Confronto tra soluzioni native}
+Le piattaforme native presentano caratteristiche differenti in termini di facilità di configurazione, sicurezza, compatibilità e funzioni avanzate. Nella Tabella~\ref{tab:confronto_piattaforme} viene proposta una comparazione sintetica.
+
+\begin{table}[h!]
+    \centering
+    \caption{Confronto tra principali soluzioni domotiche native}
+    \label{tab:confronto_piattaforme}
+    \begin{tabular}{@{}lllll@{}}
+        \toprule
+        \textbf{Piattaforma} & \textbf{Compatibilità} & \textbf{Sicurezza} & \textbf{Controllo Vocale} & \textbf{Scalabilità} \\
+        \midrule
+        Apple HomeKit & Alta & Elevata & Siri & Media \\
+        Google Home & Molto Alta & Media & Google Assistant & Alta \\
+        Amazon Alexa & Alta & Media & Alexa & Alta \\
+        Samsung SmartThings & Alta & Alta & Bixby / Alexa & Alta \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+% Capitolo 5: Esempio pratico: Sistema Domotico con Apple HomeKit
