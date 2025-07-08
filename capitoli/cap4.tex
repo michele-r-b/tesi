@@ -1,17 +1,28 @@
-
 \chapter{Sicurezza e Privacy nella Domotica Residenziale}
 
 \section{Introduzione alla sicurezza IoT domestica}
-La sicurezza in ambito IoT residenziale è cruciale poiché i dispositivi intelligenti raccolgono e condividono continuamente dati sensibili degli utenti.
+La sicurezza in ambito IoT residenziale è cruciale poiché i dispositivi intelligenti raccolgono e condividono continuamente dati sensibili degli utenti, come informazioni personali, abitudini domestiche e dati biometrici. La crescente diffusione di dispositivi connessi, quali termostati intelligenti, telecamere di sorveglianza, assistenti vocali e sensori ambientali, aumenta la superficie di attacco potenziale. È quindi fondamentale adottare strategie di sicurezza integrate che includano la protezione dei dati in transito e a riposo, la gestione degli accessi e la resilienza contro attacchi informatici. Studi recenti evidenziano come la mancanza di aggiornamenti software e la configurazione predefinita dei dispositivi rappresentino i principali vettori di rischio (Roman et al., 2013; Sicari et al., 2015).
 
 \section{Minacce e vulnerabilità comuni}
-Descrizione delle minacce tipiche: intrusioni, malware, vulnerabilità dei protocolli wireless e cablati.
+Le minacce tipiche nel contesto IoT domestico includono intrusioni non autorizzate, attacchi malware specifici per dispositivi embedded, e vulnerabilità nei protocolli di comunicazione wireless come ZigBee, Z-Wave, Wi-Fi e Bluetooth. Ad esempio, attacchi di tipo Man-in-the-Middle (MitM) possono intercettare e manipolare dati sensibili, mentre exploit di buffer overflow possono compromettere i firmware dei dispositivi. Inoltre, la presenza di dispositivi con password di default o aggiornamenti mancanti facilita l'accesso illecito. Un caso noto è stato l'attacco Mirai (Antonakakis et al., 2017), che ha sfruttato dispositivi IoT vulnerabili per generare un vasto botnet DDoS. È quindi essenziale identificare e mitigare vulnerabilità note attraverso analisi di sicurezza periodiche e penetration testing.
 
 \section{Best practice per garantire sicurezza e privacy}
-Misure di prevenzione e protezione come aggiornamenti regolari, reti separate, firewall e sistemi di monitoraggio proattivo.
+Per garantire sicurezza e privacy è consigliabile implementare una serie di misure preventive e protettive. Tra queste, l'applicazione regolare di aggiornamenti firmware e patch di sicurezza è fondamentale per correggere vulnerabilità note. La segmentazione della rete domestica, ad esempio tramite VLAN o reti Wi-Fi separate per dispositivi IoT e dispositivi personali, riduce il rischio di compromissione trasversale. L'uso di firewall e sistemi di rilevamento delle intrusioni (IDS) consente di monitorare il traffico e bloccare attività sospette. Inoltre, l'adozione di politiche di gestione degli accessi basate su principi di minimo privilegio e autenticazione multifattoriale (MFA) rafforza la protezione degli account. Infine, la sensibilizzazione degli utenti su pratiche di sicurezza, come la modifica delle password di default, è un elemento chiave (Fernandes et al., 2016).
 
 \section{Tecniche di crittografia e autenticazione nei protocolli IoT}
-Panoramica su crittografia end-to-end, TLS/SSL, autenticazione a due fattori e gestione sicura delle credenziali.
+La protezione dei dati in ambienti IoT si basa su tecniche di crittografia end-to-end, che garantiscono la riservatezza e l'integrità delle comunicazioni tra dispositivi e server cloud. Protocollo TLS/SSL è ampiamente utilizzato per cifrare le comunicazioni su IP, mentre protocolli specifici per IoT, come DTLS (Datagram Transport Layer Security), sono adottati per ambienti con limitate risorse computazionali. L'autenticazione a due fattori (2FA) e l'uso di certificati digitali migliorano la sicurezza degli accessi, riducendo il rischio di compromissione da password deboli. La gestione sicura delle credenziali, tramite hardware security modules (HSM) o Trusted Platform Modules (TPM), è essenziale per prevenire furti di chiavi crittografiche. Inoltre, l'adozione di standard come OAuth 2.0 e MQTT con autenticazione integrata facilita un controllo granulare degli accessi (Sicari et al., 2015; Yang et al., 2017).
 
 \section{Analisi di casi di violazione della sicurezza in ambito domestico}
-Esempi concreti e studi di incidenti di sicurezza, con analisi e lezioni apprese.
+Diversi casi concreti evidenziano le conseguenze di violazioni della sicurezza in ambito domestico. Un esempio è l'hacking di telecamere IP domestiche che ha portato alla diffusione di video privati online, sfruttando vulnerabilità di default nelle credenziali e firmware obsoleti. Un altro caso riguarda la compromissione di assistenti vocali che, una volta controllati da attaccanti, possono intercettare conversazioni o attivare dispositivi senza consenso. L'analisi di questi incidenti sottolinea l'importanza di adottare misure di sicurezza proattive e di mantenere aggiornati i dispositivi. Le lezioni apprese indicano inoltre la necessità di una maggiore regolamentazione e standardizzazione in materia di sicurezza IoT domestica (Checkoway et al., 2011; Fernandes et al., 2016). Tali studi contribuiscono a definire linee guida per la progettazione di sistemi più sicuri e resilienti.
+
+\bigskip
+\noindent\textbf{Riferimenti bibliografici}
+
+\begin{itemize}
+\item Antonakakis, M., April, T., Bailey, M., et al. (2017). Understanding the Mirai Botnet. \textit{USENIX Security Symposium}.
+\item Checkoway, S., McCoy, D., Kantor, B., et al. (2011). Comprehensive Experimental Analyses of Automotive Attack Surfaces. \textit{USENIX Security Symposium}.
+\item Fernandes, E., Jung, J., & Prakash, A. (2016). Security Analysis of Emerging Smart Home Applications. \textit{IEEE Symposium on Security and Privacy}.
+\item Roman, R., Zhou, J., & Lopez, J. (2013). On the Features and Challenges of Security and Privacy in Distributed Internet of Things. \textit{Computer Networks}, 57(10), 2266–2279.
+\item Sicari, S., Rizzardi, A., Grieco, L. A., & Coen-Porisini, A. (2015). Security, Privacy and Trust in Internet of Things: The Road Ahead. \textit{Computer Networks}, 76, 146–164.
+\item Yang, Y., Wu, L., Yin, G., Li, L., & Zhao, H. (2017). A Survey on Security and Privacy Issues in Internet-of-Things. \textit{IEEE Internet of Things Journal}, 4(5), 1250–1258.
+\end{itemize}
