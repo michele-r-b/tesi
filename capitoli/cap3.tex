@@ -1,20 +1,35 @@
 \chapter{Evoluzione dei Protocolli di Comunicazione IoT}
+
 \section{Introduzione ai protocolli IoT}
-I protocolli di comunicazione IoT sono insiemi di regole che permettono ai dispositivi intelligenti di scambiarsi dati all'interno di una rete. Nella domotica residenziale, essi rappresentano il fondamento tecnico per l'interoperabilità e l'efficienza dell'intero sistema. Tali protocolli si dividono principalmente in due categorie: cablati (come KNX, RS-485) e wireless (come Zigbee, Z-Wave, Wi-Fi, Bluetooth).
+I protocolli di comunicazione IoT costituiscono il cuore tecnologico dei sistemi domotici intelligenti, definendo le modalità con cui dispositivi eterogenei si scambiano informazioni all'interno di una rete. L'evoluzione di tali protocolli riflette i cambiamenti delle esigenze applicative e tecnologiche, oltre che l'espansione delle applicazioni IoT nella vita quotidiana. Questi protocolli possono essere distinti principalmente in due categorie: protocolli cablati (come KNX, RS-485) e protocolli wireless (come Zigbee, Z-Wave, Wi-Fi, Bluetooth Low Energy, Thread e Matter).
 
-\section{Storia ed evoluzione dei protocolli}
-Inizialmente, i sistemi domotici si basavano su protocolli proprietari, sviluppati da singoli produttori e caratterizzati da limitata interoperabilità. Con il tempo, la richiesta di soluzioni più flessibili ha favorito la nascita di standard aperti e interoperabili. L'evoluzione tecnologica ha portato all'adozione di reti mesh, integrazione con il cloud e, più recentemente, all'impiego di protocolli basati su IP, come Thread e Matter.
+\section{Protocolli cablati: KNX e RS-485}
+Storicamente, le prime soluzioni domotiche si basavano prevalentemente su protocolli cablati, tra cui KNX e RS-485, che offrivano vantaggi in termini di stabilità e affidabilità della comunicazione. KNX, in particolare, è diventato uno standard internazionale (ISO/IEC 14543-3), noto per la sua robustezza, affidabilità e flessibilità, consentendo l'integrazione di diversi dispositivi all'interno di una rete domotica estesa \parencite{knxStandard}. RS-485, invece, ha trovato applicazione in contesti industriali e domestici grazie alla sua elevata resistenza alle interferenze e alla capacità di gestire connessioni su lunghe distanze.
 
-\section{Analisi dei principali protocolli}
+\section{Protocolli wireless: Zigbee, Z-Wave, Wi-Fi e Bluetooth Low Energy}
+Con l'avvento di tecnologie wireless più avanzate e la necessità di semplificare le installazioni domestiche, protocolli come Zigbee, Z-Wave, Wi-Fi e Bluetooth Low Energy (BLE) hanno acquisito crescente popolarità:
 \begin{itemize}
-    \item \textbf{Zigbee}: protocollo wireless a basso consumo, basato su IEEE 802.15.4, adatto per reti mesh.
-    \item \textbf{Z-Wave}: simile a Zigbee ma con maggiore interoperabilità, sviluppato specificamente per la domotica.
-    \item \textbf{Wi-Fi}: ampiamente diffuso, offre elevata larghezza di banda ma consuma più energia.
-    \item \textbf{Thread}: protocollo IPv6-based, progettato per reti mesh sicure e scalabili.
-    \item \textbf{Matter}: standard aperto e universale, focalizzato sull'interoperabilità tra dispositivi multimarca.
-    \item \textbf{Bluetooth Low Energy (BLE)}: adatto per comunicazioni a corto raggio e basso consumo.
+    \item \textbf{Zigbee}: Basato sullo standard IEEE 802.15.4, è ottimizzato per reti mesh a basso consumo energetico, ideale per sensori e attuatori a batteria \parencite{zigbeeAlliance}.
+    \item \textbf{Z-Wave}: Proprietario, ma molto diffuso nelle applicazioni domotiche residenziali grazie alla sua semplicità di configurazione, sicurezza integrata e bassi consumi energetici \parencite{zwaveAlliance}.
+    \item \textbf{Wi-Fi}: Basato sullo standard IEEE 802.11, ha il vantaggio di una elevata velocità di trasmissione dati e ampia diffusione nelle abitazioni, ma soffre di elevato consumo energetico rispetto ad altri protocolli \parencite{wifiAlliance}.
+    \item \textbf{Bluetooth Low Energy (BLE)}: Caratterizzato da consumi energetici estremamente ridotti, BLE è adatto per applicazioni a corto raggio, come dispositivi indossabili e sensori di prossimità \parencite{bluetoothSIG}.
 \end{itemize}
 
-\section{Innovazioni recenti}
-Le innovazioni nel campo delle comunicazioni includono l'introduzione del 5G, che offre maggiore velocità e bassa latenza, e l'uso delle reti mesh per una copertura più affidabile. Inoltre, l'intelligenza artificiale viene sempre più integrata nei protocolli per ottimizzare la gestione della rete, migliorare la sicurezza e abilitare automazioni intelligenti basate sul comportamento dell'utente.
+\section{Thread e Matter: verso l'interoperabilità e l'unificazione}
+Thread e Matter rappresentano l'evoluzione più recente nel panorama dei protocolli IoT domestici:
+\begin{itemize}
+    \item \textbf{Thread}: Protocollo wireless basato su IPv6, pensato specificatamente per IoT domestico, combina robustezza, bassa latenza e bassi consumi energetici con la flessibilità della rete mesh \parencite{threadGroup}.
+    \item \textbf{Matter}: Sviluppato dalla Connectivity Standards Alliance (CSA), nasce dall'esigenza di creare un ecosistema interoperabile tra dispositivi multimarca utilizzando protocolli basati su IP (Internet Protocol). Matter promette di risolvere le barriere di interoperabilità, rendendo più semplice per i consumatori l’integrazione di nuovi dispositivi nei propri ecosistemi esistenti \parencite{matterAlliance}.
+\end{itemize}
 
+\section{Criteri di selezione dei protocolli}
+La scelta del protocollo ideale dipende da vari fattori, tra cui:
+\begin{itemize}
+    \item Consumo energetico: particolarmente importante nei dispositivi alimentati a batteria.
+    \item Portata e copertura: determinano la capacità del protocollo di garantire una comunicazione stabile in diversi contesti abitativi.
+    \item Velocità e latenza: cruciali per applicazioni che richiedono risposte rapide e precise.
+    \item Facilità d'uso e integrazione: influenzano direttamente l'esperienza utente e la scalabilità del sistema.
+    \item Sicurezza e privacy: essenziali per proteggere le reti domestiche da intrusioni e garantire la riservatezza dei dati.
+\end{itemize}
+
+Nel prossimo capitolo saranno approfonditi ulteriormente gli aspetti cruciali della sicurezza e della privacy associati ai protocolli IoT domestici, esaminando anche le best practice per garantire reti domestiche sicure e affidabili.
