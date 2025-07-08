@@ -1,35 +1,50 @@
 \chapter{Evoluzione dei Protocolli di Comunicazione IoT}
 
 \section{Introduzione ai protocolli IoT}
-I protocolli di comunicazione IoT costituiscono il cuore tecnologico dei sistemi domotici intelligenti, definendo le modalità con cui dispositivi eterogenei si scambiano informazioni all'interno di una rete. L'evoluzione di tali protocolli riflette i cambiamenti delle esigenze applicative e tecnologiche, oltre che l'espansione delle applicazioni IoT nella vita quotidiana. Questi protocolli possono essere distinti principalmente in due categorie: protocolli cablati (come KNX, RS-485) e protocolli wireless (come Zigbee, Z-Wave, Wi-Fi, Bluetooth Low Energy, Thread e Matter).
+I protocolli di comunicazione IoT sono il vero e proprio "linguaggio" che permette ai dispositivi intelligenti di casa nostra di parlarsi e collaborare. Pensate a quando accendete la luce dal vostro smartphone o regolate il termostato senza alzarvi dal divano: tutto questo è possibile grazie a protocolli che gestiscono la comunicazione tra dispositivi diversi, spesso di marche e tecnologie differenti. Nel tempo, questi protocolli si sono evoluti per rispondere a nuove esigenze, come consumi energetici più bassi, maggiore sicurezza e facilità d’uso. Possiamo dividerli in due grandi famiglie: quelli cablati, come KNX e RS-485, e quelli wireless, come Zigbee, Z-Wave, Wi-Fi, Bluetooth Low Energy, Thread e Matter.
 
 \section{Protocolli cablati: KNX e RS-485}
-Storicamente, le prime soluzioni domotiche si basavano prevalentemente su protocolli cablati, tra cui KNX e RS-485, che offrivano vantaggi in termini di stabilità e affidabilità della comunicazione. KNX, in particolare, è diventato uno standard internazionale (ISO/IEC 14543-3), noto per la sua robustezza, affidabilità e flessibilità, consentendo l'integrazione di diversi dispositivi all'interno di una rete domotica estesa \parencite{knxStandard}. RS-485, invece, ha trovato applicazione in contesti industriali e domestici grazie alla sua elevata resistenza alle interferenze e alla capacità di gestire connessioni su lunghe distanze.
+I protocolli cablati sono stati i pionieri della domotica e ancora oggi sono molto usati, soprattutto in contesti dove la stabilità della comunicazione è fondamentale.
+
+\textbf{KNX} è uno standard internazionale molto affidabile e flessibile. Immaginate un grande edificio, come un hotel o un ufficio, dove luci, riscaldamento, tende e sistemi di sicurezza devono funzionare in modo coordinato e senza intoppi. KNX permette di collegare tutti questi dispositivi con un unico sistema cablato, garantendo che tutto funzioni senza problemi. Il vantaggio principale per l’utente è la grande affidabilità e la possibilità di personalizzare il sistema in base alle esigenze specifiche. Tuttavia, l’installazione richiede un intervento tecnico specializzato e può risultare costosa, il che lo rende meno adatto per case più piccole o soluzioni fai-da-te.
+
+\textbf{RS-485}, invece, è spesso usato in contesti industriali o in impianti domestici più semplici. Per esempio, in un’abitazione con un sistema di allarme o controllo accessi, RS-485 può garantire una comunicazione stabile anche su lunghe distanze e in ambienti con molte interferenze elettriche. Dal punto di vista dell’utente, questo si traduce in un sistema robusto che raramente perde il segnale. Tuttavia, come KNX, richiede cablaggi e competenze tecniche per l’installazione.
 
 \section{Protocolli wireless: Zigbee, Z-Wave, Wi-Fi e Bluetooth Low Energy}
-Con l'avvento di tecnologie wireless più avanzate e la necessità di semplificare le installazioni domestiche, protocolli come Zigbee, Z-Wave, Wi-Fi e Bluetooth Low Energy (BLE) hanno acquisito crescente popolarità:
-\begin{itemize}
-    \item \textbf{Zigbee}: Basato sullo standard IEEE 802.15.4, è ottimizzato per reti mesh a basso consumo energetico, ideale per sensori e attuatori a batteria \parencite{zigbeeAlliance}.
-    \item \textbf{Z-Wave}: Proprietario, ma molto diffuso nelle applicazioni domotiche residenziali grazie alla sua semplicità di configurazione, sicurezza integrata e bassi consumi energetici \parencite{zwaveAlliance}.
-    \item \textbf{Wi-Fi}: Basato sullo standard IEEE 802.11, ha il vantaggio di una elevata velocità di trasmissione dati e ampia diffusione nelle abitazioni, ma soffre di elevato consumo energetico rispetto ad altri protocolli \parencite{wifiAlliance}.
-    \item \textbf{Bluetooth Low Energy (BLE)}: Caratterizzato da consumi energetici estremamente ridotti, BLE è adatto per applicazioni a corto raggio, come dispositivi indossabili e sensori di prossimità \parencite{bluetoothSIG}.
-\end{itemize}
+Con l’avvento delle tecnologie wireless, la domotica è diventata più accessibile e flessibile, permettendo installazioni più semplici e meno invasive.
+
+\textbf{Zigbee} è molto popolare per dispositivi come sensori di movimento, termostati smart e lampadine intelligenti. Ad esempio, in una casa, i sensori Zigbee possono comunicare tra loro formando una rete mesh: se un dispositivo è lontano dal router, il segnale passa attraverso altri dispositivi fino a raggiungerlo. Questo significa che anche in case grandi o con muri spessi, la comunicazione resta stabile. Gli utenti apprezzano il basso consumo energetico, che permette ai sensori di durare anni con una singola batteria. Lo svantaggio può essere la necessità di un hub centrale e qualche difficoltà iniziale nella configurazione.
+
+\textbf{Z-Wave} è simile a Zigbee ma spesso preferito in ambito residenziale per la sua semplicità. Molti utenti lo trovano intuitivo per collegare dispositivi come serrature smart o controller per tapparelle. La sicurezza integrata è un punto forte, così come la compatibilità tra marche diverse. Tuttavia, la velocità di trasmissione è limitata rispetto al Wi-Fi, il che lo rende meno adatto a trasmettere grandi quantità di dati.
+
+\textbf{Wi-Fi} è probabilmente il protocollo più familiare, essendo quello usato per connettere smartphone, computer e smart TV a internet. Molti dispositivi IoT, come videocamere di sicurezza o assistenti vocali, usano il Wi-Fi perché garantisce alta velocità e non richiede hub aggiuntivi. L’utente comune apprezza la facilità d’uso, ma spesso si scontra con l’alto consumo energetico, che limita l’uso di Wi-Fi in dispositivi alimentati a batteria, e con problemi di congestione della rete domestica.
+
+\textbf{Bluetooth Low Energy (BLE)} è ideale per dispositivi a corto raggio e a bassissimo consumo, come smartwatch, fitness tracker o sensori di prossimità. Per esempio, potete usare BLE per sbloccare la porta di casa automaticamente quando vi avvicinate con il telefono. Il vantaggio è il risparmio energetico e la semplicità, ma la portata limitata lo rende inadatto per coprire tutta la casa senza dispositivi aggiuntivi.
 
 \section{Thread e Matter: verso l'interoperabilità e l'unificazione}
-Thread e Matter rappresentano l'evoluzione più recente nel panorama dei protocolli IoT domestici:
-\begin{itemize}
-    \item \textbf{Thread}: Protocollo wireless basato su IPv6, pensato specificatamente per IoT domestico, combina robustezza, bassa latenza e bassi consumi energetici con la flessibilità della rete mesh \parencite{threadGroup}.
-    \item \textbf{Matter}: Sviluppato dalla Connectivity Standards Alliance (CSA), nasce dall'esigenza di creare un ecosistema interoperabile tra dispositivi multimarca utilizzando protocolli basati su IP (Internet Protocol). Matter promette di risolvere le barriere di interoperabilità, rendendo più semplice per i consumatori l’integrazione di nuovi dispositivi nei propri ecosistemi esistenti \parencite{matterAlliance}.
-\end{itemize}
+Gli utenti di domotica spesso si trovano frustrati perché dispositivi di marche diverse non “parlano” tra loro facilmente. Thread e Matter sono protocolli pensati per risolvere questo problema.
+
+\textbf{Thread} è una rete mesh basata su IPv6 che permette ai dispositivi di comunicare direttamente tra loro senza passare per un hub centrale. Immaginate di avere luci, sensori e termostati che si connettono in modo autonomo e stabile, anche se un dispositivo si spegne o perde la connessione: la rete si auto-ripara. Gli utenti notano una maggiore affidabilità e una configurazione più semplice rispetto a Zigbee o Z-Wave. Come svantaggio, è ancora relativamente nuovo e non tutti i dispositivi lo supportano.
+
+\textbf{Matter} è il progetto più ambizioso, nato per creare un linguaggio comune per tutti i dispositivi smart, indipendentemente dal produttore. Se avete mai avuto difficoltà a far dialogare un dispositivo Amazon Alexa con uno Google Home, Matter promette di risolvere questo problema. Grazie a Matter, sarà possibile integrare facilmente nuovi dispositivi nel proprio ecosistema domestico senza preoccuparsi della compatibilità. Per gli utenti, questo significa meno stress e più libertà di scelta. Al momento, però, l’adozione è in crescita e non tutti i prodotti sul mercato lo supportano ancora.
 
 \section{Criteri di selezione dei protocolli}
-La scelta del protocollo ideale dipende da vari fattori, tra cui:
+Quando scegliete un protocollo per la vostra casa intelligente, dovete considerare diversi aspetti pratici:
 \begin{itemize}
-    \item Consumo energetico: particolarmente importante nei dispositivi alimentati a batteria.
-    \item Portata e copertura: determinano la capacità del protocollo di garantire una comunicazione stabile in diversi contesti abitativi.
-    \item Velocità e latenza: cruciali per applicazioni che richiedono risposte rapide e precise.
-    \item Facilità d'uso e integrazione: influenzano direttamente l'esperienza utente e la scalabilità del sistema.
-    \item Sicurezza e privacy: essenziali per proteggere le reti domestiche da intrusioni e garantire la riservatezza dei dati.
+    \item \textbf{Consumo energetico}: Se avete dispositivi alimentati a batteria, come sensori o serrature, è fondamentale scegliere protocolli a basso consumo per evitare continui cambi di batteria.
+    \item \textbf{Portata e copertura}: In case grandi o con muri spessi, protocolli con rete mesh come Zigbee, Thread o Z-Wave possono garantire una copertura migliore.
+    \item \textbf{Velocità e latenza}: Per applicazioni che richiedono risposte immediate, come videocamere o sistemi di allarme, è meglio optare per protocolli veloci come Wi-Fi.
+    \item \textbf{Facilità d'uso e integrazione}: Se non siete esperti, è importante scegliere protocolli supportati da dispositivi facili da configurare e che funzionano bene insieme.
+    \item \textbf{Sicurezza e privacy}: Proteggere la propria rete domestica è fondamentale, quindi è bene preferire protocolli che offrono solide misure di sicurezza.
 \end{itemize}
 
-Nel prossimo capitolo saranno approfonditi ulteriormente gli aspetti cruciali della sicurezza e della privacy associati ai protocolli IoT domestici, esaminando anche le best practice per garantire reti domestiche sicure e affidabili.
+Nel prossimo capitolo approfondiremo proprio questi aspetti di sicurezza e privacy nei protocolli IoT domestici, fornendo consigli pratici per mantenere la vostra casa intelligente protetta e affidabile.
+
+---
+
+\textbf{Nuovi termini introdotti da aggiornare nel glossario:}
+\begin{itemize}
+    \item \textbf{Rete mesh}: Una rete in cui ogni dispositivo si connette direttamente ad altri dispositivi vicini, migliorando copertura e affidabilità.
+    \item \textbf{IPv6}: La versione più recente del protocollo Internet, che consente un numero praticamente illimitato di indirizzi IP.
+    \item \textbf{Hub centrale}: Un dispositivo che funge da punto di controllo e coordinamento per altri dispositivi in una rete domotica.
+\end{itemize}
