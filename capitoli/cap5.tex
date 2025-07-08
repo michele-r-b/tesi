@@ -1,14 +1,45 @@
-
 \chapter{Analisi delle Prestazioni e Affidabilità dei Protocolli}
 
 \section{Indicatori chiave di performance}
-Gli indicatori chiave per valutare le prestazioni dei protocolli IoT includono latenza, consumo energetico e larghezza di banda. La scelta del protocollo più adatto dipende spesso da questi fattori cruciali.
+Gli indicatori chiave per valutare le prestazioni dei protocolli IoT sono molteplici e fondamentali per determinare l’idoneità di un protocollo in specifici contesti applicativi. Tra i principali si annoverano la latenza, il consumo energetico, la larghezza di banda, l’affidabilità della trasmissione e la capacità di gestione della rete.
+
+La latenza rappresenta il tempo necessario affinché un pacchetto dati venga trasmesso da un nodo sorgente a un nodo destinazione. In applicazioni critiche come il controllo industriale o la domotica in tempo reale, una bassa latenza è essenziale per garantire risposte tempestive. Ad esempio, Zigbee tipicamente offre latenze nell’ordine di qualche decina di millisecondi, mentre Wi-Fi può garantire latenze inferiori ma a costo di consumi energetici più elevati \cite{ZigbeeLatencyStudy}.
+
+Il consumo energetico è un indicatore cruciale, soprattutto per dispositivi alimentati a batteria. Protocollo come Z-Wave e Thread sono progettati per ottimizzare l’efficienza energetica, permettendo una durata della batteria di mesi o anni in condizioni normali di utilizzo \cite{EnergyEfficientProtocols}.
+
+La larghezza di banda determina la quantità di dati che possono essere trasmessi in un dato intervallo di tempo. Wi-Fi, ad esempio, offre larghezze di banda significativamente superiori rispetto a Zigbee o Z-Wave, rendendolo adatto a scenari che richiedono il trasferimento di grandi quantità di dati, come il video streaming \cite{WiFiBandwidth}.
+
+Infine, l’affidabilità della trasmissione e la capacità di gestione della rete, che includono la tolleranza ai guasti e la scalabilità, sono indicatori fondamentali per garantire il corretto funzionamento della rete IoT in ambienti dinamici e complessi.
 
 \section{Confronto prestazionale tra Zigbee, Z-Wave, Wi-Fi, Thread e Matter}
-Analisi comparativa basata su metriche quali latenza, velocità di trasmissione dati, consumi energetici e capacità di copertura, identificando vantaggi e svantaggi di ciascun protocollo.
+Il confronto tra i protocolli Zigbee, Z-Wave, Wi-Fi, Thread e Matter si basa su diverse metriche chiave. Zigbee e Z-Wave operano su bande di frequenza sub-GHz o 2.4 GHz, offrendo un buon compromesso tra portata e consumo energetico. Zigbee supporta velocità fino a 250 kbps, mentre Z-Wave arriva a circa 100 kbps, con una portata tipica di 30-100 metri \cite{ZWaveVsZigbee}.
+
+Wi-Fi, invece, opera su bande a 2.4 GHz e 5 GHz con velocità che possono superare i 100 Mbps, ma con un consumo energetico significativamente più elevato, rendendolo meno adatto per dispositivi a bassa potenza \cite{WiFiVsIoT}.
+
+Thread è un protocollo IP-based progettato per reti mesh a bassa potenza, con supporto per IPv6 e sicurezza integrata. Offre una latenza inferiore rispetto a Zigbee e una migliore interoperabilità grazie all’uso di standard aperti \cite{ThreadProtocol}.
+
+Matter, recentemente sviluppato, mira a unificare i protocolli esistenti per garantire interoperabilità tra dispositivi di diversi produttori. Utilizza Thread e Wi-Fi come tecnologie di trasporto e si distingue per un elevato livello di sicurezza e facilità di configurazione \cite{MatterWhitePaper}.
+
+Un esempio pratico di confronto è la gestione di una rete domestica complessa: mentre Zigbee e Z-Wave sono adatti per sensori e attuatori a bassa potenza, Wi-Fi è preferibile per dispositivi ad alta richiesta di banda come videocamere IP, e Thread/Matter offrono un equilibrio tra efficienza energetica e interoperabilità.
 
 \section{Scalabilità dei protocolli in ambienti domestici complessi}
-Studio sulla capacità dei diversi protocolli di gestire un numero crescente di dispositivi senza perdere performance, prendendo in esame casi pratici e simulazioni.
+La scalabilità è un aspetto critico nella progettazione di reti IoT, soprattutto in ambienti domestici complessi con numerosi dispositivi interconnessi. Zigbee e Thread supportano reti mesh che permettono di estendere la copertura e migliorare la robustezza della rete attraverso il routing dinamico.
+
+Zigbee può gestire fino a 65.000 dispositivi in una singola rete, ma in pratica la gestione di un numero elevato di nodi può introdurre problemi di congestione e ritardi nella comunicazione \cite{ZigbeeScalability}. Thread, grazie all’architettura IP-based e al supporto per il routing efficiente, offre una migliore scalabilità e gestione del traffico.
+
+Z-Wave, pur supportando un numero inferiore di dispositivi (fino a 232 nodi per rete), è noto per la sua affidabilità in ambienti domestici, grazie a un protocollo di routing semplice e robusto \cite{ZWaveScalability}.
+
+Wi-Fi, pur offrendo alta capacità di banda, può incontrare difficoltà nella gestione di un elevato numero di dispositivi IoT a causa del consumo energetico e della congestione della rete, soprattutto nelle bande a 2.4 GHz molto utilizzate.
+
+L’adozione di protocolli come Matter, che sfruttano Thread e Wi-Fi, consente di combinare la scalabilità di reti mesh a bassa potenza con la capacità di banda di Wi-Fi, facilitando la gestione di ambienti domestici complessi e favorendo l’interoperabilità tra dispositivi di diversi produttori.
 
 \section{Strumenti e metodologie di test per le performance IoT}
-Panoramica degli strumenti software e hardware, e delle metodologie di test più utilizzate per misurare in modo efficace le prestazioni e l'affidabilità dei protocolli IoT.
+Per valutare in modo efficace le prestazioni e l’affidabilità dei protocolli IoT, sono disponibili numerosi strumenti software e hardware, oltre a metodologie di test specifiche.
+
+Tra gli strumenti software, Wireshark è ampiamente utilizzato per l’analisi del traffico di rete, permettendo di monitorare pacchetti, latenza e perdite di dati \cite{WiresharkTool}. Per testare il consumo energetico, strumenti come Power Profiler Kit di Nordic Semiconductor consentono di misurare con precisione l’assorbimento di corrente dei dispositivi \cite{PowerProfiler}.
+
+Le metodologie di test includono test di stress, che simulano un carico elevato di traffico per valutare la robustezza della rete; test di latenza e throughput, che misurano i tempi di risposta e la capacità di trasmissione dati; e test di interoperabilità, fondamentali per protocolli come Matter che puntano a garantire la compatibilità tra dispositivi di diversi produttori \cite{IoTTestingMethods}.
+
+Inoltre, simulazioni tramite software come NS-3 permettono di modellare reti IoT complesse e prevedere il comportamento dei protocolli in scenari realistici, riducendo i costi e i tempi di sviluppo \cite{NS3Simulator}.
+
+L’integrazione di questi strumenti e metodologie consente di ottenere una valutazione completa delle prestazioni dei protocolli IoT, guidando la scelta del protocollo più adatto in base alle esigenze specifiche dell’applicazione.

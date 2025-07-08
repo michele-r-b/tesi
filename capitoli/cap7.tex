@@ -1,23 +1,54 @@
-\chapter{Prospettive Future nella Domotica Residenziale}
-\section{Il ruolo dello standard Matter e dei protocolli basati su IP}
-Matter rappresenta una svolta nel panorama della domotica residenziale: è uno standard aperto sviluppato dalla Connectivity Standards Alliance (CSA) per garantire l'interoperabilità tra dispositivi di produttori diversi. Basato su protocolli IP, Matter consente una comunicazione sicura ed efficiente tra dispositivi domestici smart, eliminando molte delle barriere imposte dai sistemi proprietari. L'adozione su larga scala di Matter potrebbe uniformare il mercato e semplificare le configurazioni per l'utente finale \parencite{matterCSA}.
+\chapter{Gestione di Dispositivi Multimarca}
+\section{La sfida dell'interoperabilità}
+Uno dei principali ostacoli alla diffusione della domotica è rappresentato dalla mancanza di interoperabilità tra dispositivi di marche diverse. Le barriere tecnologiche sono spesso dovute all'utilizzo di protocolli proprietari, all'assenza di standard comuni e a una frammentazione dell'ecosistema. Questa situazione genera complessità nella configurazione e nella gestione quotidiana degli impianti domestici, limitando l’esperienza utente e l’adozione su larga scala di soluzioni smart home.
 
-\section{Sviluppi tecnologici emergenti}
+Tuttavia, iniziative come lo standard Matter e le alleanze tra produttori stanno contribuendo a superare tali ostacoli, promuovendo la compatibilità tra dispositivi. Matter, sviluppato dalla Connectivity Standards Alliance (CSA), si propone come un protocollo IP-based aperto e sicuro, progettato per consentire una comunicazione nativa e senza soluzione di continuità tra dispositivi di diverse marche e piattaforme. Grazie all’adozione di tecnologie come Thread per la rete mesh a bassa potenza e l’integrazione con Wi-Fi e Ethernet, Matter rappresenta un passo importante verso un ecosistema IoT domestico veramente interoperabile \cite{ConnectivityStandardsAlliance2023}.
 
-\subsection{Intelligenza artificiale e apprendimento automatico nella smart home}
-L'integrazione dell'intelligenza artificiale (IA) nelle smart home è destinata a rivoluzionare l'automazione domestica. Sistemi basati su IA sono in grado di apprendere le abitudini dell'utente, anticiparne i bisogni e adattare dinamicamente le automazioni in funzione dei comportamenti rilevati. Questo approccio incrementa l'efficienza energetica, la personalizzazione e la sicurezza dei sistemi domotici \parencite{ieeeAI}.
+Inoltre, l’adozione di API standardizzate e di framework software comuni facilita lo sviluppo di applicazioni domotiche capaci di gestire dispositivi multimarca in modo trasparente per l’utente finale. L’uso di protocolli come MQTT, CoAP e RESTful API permette la comunicazione e l’integrazione anche in scenari complessi, dove dispositivi legacy e nuovi coesistono.
 
-\subsection{Reti mesh e Wi-Fi 6}
-Le reti mesh rappresentano una soluzione sempre più diffusa per migliorare la copertura e l'affidabilità delle comunicazioni wireless in ambito domestico. In parallelo, la diffusione del Wi-Fi 6 porta significativi miglioramenti in termini di velocità, efficienza e capacità di gestire un elevato numero di dispositivi contemporaneamente, rendendolo particolarmente adatto a contesti smart home complessi \parencite{etsiWifi6}.
-
-\section{Sfide legate alla privacy e alla sicurezza}
-Con l'aumento dei dispositivi connessi cresce anche il rischio legato alla sicurezza informatica. I sistemi domotici sono potenziali bersagli di attacchi hacker e possono comportare violazioni della privacy. Tra le principali criticità si evidenziano:
+\section{Soluzioni generiche per la gestione multimarca}
+Per garantire la coesistenza e il funzionamento congiunto di dispositivi di produttori diversi, sono state sviluppate soluzioni generiche quali:
 \begin{itemize}
-    \item trasmissione non cifrata di dati sensibili;
-    \item vulnerabilità nei firmware dei dispositivi;
-    \item accessi non autorizzati tramite reti domestiche compromesse.
+    \item \textbf{Gateway universali}: dispositivi hardware/software in grado di tradurre i protocolli tra sistemi differenti, ad esempio un gateway che converte Zigbee in Wi-Fi o Z-Wave in Ethernet. Questi gateway spesso implementano funzioni di bridge e possono includere motori di automazione locali per ridurre la latenza \cite{Smith2022}.
+    \item \textbf{Piattaforme open-source}: come Home Assistant, OpenHAB e Domoticz, che permettono una personalizzazione spinta e ampia compatibilità grazie a un’architettura modulare basata su componenti e integrazioni. Queste piattaforme supportano centinaia di protocolli e dispositivi, consentendo agli utenti di creare automazioni complesse e scenari personalizzati \cite{HomeAssistant2024}.
+    \item \textbf{Standard Matter}: protocollo aperto sviluppato da CSA (Connectivity Standards Alliance) per unificare l'ecosistema IoT domestico, garantendo interoperabilità nativa. Matter utilizza tecnologie di trasporto IP, crittografia end-to-end e un modello di dati comune per facilitare la configurazione automatica e sicura dei dispositivi \cite{ConnectivityStandardsAlliance2023}.
 \end{itemize}
 
-Per affrontare tali sfide, sono fondamentali l'adozione di protocolli sicuri, aggiornamenti software regolari, e la consapevolezza dell'utente riguardo le buone pratiche di cybersicurezza \parencite{nistIotSecurity}.
+Un esempio concreto di implementazione multimarca è rappresentato dall’integrazione di lampadine Philips Hue (Zigbee), termostati Nest (Wi-Fi) e serrature Yale (Z-Wave) all’interno di una piattaforma Home Assistant, che gestisce centralmente le automazioni e la supervisione tramite un’interfaccia web o app mobile.
 
+\section{Soluzioni native basate sugli smartphone}
+Numerosi produttori hanno sviluppato piattaforme integrate nei sistemi operativi mobili, che permettono il controllo centralizzato dei dispositivi domestici:
+\begin{itemize}
+    \item \textbf{Apple HomeKit}: orientato alla sicurezza e alla privacy, con integrazione tramite l'app Casa e l'assistente Siri. HomeKit utilizza un protocollo proprietario basato su crittografia end-to-end e supporta dispositivi certificati con chip specifici per garantire l’affidabilità. L’ecosistema offre anche funzionalità avanzate come automazioni basate su geofencing e scenari personalizzati \cite{Apple2023}.
+    \item \textbf{Google Home}: supporta un'ampia gamma di dispositivi e l'assistente vocale Google Assistant. La piattaforma integra protocolli come Weave e utilizza la rete Wi-Fi per la comunicazione, offrendo un’esperienza utente fluida e supporto per routine personalizzate.
+    \item \textbf{Amazon Alexa}: piattaforma versatile con ampia compatibilità e controllo vocale tramite dispositivi Echo. Alexa supporta skill personalizzate per estendere le funzioni dei dispositivi e integra protocolli multipli, inclusi Zigbee tramite hub dedicati.
+    \item \textbf{Samsung SmartThings}: combina compatibilità con dispositivi Zigbee/Z-Wave e automazioni intelligenti. SmartThings offre un ecosistema aperto con API per sviluppatori e supporta l’integrazione con assistenti vocali come Bixby, Alexa e Google Assistant \cite{Samsung2023}.
+\end{itemize}
 
+Queste piattaforme native si stanno evolvendo per supportare nativamente Matter, facilitando ulteriormente la gestione multimarca e migliorando la sicurezza e la scalabilità degli impianti.
+
+\section{Confronto tra soluzioni native}
+Le piattaforme native presentano caratteristiche differenti in termini di facilità di configurazione, sicurezza, compatibilità e funzioni avanzate. Nella Tabella~\ref{tab:confronto_piattaforme} viene proposta una comparazione sintetica.
+
+\begin{table}[h!]
+    \centering
+    \caption{Confronto tra principali soluzioni domotiche native}
+    \label{tab:confronto_piattaforme}
+    \begin{tabular}{@{}lllll@{}}
+        \toprule
+        \textbf{Piattaforma} & \textbf{Compatibilità} & \textbf{Sicurezza} & \textbf{Controllo Vocale} & \textbf{Scalabilità} \\
+        \midrule
+        Apple HomeKit & Alta & Elevata & Siri & Media \\
+        Google Home & Molto Alta & Media & Google Assistant & Alta \\
+        Amazon Alexa & Alta & Media & Alexa & Alta \\
+        Samsung SmartThings & Alta & Alta & Bixby / Alexa & Alta \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Ad esempio, Apple HomeKit si distingue per l’elevata sicurezza grazie alla crittografia end-to-end e al controllo rigoroso dei dispositivi certificati, ma può risultare meno flessibile in termini di compatibilità rispetto a Google Home, che supporta un numero maggiore di dispositivi e protocolli diversi. Amazon Alexa e Samsung SmartThings offrono un buon equilibrio tra compatibilità e funzionalità avanzate, con ampio supporto per automazioni vocali e integrazione con altri servizi cloud.
+
+\section{Esempi concreti di implementazioni multimarca}
+Un caso di studio significativo riguarda l’installazione di un sistema domotico in un’abitazione con dispositivi di diversi produttori: lampadine Philips Hue (Zigbee), termostati Nest (Wi-Fi), sensori Xiaomi (proprietario e Zigbee), serrature Yale (Z-Wave) e videocamere Arlo (Wi-Fi). Utilizzando Home Assistant come piattaforma centrale, è possibile integrare tutti questi dispositivi tramite componenti specifici, creando automazioni avanzate come l’accensione automatica delle luci al rilevamento di movimento, la regolazione intelligente della temperatura in base alla presenza e la gestione sicura degli accessi tramite notifiche push.
+
+Un altro esempio riguarda l’uso di gateway universali come il dispositivo Hubitat Elevation, che consente di collegare dispositivi Zigbee, Z-Wave e LAN, offrendo una piattaforma locale per l’automazione e riducendo la dipendenza dal cloud. Questa soluzione è particolarmente apprezzata in contesti dove la privacy e la latenza sono critici.
