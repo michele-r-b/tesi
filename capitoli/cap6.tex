@@ -1,23 +1,32 @@
-\chapter{Prospettive Future nella Domotica Residenziale}
-\section{Il ruolo dello standard Matter e dei protocolli basati su IP}
-Matter rappresenta una svolta nel panorama della domotica residenziale: è uno standard aperto sviluppato dalla Connectivity Standards Alliance (CSA) per garantire l'interoperabilità tra dispositivi di produttori diversi. Basato su protocolli IP, Matter consente una comunicazione sicura ed efficiente tra dispositivi domestici smart, eliminando molte delle barriere imposte dai sistemi proprietari. L'adozione su larga scala di Matter potrebbe uniformare il mercato e semplificare le configurazioni per l'utente finale \parencite{matterCSA}.
+\chapter{Esempio pratico: Sistema Domotico con Apple HomeKit}
+\section{Obiettivo della configurazione}
+Lo scopo di questo capitolo è illustrare un esempio concreto di integrazione domotica attraverso la piattaforma Apple HomeKit. La configurazione prende in esame l'utilizzo combinato di interruttori intelligenti BTicino Living Now e dispositivi di sicurezza Netatmo, il tutto gestito tramite l'ecosistema Apple \parencite{appleHomekit}.
 
-\section{Sviluppi tecnologici emergenti}
-
-\subsection{Intelligenza artificiale e apprendimento automatico nella smart home}
-L'integrazione dell'intelligenza artificiale (IA) nelle smart home è destinata a rivoluzionare l'automazione domestica. Sistemi basati su IA sono in grado di apprendere le abitudini dell'utente, anticiparne i bisogni e adattare dinamicamente le automazioni in funzione dei comportamenti rilevati. Questo approccio incrementa l'efficienza energetica, la personalizzazione e la sicurezza dei sistemi domotici \parencite{ieeeAI}.
-
-\subsection{Reti mesh e Wi-Fi 6}
-Le reti mesh rappresentano una soluzione sempre più diffusa per migliorare la copertura e l'affidabilità delle comunicazioni wireless in ambito domestico. In parallelo, la diffusione del Wi-Fi 6 porta significativi miglioramenti in termini di velocità, efficienza e capacità di gestire un elevato numero di dispositivi contemporaneamente, rendendolo particolarmente adatto a contesti smart home complessi \parencite{etsiWifi6}.
-
-\section{Sfide legate alla privacy e alla sicurezza}
-Con l'aumento dei dispositivi connessi cresce anche il rischio legato alla sicurezza informatica. I sistemi domotici sono potenziali bersagli di attacchi hacker e possono comportare violazioni della privacy. Tra le principali criticità si evidenziano:
+\section{Componenti utilizzati}
+Il sistema domotico è stato realizzato impiegando i seguenti dispositivi:
 \begin{itemize}
-    \item trasmissione non cifrata di dati sensibili;
-    \item vulnerabilità nei firmware dei dispositivi;
-    \item accessi non autorizzati tramite reti domestiche compromesse.
+    \item \textbf{Piattaforma centrale}: Apple HomeKit con HomePod Mini come hub \parencite{appleHomepod};
+    \item \textbf{Interruttori intelligenti}: BTicino Living Now con connettività Wi-Fi \parencite{bticino};
+    \item \textbf{Dispositivi di sicurezza}: Netatmo Presence (telecamera), sensori per porte/finestre, sirena interna \parencite{netatmo}.
 \end{itemize}
 
-Per affrontare tali sfide, sono fondamentali l'adozione di protocolli sicuri, aggiornamenti software regolari, e la consapevolezza dell'utente riguardo le buone pratiche di cybersicurezza \parencite{nistIotSecurity}.
+\section{Fasi di configurazione}
+La configurazione del sistema si articola in tre fasi principali:
+\begin{enumerate}
+    \item \textbf{Preparazione della piattaforma HomeKit}: configurazione iniziale dell'app Casa su iOS e aggiunta dell'HomePod Mini come hub domestico;
+    \item \textbf{Integrazione degli interruttori BTicino}: installazione fisica e collegamento alla rete Wi-Fi, seguita dall'aggiunta tramite QR code nell'app Casa;
+    \item \textbf{Configurazione dei dispositivi Netatmo}: installazione e associazione via app Netatmo, quindi integrazione in HomeKit tramite HomeBridge ufficiale \parencite{homebridge}.
+\end{enumerate}
+
+\section{Automazioni e scenari d'uso}
+Una volta completata l'integrazione, è possibile definire automazioni personalizzate. Tra gli scenari implementabili:
+\begin{itemize}
+    \item accensione automatica delle luci al rilevamento di movimento notturno;
+    \item attivazione della sirena in caso di apertura non autorizzata di porte;
+    \item gestione dell'illuminazione tramite comandi vocali a Siri \parencite{appleSiri}.
+\end{itemize}
+
+\section{Vantaggi e considerazioni tecniche}
+Il sistema descritto offre un buon equilibrio tra semplicità di utilizzo, scalabilità e compatibilità. HomeKit garantisce una configurazione intuitiva e un elevato livello di sicurezza dei dati \parencite{applePrivacy}. Tuttavia, va considerata la necessità di dispositivi compatibili con lo standard Apple o l'uso di bridge aggiuntivi per dispositivi non certificati.
 
 
