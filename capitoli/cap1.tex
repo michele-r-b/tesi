@@ -1,47 +1,47 @@
 \chapter{Introduzione}
-Negli ultimi anni, le tecnologie legate all'Internet of Things (IoT) hanno trasformato radicalmente il nostro modo di vivere gli spazi domestici. La casa tradizionale, un tempo costituita semplicemente da strutture fisiche e arredi, si è evoluta in un ambiente intelligente e interconnesso, capace di rispondere dinamicamente alle nostre necessità quotidiane attraverso la domotica. Basti pensare alla comodità di poter preriscaldare l'abitazione durante il tragitto di ritorno dal lavoro, ottimizzando così tanto il comfort abitativo quanto l'efficienza energetica.
+Negli ultimi anni, le tecnologie legate all'Internet of Things (IoT) hanno trasformato radicalmente il nostro modo di vivere gli spazi domestici. La casa tradizionale, un tempo costituita semplicemente da strutture fisiche e arredi, si è evoluta in un ambiente intelligente e interconnesso, capace di rispondere dinamicamente alle nostre necessità quotidiane attraverso la domotica. Pensiamo ad esempio a quanto sia comodo accendere il riscaldamento mentre si sta tornando a casa dal lavoro, così da trovare la casa già calda e risparmiare anche energia.
 
 \vspace{0.5cm}
-Le radici della domotica affondano negli anni '80, quando i primi sistemi cablati, seppur rudimentali come il protocollo X10, permettevano già il controllo remoto di luci ed elettrodomestici. Il decennio successivo ha segnato un'accelerazione significativa: l'introduzione di sistemi più sofisticati come KNX e l'avvento delle reti wireless (Zigbee, Z-Wave) hanno democratizzato l'accesso alla casa intelligente. Molti di noi ricordano l'impatto dei primi termostati Nest o delle lampadine Philips Hue, prodotti che hanno reso tangibili i benefici della domotica per le famiglie comuni.
+Le radici della domotica affondano negli anni '80, quando i primi sistemi cablati, seppur rudimentali come il protocollo X10, permettevano già il controllo remoto di luci ed elettrodomestici. Il decennio successivo ha segnato un'accelerazione significativa: l'introduzione di sistemi più sofisticati come KNX e l'avvento delle reti wireless (Zigbee, Z-Wave) hanno reso la casa intelligente accessibile a tutti. Molti di noi ricordano l'impatto dei primi termostati Nest o delle lampadine Philips Hue, prodotti che hanno fatto capire alle persone comuni quanto può essere utile la domotica in casa.
 
 \vspace{0.5cm}
-L'integrazione dell'intelligenza artificiale ha rappresentato un ulteriore salto evolutivo. Oggi non ci limitiamo più al semplice controllo via app: le nostre abitazioni imparano dai nostri comportamenti, adattandosi proattivamente alle nostre routine. Gli assistenti vocali come Amazon Alexa o Google Assistant non solo eseguono comandi, ma anticipano le nostre esigenze, suggerendo automatizzazioni personalizzate basate su variabili come orari, condizioni meteorologiche e abitudini consolidate.
+L'arrivo dell'intelligenza artificiale ha ulteriormente ampliato le possibilità ed accellerato il cambiamento in atto. Oggi le nostre case non si limitano a rispondere ai nostri comandi: è come se ci conoscessero e si adattassero a noi. Per esempio, dopo qualche settimana il sistema capisce che di solito accendiamo le luci del salotto verso le 19:00 e inizia a farlo automaticamente. Gli assistenti vocali come Alexa, Google o Siri non sono più semplici esecutori di ordini: a volte ci sorprendono suggerendo cose utili tipo "Hey, sta per piovere, vuoi che chiuda le finestre?" oppure "È ora di andare a dormire, spengo le luci?". È un po' come avere un maggiordomo digitale che impara a conoscerti giorno dopo giorno.
 
 \vspace{0.5cm}
 L'edge computing costituisce un'innovazione particolarmente rilevante, consentendo l'elaborazione dei dati direttamente a livello locale, eliminando la dipendenza dal cloud. Questo approccio migliora sensibilmente i tempi di risposta: una telecamera di sicurezza con capacità di edge computing può identificare immediatamente un intruso e inviare alert in tempo reale, senza dover attendere l'elaborazione su server remoti.
 
 
 \vspace{0.5cm}
-Le reti di nuova generazione, dal 5G fino al futuro 6G, promettono di sbloccare scenari applicativi finora impensabili. Potremmo presto gestire i nostri dispositivi domestici attraverso interfacce di realtà aumentata o monitorare parametri di salute tramite sensori che comunicano direttamente con i nostri medici. Questi sviluppi, pur offrendo enormi opportunità per comfort ed efficienza, sollevano inevitabilmente nuove questioni relative alla cybersecurity e alla privacy.
+Le tecnologie di rete continuano a evolversi e questo porterà sicuramente nuove possibilità per la casa intelligente. Già oggi vediamo come il miglioramento delle connessioni permetta di controllare i dispositivi con maggiore affidabilità e velocità. Nel prossimo futuro, potremmo vedere interfacce più intuitive e una maggiore integrazione con servizi esterni. Naturalmente, ogni innovazione porta con sé nuove sfide legate alla sicurezza e alla protezione dei dati personali.
 
 \vspace{0.5cm}
-Tuttavia, uno degli ostacoli più significativi rimane l'interoperabilità tra dispositivi di produttori diversi. Chiunque abbia tentato di integrare nuovi dispositivi smart nella propria abitazione ha probabilmente sperimentato la frustrazione di dover gestire multiple app e protocolli incompatibili. Fortunatamente, l'emergere di standard aperti come il protocollo Matter sta progressivamente abbattendo queste barriere, facilitando l'integrazione di ecosistemi eterogenei.
+Tuttavia, una delle sfide più rilevanti nel settore della domotica residenziale riguarda l'interoperabilità tra dispositivi di differenti produttori. L'esperienza comune di molti utenti che si approcciano alla domotica nella propria abitazione sono le difficoltà legate alla gestione di applicazioni multiple e protocolli di comunicazione non compatibili, oltre alla necessità di acquisire componenti hardware dedicate per ciascun ecosistema proprietario ( Hub per la gestione dei diversi dispositivi per ogni marca).  Tuttavia l'introduzione di standard aperti come il protocollo Matter rappresenta un'evoluzione significativa in questa direzione, favorendo una maggiore integrazione tra soluzioni di produttori diversi e la possibilità di avere un unico Hub centrale in grado di gestire dispositivi di marche differenti.
 
 \vspace{0.5cm}
 La presente tesi si focalizza sull'evoluzione dei protocolli di comunicazione IoT nella domotica residenziale, con particolare enfasi su sicurezza, prestazioni e interoperabilità. Per concretizzare l'analisi teorica, presenterò un caso studio basato su Apple HomeKit, selezionato per la sua usabilità e le robuste caratteristiche di sicurezza.
 
 % Sezione metodologica riveduta
-\section{Approccio metodologico della ricerca}
-La mia ricerca adotta un approccio multidisciplinare che combina analisi teorica approfondita con valutazione empirica di dati provenienti da studi esistenti e sperimentazioni pratiche. Ho strutturato il lavoro seguendo una metodologia che integra diverse prospettive:
+\section{Approccio metodologico}
+Il lavoro presentato in questa tesi nasce dall'esigenza di comprendere a fondo il mondo della domotica residenziale, combinando diversi punti di vista per offrire una visione il più possibile completa e pratica.
 
 \begin{itemize}
-\item \textbf{Revisione sistematica della letteratura}: ho condotto un'analisi critica delle pubblicazioni scientifiche e tecniche più rilevanti, privilegiando fonti recenti e autorevoli per garantire l'attualità dei contenuti;
-\item \textbf{Analisi comparativa dei protocolli}: ho sviluppato un confronto sistematico basato su metriche concrete e risultati di test sperimentali, attingendo sia da benchmark consolidati che da valutazioni indipendenti;
-\item \textbf{Studio di casi reali}: ho esaminato soluzioni commerciali esistenti, concentrandomi particolarmente sul sistema Apple HomeKit come esempio paradigmatico di integrazione sicura e user-friendly;
-\item \textbf{Prototipazione pratica}: ho realizzato un sistema domotico multimarca per validare empiricamente le considerazioni teoriche e identificare problematiche concrete nell'implementazione quotidiana.
+\item \textbf{Esplorazione della letteratura}: ho consultato numerose pubblicazioni tecniche e articoli specializzati, cercando di selezionare le fonti più recenti e significative per mantenermi aggiornato sugli sviluppi del settore;
+\item \textbf{Confronto tra protocolli}: ho messo a confronto le diverse tecnologie disponibili, basandomi su informazioni pubblicamente accessibili e opinioni di esperti del settore, per capire punti di forza e debolezza di ciascuna soluzione;
+\item \textbf{Osservazione di esempi concreti}: ho dedicato particolare attenzione ai sistemi già presenti sul mercato, con un focus su Apple HomeKit come caso interessante di tecnologia ben integrata nell'esperienza quotidiana degli utenti;
+\item \textbf{Esperienza diretta}: ho avuto modo di sperimentare personalmente con alcuni dispositivi di marche diverse, toccando con mano le sfide che si incontrano quando si cerca di far dialogare prodotti di aziende differenti.
 \end{itemize}
 
-Questo approccio metodologico integrato mi ha permesso di sviluppare una panoramica completa e aggiornata della domotica residenziale, bilanciando rigore accademico e applicabilità pratica. L'obiettivo è fornire non solo un quadro teorico solido, ma anche spunti concreti per chiunque desideri avvicinarsi consapevolmente al mondo della casa intelligente.
+Attraverso questo percorso ho potuto esplorare il mondo della domotica da diverse angolazioni, cercando di capirne pregi e difetti. Lo scopo è offrire spunti pratici e considerazioni concrete a chi vuole iniziare a rendere la propria casa più intelligente, andando oltre la semplice teoria.
 
 \section{Obiettivi della ricerca}
-Il presente lavoro persegue obiettivi articolati su più livelli, che riflettono la complessità intrinseca del panorama domotico contemporaneo:
+Questa tesi si propone diversi obiettivi, che nascono dalla natura complessa e variegata del mondo della domotica oggi:
 
 \begin{itemize}
 \item \textbf{Analisi evolutiva}: tracciare un quadro completo dell'evoluzione storica e tecnologica dei protocolli IoT nel contesto domotico, evidenziando le forze trainanti del cambiamento e le tendenze emergenti;
-\item \textbf{Valutazione critica della sicurezza}: esaminare approfonditamente le vulnerabilità specifiche dei sistemi IoT domestici, proponendo strategie di mitigazione pratiche e sostenibili per l'utente finale;
+\item \textbf{Valutazione critica della sicurezza}: esaminare approfonditamente le vulnerabilità specifiche dei sistemi IoT domestici, proponendo strategie di mitigazione pratiche semplici e gestibili per l'utente finale;
 \item \textbf{Comparazione prestazionale}: sviluppare una valutazione sistematica delle performance dei protocolli principali attraverso metriche quantitative significative (latenza, throughput, consumo energetico, scalabilità);
 \item \textbf{Studio dell'interoperabilità}: identificare e descrivere strategie concrete per l'integrazione efficace di dispositivi eterogenei, con particolare attenzione alle sfide pratiche di implementazione;
 \item \textbf{Validazione empirica}: fornire un esempio tangibile attraverso l'implementazione pratica con Apple HomeKit, dimostrando l'applicabilità dei principi teorici discussi.
 \end{itemize}
 
-Questi obiettivi riflettono la mia convinzione che la ricerca accademica debba coniugare profondità teorica e utilità pratica, contribuendo tanto all'avanzamento della conoscenza quanto al miglioramento dell'esperienza utente nel mondo reale.
+Questo lavoro di tesi è un mix di teoria e pratica, cerca di essere utile sia per chi studia questi argomenti sia per chi vuole semplicemente migliorare la propria casa con la tecnologia.

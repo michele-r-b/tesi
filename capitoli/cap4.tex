@@ -2,203 +2,179 @@
 
 \section{Introduzione alla sicurezza IoT domestica}
 
-La trasformazione digitale delle nostre abitazioni ha portato indubbi benefici in termini di comfort, efficienza energetica e qualità della vita. Tuttavia, questa evoluzione ha introdotto nuove sfide che non possono essere ignorate. La sicurezza in ambito IoT residenziale è diventata una questione cruciale, poiché i dispositivi intelligenti che popolano le nostre case raccolgono e condividono continuamente dati estremamente sensibili.
+La tecnologia ha reso le nostre case più comode e facili da gestire: dal riscaldamento controllato a distanza alle luci che si regolano da sole. Ma insieme a questi benefici ci sono anche aspetti meno visibili, come la grande quantità di dati personali che questi sistemi raccolgono e trattano ogni giorno.
 
-Pensiamo per un momento alla quantità di informazioni che transitano attraverso i nostri sistemi domotici: dalle nostre abitudini quotidiane, come gli orari in cui usciamo e rientriamo, alle preferenze di temperatura, dai pattern di illuminazione fino ai dati biometrici catturati da dispositivi di sicurezza avanzati. Ogni termostato intelligente, ogni telecamera di sorveglianza, ogni assistente vocale e sensore ambientale rappresenta un potenziale punto di accesso per malintenzionati.
+È interessante riflettere sulla quantità di informazioni che fluiscono attraverso una casa intelligente: orari di presenza, preferenze climatiche, abitudini di illuminazione, fino ad arrivare ai dati biometrici raccolti dalle telecamere di ultima generazione. Ogni componente del sistema - dal termostato intelligente all'assistente vocale - rappresenta contemporaneamente un'opportunità e una potenziale vulnerabilità.\\
 
-La crescente interconnessione di questi dispositivi amplifica esponenzialmente la superficie di attacco. Non si tratta più solo di proteggere un singolo computer o smartphone, ma un intero ecosistema di dispositivi che comunicano tra loro e con il cloud, spesso senza che l'utente medio ne sia pienamente consapevole. È quindi fondamentale adottare un approccio olistico alla sicurezza, che consideri non solo la protezione dei singoli dispositivi, ma l'intero sistema nel suo complesso.
+Ogni nuovo dispositivo connesso aggiunge un “punto d’ingresso” alla nostra rete domestica. Non dobbiamo più pensare alla sicurezza di un solo apparecchio, ma di un sistema dove tutto comunica con tutto, spesso anche con servizi online. Questa rete invisibile all’occhio dell’utente richiede strategie di protezione completamente riviste.\\
 
-Le strategie di sicurezza devono essere integrate fin dalla fase di progettazione, seguendo il principio del \textit{security by design}. Questo include la protezione dei dati sia durante la trasmissione (in transito) che quando sono memorizzati (a riposo), una gestione granulare e intelligente degli accessi, e la capacità di resistere e rispondere prontamente ad attacchi informatici sempre più sofisticati \parencite{roman2013, sicari2015}.
+L'approccio più efficace prevede l'integrazione della sicurezza fin dalle fasi iniziali di progettazione - il cosiddetto principio del \textit{security by design}. Questo significa implementare protezioni a più livelli: cifratura dei dati in transito e a riposo, gestione granulare dei permessi, meccanismi di difesa adattivi capaci di rispondere a minacce in evoluzione.
 
 \section{Minacce e vulnerabilità comuni}
 
-Il panorama delle minacce nel contesto IoT domestico è vasto e in continua evoluzione. Comprendere questi rischi è il primo passo per costruire difese efficaci.
+Le minacce alla domotica hanno dinamiche tutte loro, diverse da quelle della sicurezza informatica “classica”. Capire queste differenze è il primo passo per proteggere davvero la propria casa smart.
 
 \subsection{Intrusioni e accessi non autorizzati}
 
-Una delle minacce più immediate è rappresentata dalle intrusioni non autorizzate. Molti dispositivi IoT vengono ancora distribuiti con credenziali di default facilmente reperibili online. Un attaccante può semplicemente cercare il modello del dispositivo e trovare username e password predefiniti, ottenendo così accesso completo al sistema. Questo problema è aggravato dal fatto che molti utenti non modificano mai queste credenziali, lasciando di fatto la porta di casa digitale spalancata.
+Un aspetto sorprendentemente critico riguarda la presenza di credenziali di default nei dispositivi IoT che non vengono aggiornate. Nonostante anni di sensibilizzazione, numerosi produttori continuano a distribuire dispositivi con combinazioni username/password facilmente reperibili attraverso una semplice ricerca online. Questa pratica, unita alla tendenza degli utenti a non modificare tali credenziali, crea vulnerabilità immediate e facilmente sfruttabili.
+
+La situazione è aggravata dalla mancanza di meccanismi che obblighino l'utente a personalizzare le credenziali al primo utilizzo - una misura semplice che potrebbe eliminare gran parte di questi rischi.
 
 \subsection{Malware specifici per dispositivi embedded}
 
-I dispositivi IoT, con le loro limitate risorse computazionali e sistemi operativi semplificati, sono bersagli attraenti per malware specializzati. Questi software malevoli sono progettati per sfruttare le caratteristiche uniche dei dispositivi embedded, spesso rimanendo invisibili per lunghi periodi mentre raccolgono dati o utilizzano il dispositivo per attacchi verso terzi.
+I dispositivi IoT, caratterizzati da risorse computazionali limitate e sistemi operativi minimali, presentano un profilo di vulnerabilità unico. I malware progettati per questi ambienti sfruttano proprio queste limitazioni: la scarsa capacità di implementare antivirus tradizionali, l'impossibilità di monitorare in tempo reale i processi in esecuzione, la difficoltà nell'applicare patch di sicurezza.
+
+Questi software malevoli possono operare inosservati per periodi prolungati, trasformando dispositivi apparentemente innocui in strumenti per la raccolta di dati sensibili o in nodi di botnet per attacchi distribuiti.
 
 \subsection{Vulnerabilità nei protocolli di comunicazione}
 
-I protocolli wireless utilizzati nella domotica -- ZigBee, Z-Wave, Wi-Fi e Bluetooth -- presentano ciascuno specifiche vulnerabilità. Gli attacchi di tipo Man-in-the-Middle (MitM) sono particolarmente insidiosi: un attaccante può posizionarsi tra due dispositivi comunicanti, intercettando e potenzialmente modificando i dati scambiati. Immaginate un malintenzionato che intercetta i comandi inviati alla vostra serratura smart, potendo così aprire la porta a suo piacimento.
+L'eterogeneità dei protocolli wireless nella domotica - ZigBee, Z-Wave, Wi-Fi, Bluetooth - introduce sfide specifiche di sicurezza. Gli attacchi di tipo Man-in-the-Middle rappresentano una minaccia particolarmente insidiosa in questo contesto. Un attore malevolo può posizionarsi nel percorso di comunicazione tra dispositivi, intercettando e potenzialmente alterando i comandi trasmessi. Consideriamo l'esempio di una serratura intelligente: l'intercettazione dei segnali di controllo potrebbe permettere l'apertura della casa in un secondo momento.
 
 \subsection{Il caso Mirai: una lezione da non dimenticare}
 
-L'attacco del botnet Mirai nel 2016 ha rappresentato uno spartiacque nella percezione della sicurezza IoT. Questo malware ha infettato centinaia di migliaia di dispositivi IoT vulnerabili -- telecamere, router, DVR -- trasformandoli in un esercito di zombie digitali utilizzati per lanciare devastanti attacchi DDoS. La semplicità con cui Mirai ha compromesso questi dispositivi, sfruttando principalmente password di default, ha evidenziato la fragilità dell'ecosistema IoT e la necessità urgente di standard di sicurezza più rigorosi \parencite{miraiBotnet}.
+L'epidemia del botnet Mirai nel 2016 rimane un caso di studio fondamentale per comprendere le vulnerabilità sistemiche dell'IoT. Questo malware ha dimostrato come la combinazione di credenziali predefinite e mancanza di aggiornamenti di sicurezza possa trasformare centinaia di migliaia di dispositivi domestici in armi per attacchi DDoS di scala globale. La semplicità dell'attacco - basato essenzialmente sul tentativo sistematico di credenziali note - evidenzia come problemi apparentemente banali possano avere conseguenze devastanti \parencite{miraiBotnet}.
 
 \section{Best practice per garantire sicurezza e privacy}
 
-La protezione efficace di un sistema domotico richiede un approccio multistrato che combini misure tecniche, procedurali e educative.
+Per difendere un ambiente domotico serve una strategia a più livelli, che unisca soluzioni tecniche, buone pratiche e formazione degli utenti. Insieme, questi elementi creano un sistema capace di reagire e adattarsi ai rischi che cambiano nel tempo.
 
 \subsection{Aggiornamenti e patch management}
 
-Il primo baluardo contro le vulnerabilità note è mantenere tutti i dispositivi aggiornati. Questo significa non solo installare gli aggiornamenti quando disponibili, ma anche verificare proattivamente la disponibilità di nuove versioni firmware. Molti dispositivi IoT non si aggiornano automaticamente, richiedendo l'intervento manuale dell'utente. È consigliabile stabilire una routine mensile di controllo e aggiornamento, documentando le versioni installate per ogni dispositivo.
+La gestione sistematica degli aggiornamenti rappresenta la prima linea di difesa contro vulnerabilità note. Questo processo, apparentemente semplice, presenta sfide pratiche significative nell'ambito IoT: molti dispositivi non implementano meccanismi di aggiornamento automatico, richiedendo interventi manuali periodici. La creazione di una routine di verifica - magari calendarizzata mensilmente - può trasformare questa attività da sporadica emergenza a pratica consolidata.
 
 \subsection{Segmentazione della rete}
 
-Una delle strategie più efficaci è la segmentazione della rete domestica. Invece di collegare tutti i dispositivi alla stessa rete Wi-Fi, è opportuno creare reti separate:
+L'isolamento logico dei dispositivi attraverso la segmentazione di rete offre benefici significativi con un impegno implementativo relativamente contenuto:
 
 \begin{itemize}
-    \item \textbf{Rete principale}: per computer, smartphone e dispositivi contenenti dati sensibili
-    \item \textbf{Rete IoT}: dedicata esclusivamente ai dispositivi domotici
-    \item \textbf{Rete ospiti}: per visitatori occasionali
+    \item \textbf{Rete principale protetta}: riservata a dispositivi contenenti dati sensibili e sistemi IoT verificati
+    \item \textbf{Rete ospiti isolata}: per visitatori occasionali, impedendo accessi non autorizzati all'infrastruttura principale
 \end{itemize}
 
-Questa separazione, implementabile tramite VLAN o utilizzando router che supportano reti multiple, limita significativamente i danni in caso di compromissione di un dispositivo. Se una lampadina smart viene hackerata, l'attaccante non avrà accesso diretto al vostro laptop contenente documenti importanti.
+Questa separazione limita la propagazione di eventuali compromissioni e facilita il monitoraggio del traffico anomalo.
 
 \subsection{Firewall e sistemi di monitoraggio}
 
-L'implementazione di un firewall configurato specificamente per l'ambiente domestico è essenziale. Moderne soluzioni come pfSense o sistemi basati su Raspberry Pi con software specializzato possono fornire:
-
+I router consumer moderni hanno fatto passi significativi nell'integrazione di funzionalità di sicurezza precedentemente riservate ad ambienti enterprise. Produttori come ASUS, Netgear e AVM (Fritz!Box) offrono oggi:
+    \
 \begin{itemize}
-    \item Filtraggio del traffico in entrata e uscita
-    \item Rilevamento di pattern di traffico anomali
-    \item Blocco automatico di tentativi di accesso sospetti
-    \item Log dettagliati per analisi forensi
+    \item Sistemi di prevenzione delle intrusioni (IPS) integrati
+    \item Analisi comportamentale del traffico di rete
+    \item Filtri per contenuti malevoli aggiornati in tempo reale
+    \item Sistemi di notifica per eventi di sicurezza rilevanti
 \end{itemize}
 
-I sistemi di rilevamento delle intrusioni (IDS) aggiungono un ulteriore livello di protezione, analizzando il traffico di rete alla ricerca di signature di attacchi noti o comportamenti anomali.
+L'attivazione di queste funzionalità, spesso disponibili ma disabilitate di default, può incrementare significativamente il livello di protezione con uno sforzo minimo. Alcuni provider hanno iniziato a fornire dispositivi preconfigurati con queste protezioni attive, semplificando ulteriormente l'adozione.
 
 \subsection{Gestione degli accessi e autenticazione forte}
 
-L'adozione di politiche rigorose per la gestione degli accessi è fondamentale:
+L'implementazione di politiche di accesso robuste richiede un bilanciamento tra sicurezza e usabilità:
 
 \begin{itemize}
-    \item \textbf{Principio del minimo privilegio}: ogni utente e dispositivo dovrebbe avere solo i permessi strettamente necessari
-    \item \textbf{Autenticazione multifattoriale (MFA)}: oltre alla password, richiedere un secondo fattore (SMS, app authenticator, biometria)
-    \item \textbf{Password complesse e uniche}: utilizzare un password manager per generare e memorizzare credenziali robuste per ogni dispositivo
-    \item \textbf{Rotazione periodica delle credenziali}: cambiare le password ogni 3-6 mesi, specialmente per dispositivi critici
+    \item \textbf{Principio del privilegio minimo}: assegnare solo i permessi strettamente necessari per ogni utente o dispositivo
+    \item \textbf{Autenticazione multi-fattore (MFA)}: integrare fattori di autenticazione aggiuntivi, bilanciando sicurezza e praticità d'uso
+    \item \textbf{Gestione centralizzata delle credenziali}: l'utilizzo di password manager facilita l'adozione di credenziali complesse e uniche
+    \item \textbf{Rotazione programmata}: stabilire intervalli regolari per l'aggiornamento delle credenziali critiche
 \end{itemize}
 
 \subsection{Educazione e consapevolezza degli utenti}
 
-La tecnologia da sola non basta. Gli utenti devono essere consapevoli dei rischi e delle loro responsabilità:
+La componente umana rimane fondamentale in qualsiasi strategia di sicurezza. La formazione degli abitanti della casa, soprattutto per gli utenti con ruoli di gestione amministartiva dei dispositivi,  dovrebbe coprire:
 
 \begin{itemize}
-    \item Riconoscere tentativi di phishing mirati a ottenere credenziali IoT
-    \item Comprendere l'importanza degli aggiornamenti di sicurezza
-    \item Sapere come verificare la legittimità di app e servizi cloud collegati ai dispositivi
-    \item Essere in grado di identificare comportamenti anomali dei dispositivi
+    \item Riconoscimento di tentativi di phishing specifici per dispositivi IoT
+    \item Comprensione dell'importanza degli aggiornamenti di sicurezza
+    \item Capacità di verificare l'autenticità di app e servizi collegati
+    \item Identificazione di comportamenti anomali nei dispositivi
 \end{itemize}
 
-Workshop familiari sulla sicurezza digitale possono trasformare ogni membro della famiglia in una sentinella attiva contro le minacce \parencite{sicari2015, yang2017}.
+Sessioni informative periodiche, magari integrate con esempi pratici e simulazioni, possono trasformare ogni membro della famiglia in un elemento attivo del sistema di sicurezza.
 
 \section{Tecniche di crittografia e autenticazione nei protocolli IoT}
 
-La crittografia rappresenta la spina dorsale della sicurezza nelle comunicazioni IoT, ma la sua implementazione in dispositivi con risorse limitate presenta sfide uniche.
+L'implementazione di meccanismi crittografici in ambienti con risorse limitate rappresenta una delle sfide tecniche più interessanti della sicurezza IoT.
 
-\subsection{Crittografia end-to-end adattiva}
+\subsection{Crittografia end-to-end nei sistemi domotici}
 
-La protezione dei dati deve essere garantita lungo tutto il percorso, dal sensore al cloud e viceversa. Tuttavia, i dispositivi IoT spesso hanno processori poco potenti e memoria limitata. La soluzione sta nell'adottare algoritmi crittografici ottimizzati:
-
-\begin{itemize}
-    \item \textbf{AES-128}: offre un buon compromesso tra sicurezza e requisiti computazionali
-    \item \textbf{Elliptic Curve Cryptography (ECC)}: fornisce sicurezza equivalente a RSA con chiavi più corte
-    \item \textbf{ChaCha20-Poly1305}: alternativa moderna ad AES, particolarmente efficiente su processori senza accelerazione hardware
-\end{itemize}
-
-\subsection{Protocolli di comunicazione sicuri}
-
-Il tradizionale TLS/SSL, pur essendo robusto, può essere troppo pesante per dispositivi IoT. Alternative ottimizzate includono:
+La protezione crittografica dei dati deve essere garantita lungo l'intero percorso di trasmissione, dal dispositivo Ioy fino al nostro smartphone. Le limitazioni hardware dei dispositivi IoT impongono scelte oculate nell'implementazione:
 
 \begin{itemize}
-    \item \textbf{DTLS (Datagram TLS)}: versione di TLS per comunicazioni UDP, ideale per sensori che inviano dati sporadicamente
-    \item \textbf{CoAP con DTLS}: Constrained Application Protocol con sicurezza integrata per dispositivi a basse risorse
-    \item \textbf{MQTT-SN}: versione ottimizzata di MQTT per reti di sensori con supporto per sicurezza
+    \item \textbf{AES-128}: uno degli standard più diffusi, usato perché offre un buon equilibrio tra sicurezza e velocità. Protegge bene senza pesare troppo sulle prestazioni o sulla batteria.
+    \item \textbf{Crittografia a curve ellittiche (ECC)}: garantisce lo stesso livello di protezione di altri sistemi ma con chiavi più corte, quindi più veloce e adatta anche ai dispositivi più piccoli.
+    \item \textbf{Suite crittografiche leggere}: algoritmi come ChaCha20-Poly1305, pensati apposta per l’IoT, che mantengono alta la sicurezza anche su hardware con risorse limitate.
 \end{itemize}
+\subsection{Protocolli di comunicazione sicura}
 
-\subsection{Gestione sicura delle identità e delle chiavi}
-
-La gestione delle credenziali in ambienti IoT richiede soluzioni innovative:
-
-\textbf{Hardware Security Modules (HSM) e Trusted Platform Modules (TPM)} forniscono storage sicuro per chiavi crittografiche, impedendo l'estrazione anche in caso di compromissione del firmware. Per dispositivi più semplici, tecniche come il \textit{key derivation} permettono di generare chiavi temporanee da un seme master, limitando l'esposizione in caso di breach.
-
-\textbf{Certificati digitali e PKI leggere} consentono l'autenticazione mutua tra dispositivi e server. Implementazioni come \textbf{X.509} possono essere ottimizzate per l'IoT utilizzando certificati con campi ridotti e algoritmi ECC.
-
-\subsection{Standard moderni per l'autenticazione}
-
-L'adozione di standard aperti facilita l'interoperabilità mantenendo alta la sicurezza:
+L'adattamento dei protocolli di sicurezza tradizionali alle necessità e caratteristiche dei dispositivi IoT ha prodotto soluzioni innovative:
 
 \begin{itemize}
-    \item \textbf{OAuth 2.0}: permette autorizzazioni granulari senza condividere password
-    \item \textbf{JWT (JSON Web Tokens)}: token auto-contenuti per autenticazione stateless
-    \item \textbf{FIDO2/WebAuthn}: autenticazione senza password basata su crittografia a chiave pubblica
+    \item \textbf{DTLS (Datagram TLS)}: una versione di TLS pensata per funzionare bene con il protocollo UDP, utile per dispositivi che si connettono in modo intermittente o con reti non stabili.
+    \item \textbf{Protocolli sicuri a livello applicativo}: come CoAP-DTLS e MQTT-TLS, che integrano le funzioni di sicurezza direttamente nel protocollo usato dai dispositivi per comunicare.
+    \item \textbf{Meccanismi di attestazione}: sistemi che controllano l’integrità e l’autenticità del dispositivo prima di consentire lo scambio di dati, così da evitare comunicazioni con unità compromesse.
 \end{itemize}
 
-L'implementazione corretta di questi standard richiede attenzione ai dettagli e comprensione delle limitazioni dei dispositivi target \parencite{sicari2015, yang2017}.
+\subsection{Standard di autenticazione nell'era IoT}
+
+La convergenza verso standard aperti facilita l'interoperabilità dei dispositivi di produttori differenti senza compromettere la sicurezza:
+
+\begin{itemize}
+    \item \textbf{OAuth 2.0 e OpenID Connect}: permettono di concedere permessi specifici a un servizio senza dover condividere direttamente la password, aumentando la sicurezza.
+    \item \textbf{JWT e CBOR Web Tokens}: piccoli “pacchetti” di informazioni firmati digitalmente che contengono tutto ciò che serve per l’autenticazione, riducendo la necessità di mantenere dati lato server.
+    \item \textbf{FIDO2/WebAuthn}: sistemi di autenticazione senza password, che usano metodi come impronte digitali o riconoscimento facciale, sempre più adottati anche nei dispositivi IoT.
+\end{itemize}
+
+La selezione di dispositivi che implementano questi standard non solo garantisce maggiore sicurezza ma anche migliore integrazione futura.
 
 \section{Analisi di casi di violazione della sicurezza in ambito domestico}
 
-L'esame di incidenti reali fornisce lezioni preziose per migliorare la sicurezza dei sistemi futuri.
+L'esame di incidenti reali fornisce informazioni preziose per la prevenzione di future compromissioni.
 
 \subsection{Il caso delle telecamere IP compromesse}
 
-Nel 2020, migliaia di telecamere IP domestiche sono state compromesse e i loro feed video pubblicati su siti web pubblici. L'analisi post-mortem ha rivelato una combinazione letale di fattori:
+L'incidente del 2020 che ha esposto migliaia di feed video domestici rappresenta un caso emblematico e su vasta scala:
 
 \begin{itemize}
-    \item Password di default mai cambiate
-    \item Firmware obsoleto con vulnerabilità note da anni
-    \item Porte di gestione esposte direttamente su Internet
-    \item Assenza di crittografia per lo streaming video
+    \item Persistenza di credenziali di accesso di default 
+    \item Nessun aggiornamento del firmware da diversi anni
+    \item Esposizione diretta delle porte di gestione dei servizi critici direttamente su Internet
+    \item Assenza di cifratura per lo stream dei video
 \end{itemize}
 
-Le vittime hanno subito non solo violazioni della privacy, ma anche furti mirati dopo che i malintenzionati hanno osservato le loro routine quotidiane. Questo caso sottolinea l'importanza di considerare ogni dispositivo IoT come una potenziale finestra sulla nostra vita privata.
-
-\subsection{Assistenti vocali sotto attacco}
-
-Un caso particolarmente inquietante ha coinvolto assistenti vocali compromessi per intercettare conversazioni private. Gli attaccanti hanno sfruttato:
-
-\begin{itemize}
-    \item Vulnerabilità nel protocollo di accoppiamento Bluetooth
-    \item Comandi vocali subsonici non udibili all'orecchio umano
-    \item Skill/app di terze parti con permessi eccessivi
-\end{itemize}
-
-Una volta compromessi, questi dispositivi sono stati utilizzati per:
-\begin{itemize}
-    \item Registrare conversazioni sensibili
-    \item Effettuare acquisti non autorizzati
-    \item Controllare altri dispositivi smart home collegati
-    \item Disattivare sistemi di allarme
-\end{itemize}
+L'analisi successiva ha rivelato come la concatenazione di vulnerabilità apparentemente minori possa creare brecce di sicurezza maggiori.
 
 \subsection{L'incidente Ring e le implicazioni sulla privacy}
 
-Nel 2019, numerosi account Ring sono stati compromessi, permettendo agli hacker di accedere a videocamere di sicurezza domestiche. Gli attaccanti hanno terrorizzato le famiglie parlando attraverso gli altoparlanti integrati e osservando l'interno delle abitazioni. L'indagine ha rivelato che molti utenti:
+Il caso Ring del 2019 ha evidenziato come la sicurezza debba estendersi oltre il dispositivo stesso. Gli hacker hanno sfruttato diversi punti di vulnerabiltà:
 
 \begin{itemize}
-    \item Riutilizzavano password già compromesse in altri breach
-    \item Non avevano attivato l'autenticazione a due fattori disponibile
-    \item Ignoravano notifiche di accessi sospetti
+    \item Riutilizzo di credenziali compromesse in precedenti data breach per lo stesso account personale
+    \item Mancata adozione di MFA nonostante fosse disponibile
+    \item Scarsa attenzione degli utenti agli indicatori di compromissione
 \end{itemize}
 
-Questo incidente ha portato a class action e ha spinto Amazon (proprietaria di Ring) a rendere obbligatoria l'autenticazione a due fattori, dimostrando come la pressione pubblica possa guidare miglioramenti nella sicurezza \parencite{ringIncident, nestIncident}.
+La risposta di Amazon - rendere obbligatoria l'autenticazione a due fattori dopo l'azione legale collettiva - dimostra come la pressione regolatoria e sociale possa accelerare l'adozione di misure di sicurezza basilari ma efficaci.
 
 \subsection{Lezioni apprese e raccomandazioni}
 
-Questi casi evidenziano pattern ricorrenti che devono guidare lo sviluppo futuro:
+L'analisi trasversale di questi incidenti rivela pattern ricorrenti:
 
 \begin{enumerate}
-    \item \textbf{Security by default}: i dispositivi devono essere sicuri fin dal primo avvio
-    \item \textbf{Trasparenza}: gli utenti devono sapere quali dati vengono raccolti e come
-    \item \textbf{Responsabilità condivisa}: produttori e utenti devono collaborare per la sicurezza
-    \item \textbf{Preparazione agli incidenti}: avere piani di risposta pronti minimizza i danni
+    \item \textbf{Security by default}: la configurazione sicura deve essere lo stato iniziale, non un'opzione
+    \item \textbf{Trasparenza proattiva}: gli utenti devono comprendere quali dati vengono raccolti e come vengono protetti
+    \item \textbf{Modello di responsabilità condivisa}: successo richiede collaborazione tra produttori, provider e utenti finali
+    \item \textbf{Resilienza operativa}: piani di incident response testati minimizzano l'impatto di eventuali breach
 \end{enumerate}
 
 \section{Conclusioni e prospettive future}
 
-La sicurezza nella domotica residenziale non è un obiettivo da raggiungere una volta per tutte, ma un processo continuo di adattamento alle nuove minacce. Mentre la tecnologia evolve, portando nelle nostre case dispositivi sempre più intelligenti e interconnessi, dobbiamo rimanere vigili e proattivi nella protezione della nostra privacy e sicurezza.
+In ambito domotico, la sicurezza va vista come un processo in continua evoluzione. Ogni progresso tecnologico porta con sé nuove opportunità, ma anche rischi che richiedono un aggiornamento costante delle strategie di difesa.
 
-Il futuro vedrà probabilmente l'adozione di tecnologie emergenti come:
+Le direzioni future più promettenti includono:
 
 \begin{itemize}
-    \item \textbf{AI per la sicurezza}: sistemi che apprendono i pattern normali e identificano anomalie
-    \item \textbf{Blockchain per l'IoT}: registri distribuiti per garantire l'integrità dei dati
-    \item \textbf{Quantum-safe cryptography}: preparazione all'era del quantum computing
+    \item \textbf{Intelligenza artificiale per la sicurezza adattiva}: sistemi che apprendono pattern comportamentali per identificare anomalie in tempo reale
+    \item \textbf{Tecnologie distributed ledger}: blockchain e simili per garantire integrità e non ripudiabilità dei dati IoT
+    \item \textbf{Crittografia post-quantistica}: preparazione proattiva all'era del quantum computing
 \end{itemize}
 
-L'obiettivo finale è creare case intelligenti che migliorino la nostra vita senza compromettere la nostra sicurezza. Con l'approccio giusto, combinando tecnologia avanzata, best practice consolidate e consapevolezza degli utenti, questo obiettivo è assolutamente raggiungibile.
+Vogliamo abitazioni intelligenti che offrano tutti i vantaggi della tecnologia, ma senza sacrificare la sicurezza e la riservatezza dei dati e l'usabilità dei dispositivi. E' un traguardo possibile grazie all'adozione di pratiche consolidate, all’uso di consapevole di soluzioni innovative per la sicurezza e alla formazione continua di chi le utilizza.

@@ -1,0 +1,5 @@
+{
+    "ltex.language": "it",
+    "ltex.enabled": ["latex", "tex"],
+    "ltex.additionalRules.enablePickyRules": true
+}
