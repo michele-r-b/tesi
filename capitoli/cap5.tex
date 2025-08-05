@@ -2,393 +2,288 @@
 
 \section{Introduzione}
 
-Nel mondo della domotica residenziale, la scelta del protocollo di comunicazione rappresenta una decisione fondamentale che influenza profondamente le prestazioni, l'affidabilità e l'esperienza utente dell'intero sistema. Questo capitolo si propone di analizzare in dettaglio le performance dei principali protocolli IoT utilizzati in ambito domestico, fornendo strumenti concreti per valutare quale soluzione si adatti meglio a specifiche esigenze implementative.
+Nel contesto della domotica residenziale, la selezione del protocollo di comunicazione rappresenta un passaggio cruciale, capace di incidere in modo determinante sulle prestazioni complessive del sistema, sull’affidabilità delle connessioni tra i dispositivi e, non da ultimo, sull’esperienza d’uso percepita dagli utenti finali. Questo capitolo si propone di esplorare in modo approfondito le caratteristiche tecniche e operative dei principali protocolli IoT impiegati in ambito domestico, offrendo strumenti concreti per orientare la scelta verso la soluzione più adeguata in funzione delle specifiche esigenze progettuali.\\
 
-L'evoluzione tecnologica ha portato alla nascita di numerosi protocolli, ciascuno con peculiarità che lo rendono più o meno adatto a determinati scenari d'uso. Non esiste una soluzione universalmente superiore: la scelta ottimale dipende da un'attenta valutazione di molteplici fattori che analizzeremo nel dettaglio.
+L’evoluzione tecnologica degli ultimi anni ha favorito la diffusione di una molteplicità di protocolli, ciascuno sviluppato per rispondere a determinati requisiti funzionali o vincoli strutturali. Nessuno di essi può essere considerato intrinsecamente “migliore” in senso assoluto: la decisione finale deve necessariamente derivare da un’attenta analisi comparativa, che tenga conto di fattori quali la scalabilità, il consumo energetico, la latenza, la sicurezza, la compatibilità con ecosistemi preesistenti e il grado di complessità richiesto per l’integrazione.
 
 \section{Indicatori chiave di performance}
 
-Per valutare in modo oggettivo e completo le prestazioni dei protocolli IoT, è necessario definire e comprendere gli indicatori chiave di performance (KPI) che ne determinano l'efficacia in contesti reali.
+Per capire davvero quanto un protocollo di comunicazione IoT sia efficace all’interno di un’abitazione intelligente, non basta leggerne le specifiche tecniche ma è fondamentale considerare alcuni indicatori chiave di performance, definiti con il nome Key Performance Indicators abbrteviato in  (KPI), questi indicatori oggettivi ci  aiutano a valutare in modo concreto e comparabile il comportamento di ciascuna tecnologia nelle situazioni reali di abitazioni comuni.
 
 \subsection{Latenza: il tempo di risposta del sistema}
 
-La latenza rappresenta il tempo che intercorre tra l'invio di un comando e la sua effettiva esecuzione. In un sistema domotico, questo parametro influenza direttamente la percezione di reattività del sistema da parte dell'utente.
+Uno degli aspetti che più influisce sull’esperienza d’uso quotidiana è la \textbf{latenza}, ovvero il tempo che passa tra l’invio di un comando e la sua esecuzione. In altre parole, quanto velocemente la casa “risponde” quando chiediamo qualcosa. È un po’ come premere l’interruttore della luce: se dopo averlo fatto ci vogliono più di 200-300 millisecondi perché la lampada si accenda, la sensazione immediata è che qualcosa non funzioni a dovere – anche se tecnicamente tutto è sotto controllo. Questo breve ritardo può sembrare irrilevante, ma oltre una certa soglia diventa fastidioso e può minare la fiducia nel sistema.\\
 
-Immaginiamo di premere un interruttore smart per accendere una luce: se il ritardo supera i 200-300 millisecondi, l'utente percepisce il sistema come lento o non responsivo. Questa soglia psicologica rende la latenza un parametro critico per l'accettazione del sistema.
+Naturalmente, non tutti i protocolli si comportano allo stesso modo. \textbf{Zigbee}, ad esempio, è generalmente molto reattivo nelle comunicazioni dirette, con latenze comprese tra i 15 e i 30 millisecondi. Tuttavia, quando la rete diventa più complessa, come nel caso di una struttura mesh con più passaggi intermedi (i cosiddetti multi-hop), il tempo di risposta può allungarsi fino a 50-100 millisecondi.\\
 
-Zigbee, nella sua implementazione tipica, garantisce latenze nell'ordine di 15-30 millisecondi per comunicazioni dirette, che possono salire a 50-100 millisecondi in reti mesh complesse con routing multi-hop. Wi-Fi, quando ottimizzato per applicazioni real-time, può scendere sotto i 10 millisecondi, ma questo vantaggio si paga in termini di consumo energetico \cite{ZigbeeLatencyStudy}.
+Il \textbf{Wi-Fi}, se ottimizzato per applicazioni in tempo reale, può offrire prestazioni ancora migliori, arrivando a latenze inferiori ai 10 millisecondi. Ma c’è un prezzo da pagare: questi risultati richiedono un consumo energetico decisamente più elevato, rendendo il Wi-Fi meno adatto per dispositivi alimentati a batteria, come sensori o piccoli attuatori che devono funzionare per anni senza manutenzione.\\
 
-\subsection{Consumo energetico: la sfida dell'autonomia}
+In definitiva, la scelta del protocollo deve sempre tenere conto di un equilibrio tra velocità, efficienza energetica e caratteristiche dell’ambiente domestico in cui verrà implementato. La reattività è importante, ma lo è altrettanto la capacità del sistema di durare nel tempo senza interventi continui.
 
-Il consumo energetico rappresenta forse la sfida più significativa nell'IoT domestico. Dispositivi come sensori di movimento, temperatura o apertura porte devono operare per anni con una singola batteria, rendendo l'efficienza energetica un requisito imprescindibile.
 
-I protocolli si differenziano notevolmente sotto questo aspetto:
+\subsection{Consumo energetico: la sfida dell’autonomia}
 
-\begin{itemize}
-    \item \textbf{Z-Wave}: Ottimizzato per il risparmio energetico, con consumi in standby inferiori a 1 µA e trasmissione che richiede circa 30-40 mA per brevi periodi
-    \item \textbf{Zigbee}: Modalità sleep avanzate con consumi sotto i 3 µA, risveglio rapido in meno di 15 ms
-    \item \textbf{Thread}: Eredita l'efficienza di Zigbee aggiungendo ottimizzazioni per il routing IPv6
-    \item \textbf{Wi-Fi}: Anche con le ottimizzazioni più recenti (Wi-Fi 6), il consumo rimane nell'ordine dei mA in standby
-\end{itemize}
+Tra le principali sfide dell’Internet of Things applicato alla domotica, il consumo energetico occupa un ruolo di primo piano. In particolare, numerosi dispositivi domestici, come sensori di movimento, di temperatura, o di apertura porte e finestre, devono poter funzionare per lunghi periodi, spesso per anni, con una singola batteria di piccole dimensioni. In questo scenario, l’efficienza energetica non rappresenta solo un vantaggio, ma un requisito fondamentale per garantire la sostenibilità e l’affidabilità dell’intero ecosistema smart.
 
-Un sensore di temperatura Z-Wave che trasmette ogni 5 minuti può operare per 5-7 anni con una batteria CR2032, mentre un dispositivo Wi-Fi equivalente richiederebbe ricariche mensili o alimentazione continua \cite{EnergyEfficientProtocols}.
-
-\subsection{Larghezza di banda: capacità di trasferimento dati}
-
-La larghezza di banda determina la quantità di informazioni che possono fluire attraverso la rete in un dato periodo. Questo parametro diventa critico quando si considerano applicazioni come:
+I protocolli di comunicazione IoT si distinguono nettamente per quanto riguarda l’impatto energetico, in funzione del loro design, delle modalità di trasmissione e della gestione dei cicli di attività e standby. Di seguito, una panoramica comparativa delle principali soluzioni:
 
 \begin{itemize}
-    \item Streaming video da telecamere di sicurezza
-    \item Aggiornamenti firmware over-the-air
-    \item Trasferimento di log dettagliati per diagnostica
-    \item Controllo di dispositivi audio multi-room
+    \item \textbf{Z-Wave}: Progettato fin dalle origini per applicazioni a basso consumo, Z-Wave offre consumi estremamente contenuti in modalità standby (inferiori a 1 µA) e una richiesta energetica in trasmissione intorno ai 30–40 mA, limitata a brevi istanti. Queste caratteristiche lo rendono ideale per dispositivi alimentati a batteria.
+   \item \textbf{Zigbee}: Anch’esso particolarmente efficiente, Zigbee utilizza modalità “sleep” avanzate con assorbimenti inferiori ai 3 µA. Il tempo di riattivazione è molto contenuto (meno di 15 ms), garantendo un buon compromesso tra reattività e risparmio energetico.
+
+    \item \textbf{Thread}: Questo protocollo eredita l’approccio efficiente di Zigbee, ma introduce ulteriori ottimizzazioni per supportare il routing basato su IPv6, consentendo una gestione energetica ancora più flessibile e scalabile, pur mantenendo consumi contenuti.
+
+    \item \textbf{Wi-Fi}: Tradizionalmente meno adatto ai dispositivi a basso consumo, anche nelle sue versioni più recenti – come Wi-Fi 6 – continua a presentare assorbimenti elevati, con consumi in standby nell’ordine dei millesimi di ampere (mA), decisamente superiori rispetto agli standard sopra citati.
 \end{itemize}
 
-Le differenze tra i protocolli sono sostanziali:
+Per rendere il confronto più concreto, si consideri un sensore di temperatura basato su Z-Wave, configurato per trasmettere dati ogni 5 minuti: in condizioni ottimali, può operare per un periodo compreso tra i 5 e i 7 anni con una singola batteria tipo CR2032. Al contrario, un dispositivo Wi-Fi equivalente richiederebbe una ricarica mensile o un’alimentazione continua, fattore che limita fortemente la sua applicabilità in scenari stand-alone.
+
+\subsection{Larghezza di banda: quanto possono davvero ``parlare'' i dispositivi}
+
+Un altro parametro importante da considerare, soprattutto in certi scenari, è la \textbf{larghezza di banda}, ovvero la quantità di dati che possono essere trasmessi attraverso la rete in un dato intervallo di tempo. Anche se molti dispositivi domotici scambiano solo piccoli pacchetti di dati (ad esempio, un comando on/off o la lettura di un sensore), esistono casi d’uso che richiedono una capacità di trasferimento ben più ampia.
+
+Alcuni esempi includono:
+
+\begin{itemize}
+    \item Lo \textit{streaming video} in tempo reale da telecamere di sicurezza
+    \item Gli \textit{aggiornamenti firmware over-the-air}, fondamentali per la manutenzione remota
+    \item Il trasferimento di \textit{log diagnostici} da dispositivi complessi
+    \item Il controllo e la sincronizzazione di \textit{impianti audio multi-room}
+\end{itemize}
+
+In questi contesti, la banda disponibile fa la differenza. I protocolli IoT presentano valori molto diversi in termini di velocità massima e throughput reale, come evidenziato nella tabella seguente:
 
 \begin{table}[h]
 \centering
 \begin{tabular}{|l|c|c|}
 \hline
-\textbf{Protocollo} & \textbf{Velocità massima} & \textbf{Throughput reale} \\
+\textbf{Protocollo} & \textbf{Velocità massima} & \textbf{Throughput reale stimato} \\
 \hline
-Z-Wave & 100 kbps & 40-60 kbps \\
-Zigbee & 250 kbps & 100-150 kbps \\
-Thread & 250 kbps & 100-150 kbps \\
-Wi-Fi 4 & 600 Mbps & 100-200 Mbps \\
-Wi-Fi 6 & 9.6 Gbps & 1-2 Gbps \\
+Z-Wave & 100 kbps & 40–60 kbps \\
+Zigbee & 250 kbps & 100–150 kbps \\
+Thread & 250 kbps & 100–150 kbps \\
+Wi-Fi 4 & 600 Mbps & 100–200 Mbps \\
+Wi-Fi 6 & 9.6 Gbps & 1–2 Gbps \\
 \hline
 \end{tabular}
-\caption{Confronto delle velocità di trasmissione dei principali protocolli IoT}
+\caption{Confronto tra velocità teoriche e throughput pratico dei principali protocolli IoT}
 \end{table}
 
-È evidente come Wi-Fi domini in termini di capacità pura, ma questa superiorità va contestualizzata: la maggior parte dei dispositivi domotici trasmette pochi byte di dati (stato on/off, temperatura, luminosità), rendendo l'alta banda di Wi-Fi spesso superflua e costosa in termini energetici \cite{WiFiBandwidth}.
+Come si osserva, \textbf{Wi-Fi} domina nettamente per capacità di banda. Tuttavia, nella maggior parte degli impianti domotici, questa potenza risulta sovradimensionata: un semplice comando per accendere una luce o inviare una lettura della temperatura richiede pochi byte, rendendo il Wi-Fi inefficiente in termini energetici per compiti così semplici \cite{wifi6-spec}. 
 
-\subsection{Affidabilità e resilienza}
+In altre parole, usare il Wi-Fi per trasmettere dati minimi è come utilizzare un camion per consegnare una cartolina: funziona, ma è chiaramente uno spreco.
 
-L'affidabilità di un protocollo si misura nella sua capacità di garantire la consegna dei messaggi anche in condizioni avverse. Questo include:
+\vspace{0.5cm}
+
+\subsection{Affidabilità e resilienza: quando la rete deve sapersela cavare da sola}
+
+Perché un sistema domotico possa davvero definirsi affidabile, non basta che funzioni “quando tutto va bene”: deve essere in grado di reagire e adattarsi anche quando qualcosa non va come previsto. È in queste situazioni che entrano in gioco due concetti fondamentali: \textbf{affidabilità} e \textbf{resilienza}.
+
+In termini pratici, un protocollo di comunicazione deve possedere alcune capacità essenziali:
 
 \begin{itemize}
-    \item \textbf{Tolleranza alle interferenze}: Capacità di operare in presenza di altri dispositivi wireless
-    \item \textbf{Meccanismi di ritrasmissione}: Gestione automatica dei pacchetti persi
-    \item \textbf{Routing dinamico}: Capacità di trovare percorsi alternativi in caso di guasti
-    \item \textbf{Quality of Service (QoS)}: Prioritizzazione del traffico critico
+    \item \textbf{Gestione delle interferenze}: saper mantenere la comunicazione anche in ambienti ricchi di segnali wireless (Wi-Fi, Bluetooth, ecc.)
+    \item \textbf{Ritrasmissione automatica}: garantire che i pacchetti persi vengano inviati di nuovo senza necessità di intervento
+    \item \textbf{Routing dinamico}: trovare percorsi alternativi se un nodo della rete diventa inattivo o instabile
+    \item \textbf{Prioritizzazione del traffico}: assegnare maggiore importanza ai messaggi critici tramite meccanismi di \textit{Quality of Service} (QoS)
 \end{itemize}
 
-Le reti mesh di Zigbee e Thread eccellono in questo ambito, con algoritmi di routing che si adattano dinamicamente a cambiamenti nella topologia della rete. Z-Wave, operando su frequenze sub-GHz meno congestionate, offre maggiore immunità alle interferenze rispetto ai protocolli a 2.4 GHz.
+Le reti \textit{mesh} basate su \textbf{Zigbee} e \textbf{Thread} sono progettate proprio per affrontare queste sfide: grazie ad algoritmi di routing intelligente, sono in grado di riorganizzarsi in autonomia e reindirizzare i messaggi qualora un dispositivo venga rimosso, sostituito o risulti non raggiungibile \cite{zigbee-spec,thread-spec}. Questo approccio rende il sistema più flessibile e robusto nel tempo.\\
+
+Anche \textbf{Z-Wave}, pur avendo una struttura mesh meno estesa, offre un vantaggio rilevante: opera su frequenze \textbf{sub-GHz}, in particolare intorno agli 868 MHz in Europa, una banda meno affollata rispetto alla classica 2.4 GHz utilizzata da molti altri protocolli. Ciò si traduce in una maggiore immunità alle interferenze, che spesso rappresentano un problema negli ambienti domestici saturi di dispositivi wireless \cite{zwave-spec}.\\
+
+Per quanto riguarda il \textbf{Wi-Fi}, nonostante la sua ampia diffusione e le elevate prestazioni in termini di velocità, si dimostra talvolta meno resiliente in ambienti particolarmente congestionati. La stabilità complessiva della rete Wi-Fi dipende fortemente dalla qualità dell'infrastruttura (router, access point, gestione dei canali), e in caso di sovraccarico o malfunzionamenti può mostrare latenze elevate o perdita di pacchetti \cite{wifi6-spec}.\\
+
+Come illustrato nella Figura~\ref{fig:reti-mesh}, le reti mesh consentono a ogni nodo di fungere da ponte per altri dispositivi, garantendo comunicazione anche in caso di guasti o disconnessioni.
+
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.3]{immagini/reti.jpeg}
+    \caption{Interfaccia Apple Home con dispositivi configurati}
+    \label{fig:reti-mesh}
+\end{figure}
+
+In definitiva, quando si progettano sistemi domotici destinati a durare nel tempo e ad adattarsi a contesti mutevoli, scegliere protocolli con meccanismi di recupero e adattamento diventa una garanzia di stabilità e continuità.
 
 \section{Confronto prestazionale tra Zigbee, Z-Wave, Wi-Fi, Thread e Matter}
 
 \subsection{Zigbee: il veterano delle reti mesh}
 
-Zigbee rappresenta uno dei protocolli più maturi nell'ecosistema IoT domestico. Basato sullo standard IEEE 802.15.4, opera principalmente sulla banda 2.4 GHz condivisa con Wi-Fi e Bluetooth.
+Zigbee è considerato uno dei protocolli più consolidati nell’ambito della domotica, grazie alla sua lunga presenza sul mercato e alla vasta adozione da parte dei produttori. Basato sullo standard IEEE 802.15.4, opera principalmente sulla banda a 2.4 GHz, la stessa condivisa con Wi-Fi e Bluetooth.
 
 \textbf{Punti di forza:}
 \begin{itemize}
     \item Ecosistema maturo con ampia disponibilità di dispositivi
-    \item Supporto per reti mesh self-healing fino a 65.000 nodi teorici
-    \item Profili applicativi standardizzati (Zigbee Home Automation, Zigbee Light Link)
+    \item Supporto per reti mesh auto-riparanti fino a 65.000 nodi teorici
+    \item Profili applicativi standardizzati (es. Zigbee Home Automation, Zigbee Light Link)
     \item Consumi energetici estremamente ridotti
 \end{itemize}
 
 \textbf{Limitazioni:}
 \begin{itemize}
-    \item Interferenze sulla banda 2.4 GHz affollata
-    \item Complessità nella gestione di reti molto grandi
-    \item Frammentazione tra diversi profili e versioni
-    \item Velocità di trasmissione limitata per applicazioni data-intensive
+    \item Rischio di interferenze nella banda 2.4 GHz
+    \item Complessità nella gestione di reti molto estese
+    \item Frammentazione tra profili e versioni differenti
+    \item Velocità non adatta a trasferimenti di dati intensivi
 \end{itemize}
 
-Un caso d'uso tipico è l'illuminazione smart: Philips Hue utilizza Zigbee per controllare fino a 50 lampadine con un singolo bridge, garantendo tempi di risposta quasi istantanei e sincronizzazione perfetta per scenari luminosi complessi \cite{ZWaveVsZigbee}.
+Philips Hue, ad esempio, utilizza Zigbee per controllare fino a 50 lampadine con un singolo bridge, offrendo sincronizzazione precisa e latenza impercettibile.
 
 \subsection{Z-Wave: l'alternativa su frequenze dedicate}
 
-Z-Wave si distingue per l'utilizzo di frequenze sub-GHz (868 MHz in Europa, 908 MHz negli USA), che offrono vantaggi significativi in termini di penetrazione attraverso muri e interferenze ridotte.
+Z-Wave si distingue per l’utilizzo di frequenze sub-GHz (868 MHz in Europa, 908 MHz negli USA), che garantiscono una maggiore penetrazione attraverso muri e ridotte interferenze rispetto alla banda 2.4 GHz.
 
 \textbf{Caratteristiche distintive:}
 \begin{itemize}
-    \item Interoperabilità garantita tra dispositivi certificati Z-Wave
-    \item Portata superiore (fino a 100 metri in campo aperto)
-    \item Rete mesh con routing source-routed per efficienza ottimale
-    \item Limite di 232 nodi per rete, ma sufficiente per la maggior parte delle abitazioni
+    \item Interoperabilità certificata tra dispositivi Z-Wave
+    \item Portata estesa fino a 100 metri in campo aperto
+    \item Topologia mesh con routing source-routed ottimizzato
+    \item Limite di 232 nodi per rete, sufficiente per l’ambito residenziale
 \end{itemize}
 
-\textbf{Considerazioni pratiche:}
-La velocità limitata (100 kbps) rende Z-Wave inadatto per applicazioni che richiedono trasferimento di grandi quantità di dati, ma eccellente per controllo e monitoraggio. Un sistema di sicurezza domestico basato su Z-Wave può gestire decine di sensori porta/finestra, rilevatori di movimento e sirene con affidabilità militare \cite{ZWaveVsZigbee}.
+La sua velocità massima, pari a 100 kbps, lo rende inadatto a carichi di dati elevati, ma perfetto per sistemi di controllo. Un impianto di sicurezza domestica può includere sensori di movimento, contatti magnetici per porte/finestre e sirene ad alta affidabilità.
 
 \subsection{Wi-Fi: potenza e versatilità}
 
-Wi-Fi domina in termini di capacità pura e ubiquità. Ogni casa moderna ha già una rete Wi-Fi, eliminando la necessità di hub dedicati per molte applicazioni.
+Il Wi-Fi domina per capacità di banda e diffusione. La presenza capillare di router domestici riduce la necessità di infrastrutture dedicate, rendendolo ideale per dispositivi che richiedono elevato throughput.
 
 \textbf{Vantaggi competitivi:}
 \begin{itemize}
-    \item Larghezza di banda incomparabile per streaming video e trasferimenti massivi
+    \item Larghezza di banda elevatissima, adatta a video e trasferimenti intensivi
     \item Infrastruttura già presente nella maggior parte delle abitazioni
-    \item Supporto nativo per IP, facilitando l'integrazione con servizi cloud
-    \item Wi-Fi 6 introduce ottimizzazioni specifiche per IoT (Target Wake Time)
+    \item Supporto IP nativo, ideale per integrazione cloud
+    \item Ottimizzazioni recenti in Wi-Fi 6 per dispositivi IoT (es. Target Wake Time)
 \end{itemize}
 
-\textbf{Sfide nell'IoT domestico:}
+\textbf{Sfide operative:}
 \begin{itemize}
-    \item Consumo energetico proibitivo per dispositivi a batteria
-    \item Complessità nella gestione di decine di dispositivi su un singolo access point
-    \item Latenza variabile in reti congestionate
-    \item Costi superiori per l'hardware
+    \item Consumo energetico elevato, inadatto a dispositivi a batteria
+    \item Degrado prestazionale con molti dispositivi connessi a un singolo access point
+    \item Latenza variabile in presenza di congestione di rete
+    \item Hardware più costoso rispetto ad alternative low-power
 \end{itemize}
 
-Le videocamere di sicurezza rappresentano l'applicazione ideale per Wi-Fi: richiedono alta banda per lo streaming video e sono tipicamente alimentate dalla rete elettrica, eliminando i vincoli energetici \cite{WiFiVsIoT}.
+Le videocamere IP rappresentano un'applicazione ideale: richiedono banda elevata e sono alimentate da rete elettrica, eliminando il vincolo energetico \cite{WiFiVsIoT}.
 
 \subsection{Thread: l'evoluzione IP-native}
 
-Thread rappresenta l'evoluzione moderna dei protocolli mesh, progettato nativamente per l'era dell'IPv6 e dell'interoperabilità.
+Thread è un protocollo mesh moderno progettato per supportare IPv6 nativamente, con un’architettura leggera e sicura adatta all’era dell’interoperabilità e del cloud.
 
 \textbf{Innovazioni chiave:}
 \begin{itemize}
-    \item Supporto nativo IPv6 per connettività end-to-end con Internet
-    \item Sicurezza banking-grade con crittografia AES e gestione automatica delle chiavi
-    \item Commissioning semplificato tramite smartphone
-    \item Self-healing mesh con convergenza rapida in caso di guasti
+    \item Supporto IPv6 nativo con instradamento end-to-end
+    \item Sicurezza avanzata con crittografia AES e gestione automatica delle chiavi
+    \item Commissioning semplice via smartphone
+    \item Mesh self-healing con tempi di riconvergenza rapidi
 \end{itemize}
 
-\textbf{Prestazioni sul campo:}
-Thread dimostra latenze paragonabili a Zigbee (20-50 ms) con il vantaggio di un'architettura più moderna. La capacità di supportare fino a 250 dispositivi attivi in una rete domestica lo rende adatto anche per installazioni complesse. Apple HomePod mini e Google Nest Hub fungono da border router Thread, facilitando l'adozione senza hardware aggiuntivo \cite{ThreadProtocol}.
+Le sue latenze sono paragonabili a Zigbee (20–50 ms), ma con un’architettura più moderna e scalabile. Dispositivi come Apple HomePod mini o Google Nest Hub fungono da border router per reti Thread, facilitando l’adozione senza componenti aggiuntivi \cite{thread-spec}.
 
-\subsection{Matter: l'unificatore dell'ecosistema}
+\subsection{Matter: l’unificatore dell’ecosistema}
 
-Matter non è un protocollo di trasporto ma uno standard applicativo che opera sopra Thread, Wi-Fi ed Ethernet, promettendo di risolvere il problema dell'interoperabilità.
+Matter si propone come livello applicativo universale, operando sopra protocolli esistenti come Thread, Wi-Fi ed Ethernet. Il suo obiettivo è garantire interoperabilità trasparente tra piattaforme e produttori.
 
-\textbf{Proposizione di valore:}
+\textbf{Punti di forza:}
 \begin{itemize}
-    \item Interoperabilità garantita tra ecosistemi (Apple HomeKit, Google Home, Amazon Alexa)
-    \item Sicurezza by-design con certificazione obbligatoria
-    \item Commissioning unificato tramite QR code
-    \item Controllo locale senza dipendenza dal cloud
+    \item Compatibilità trasversale tra Apple, Google, Amazon, Samsung
+    \item Sicurezza integrata nel design, con certificazione obbligatoria
+    \item Commissioning tramite QR code o NFC
+    \item Comunicazione locale senza necessità di cloud
 \end{itemize}
 
-\textbf{Impatto sulle prestazioni:}
-Matter aggiunge un overhead minimo (5-10\% di latenza aggiuntiva) ma i benefici in termini di compatibilità superano ampiamente questo costo. Un termostato Matter può essere controllato indifferentemente da Siri, Google Assistant o Alexa, con prestazioni consistenti su tutte le piattaforme \cite{MatterWhitePaper}.
+Matter introduce un overhead minimo (circa 5–10\% di latenza aggiuntiva), ma il vantaggio in termini di compatibilità compensa ampiamente. Un termostato compatibile può essere gestito indistintamente da Siri, Google Assistant o Alexa, mantenendo la stessa qualità d’interazione \cite{MatterWhitePaper}.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\textbf{Parametro} & \textbf{Zigbee} & \textbf{Z-Wave} & \textbf{Wi-Fi} & \textbf{Thread} & \textbf{Matter} \\
+\hline
+Banda & 2.4 GHz & Sub-GHz & 2.4/5 GHz & 2.4 GHz & - \\
+Topologia & Mesh & Mesh & Point-to-point & Mesh & - \\
+Velocità max & 250 kbps & 100 kbps & \textgreater100 Mbps & 250 kbps & - \\
+Energia & Molto bassa & Bassa & Alta & Bassa & Variabile \\
+Interoperabilità & Limitata & Alta (cert.) & Variabile & Alta & Massima \\
+\hline
+\end{tabular}
+\caption{Confronto sintetico tra protocolli e standard IoT in ambito domotico}
+\label{tab:confronto-protocolli}
+\end{table}
 
 \section{Scalabilità dei protocolli in ambienti domestici complessi}
 
-La scalabilità diventa critica quando si passa da pochi dispositivi smart a vere e proprie case intelligenti con centinaia di sensori, attuatori e controllori.
+Man mano che le abitazioni intelligenti si arricchiscono di sensori, attuatori e dispositivi di controllo, il tema della \textbf{scalabilità} diventa centrale. Un sistema domotico moderno non si limita più ad accendere qualche luce o a regolare il termostato: può arrivare a gestire centinaia di elementi distribuiti in ambienti ampi e strutturati. In questo contesto, è fondamentale comprendere come i principali protocolli IoT reagiscano all’aumento della complessità della rete.
 
-\subsection{Analisi della scalabilità per protocollo}
+\subsection{Scalabilità per protocollo}
 
-\subsubsection{Zigbee: teoria vs pratica}
+\subsubsection{Zigbee: tra teoria e realtà}
 
-Mentre Zigbee supporta teoricamente 65.000 dispositivi per rete, la realtà è più complessa. In pratica, reti con più di 200-300 dispositivi iniziano a mostrare:
+Zigbee dichiara il supporto fino a 65.000 dispositivi per rete, un numero che, sulla carta, garantirebbe ampie possibilità di espansione. Tuttavia, in ambito residenziale, questa soglia è ben lontana dalla realtà operativa.
 
+Già superata la soglia dei 200-300 dispositivi, cominciano a emergere difficoltà pratiche:
 \begin{itemize}
-    \item Aumento della latenza per il routing complesso
-    \item Congestione del canale radio
-    \item Difficoltà nella gestione e manutenzione
-    \item Problemi di sincronizzazione per aggiornamenti firmware
+    \item Latenze maggiori dovute al routing tra nodi multipli
+    \item Congestione nella banda a 2.4 GHz, soprattutto in ambienti densi
+    \item Rallentamenti durante aggiornamenti firmware distribuiti
+    \item Complessità crescente nella configurazione e manutenzione
 \end{itemize}
 
-La soluzione tipica prevede la segmentazione in sotto-reti logiche, ad esempio separando illuminazione, sicurezza e climatizzazione su coordinator Zigbee distinti \cite{ZigbeeScalability}.
+Una strategia spesso adottata è la creazione di \textbf{sotto-reti logiche} distinte, ciascuna gestita da un coordinator dedicato, per esempio separando l’illuminazione dalla climatizzazione o dai sistemi di sicurezza.
 
-\subsubsection{Z-Wave: affidabilità su scala ridotta}
+\subsubsection{Z-Wave: solido entro i propri limiti}
 
-Il limite di 232 nodi di Z-Wave può sembrare restrittivo, ma si rivela adeguato per il 99\% delle installazioni residenziali. La semplicità del protocollo garantisce prestazioni prevedibili anche al limite della capacità.
+Z-Wave ha un limite teorico molto più contenuto: 232 dispositivi per rete. Tuttavia, per la maggior parte delle abitazioni — anche quelle di grandi dimensioni — si tratta di un numero più che sufficiente. La gestione più semplice e il minor rischio di congestione radio, grazie all’uso della banda sub-GHz, lo rendono una scelta solida e prevedibile.
 
-Un'abitazione di 300 m² può tipicamente includere:
+Un'abitazione con circa 100 dispositivi (tra interruttori, sensori e attuatori) rientra tranquillamente nei limiti del protocollo, offrendo ancora margine per ulteriori espansioni.
+
+\subsubsection{Thread e Matter: progettati per crescere}
+
+Thread è stato pensato fin dall’inizio per reti scalabili, affidabili e facilmente gestibili:
 \begin{itemize}
-    \item 30-40 interruttori e dimmer
-    \item 20-30 sensori ambientali
-    \item 10-15 dispositivi di sicurezza
-    \item 10-20 prese smart e attuatori vari
+    \item I router mesh distribuiti bilanciano il traffico in modo dinamico
+    \item L'uso nativo di IPv6 semplifica il routing e la gestione
+    \item La rete si auto-configura e auto-ripara in caso di guasti
 \end{itemize}
 
-Totale: 70-105 dispositivi, ben entro i limiti di Z-Wave con margine per espansioni future \cite{ZWaveScalability}.
+Test su installazioni reali mostrano che anche con oltre 200 dispositivi, i tempi di risposta restano sotto i 100 ms nel 95° percentile, con una degradazione molto graduale delle prestazioni all’aumentare del carico.
 
-\subsubsection{Thread e Matter: scalabilità moderna}
+Matter, appoggiandosi a Thread (e in parte al Wi-Fi), eredita e potenzia questa capacità, offrendo al tempo stesso interoperabilità tra ecosistemi e gestione centralizzata semplificata.
 
-Thread affronta la scalabilità con un approccio moderno:
+\subsection{Strategie di progettazione per reti complesse}
 
-\begin{itemize}
-    \item Router distribuiti che bilanciano automaticamente il carico
-    \item Algoritmi di routing ottimizzati per IPv6
-    \item Gestione efficiente della memoria sui dispositivi edge
-    \item Supporto per commissioning di massa
-\end{itemize}
+\subsubsection{Progettare la rete per livelli}
 
-Test sul campo mostrano che reti Thread con 200+ dispositivi mantengono latenze sotto i 100 ms nel 95° percentile, con degradazione graceful all'aumentare del carico.
-
-\subsection{Strategie per gestire la complessità}
-
-\subsubsection{Architettura gerarchica}
-
-Organizzare la rete in livelli logici migliora gestibilità e prestazioni:
+Quando i dispositivi aumentano, progettare in modo gerarchico diventa essenziale. Una buona architettura divide la rete in tre livelli logici:
 
 \begin{enumerate}
-    \item \textbf{Livello Edge}: Sensori e attuatori semplici (Zigbee/Z-Wave/Thread)
-    \item \textbf{Livello Aggregazione}: Hub di zona che consolidano il traffico
-    \item \textbf{Livello Core}: Controller principale e servizi cloud (Wi-Fi/Ethernet)
+    \item \textbf{Livello Edge}: i dispositivi periferici (sensori, attuatori) che eseguono compiti specifici
+    \item \textbf{Livello di Aggregazione}: hub locali o controller di zona che raccolgono e instradano i dati
+    \item \textbf{Livello Core}: un controller principale (o cloud gateway) che integra, elabora e coordina tutto il sistema
 \end{enumerate}
 
-\subsubsection{Segregazione per funzione}
+Questa suddivisione migliora la stabilità, semplifica la manutenzione e consente di isolare eventuali malfunzionamenti, evitando che si propaghino all’intero sistema.
 
-Separare dispositivi critici da quelli non essenziali:
+\subsubsection{Separare per funzione: la rete è più leggibile}
 
-\begin{itemize}
-    \item \textbf{Rete Sicurezza}: Dedicata a sensori e allarmi (Z-Wave per affidabilità)
-    \item \textbf{Rete Comfort}: Illuminazione e clima (Zigbee/Thread per efficienza)
-    \item \textbf{Rete Media}: Streaming e entertainment (Wi-Fi per banda)
-\end{itemize}
-
-\section{Strumenti e metodologie di test per le performance IoT}
-
-Valutare oggettivamente le prestazioni di una rete IoT richiede strumenti specializzati e metodologie rigorose.
-
-\subsection{Strumenti software per l'analisi}
-
-\subsubsection{Analisi del traffico di rete}
-
-\textbf{Wireshark} rimane lo standard de facto per l'analisi approfondita del traffico. Con i dissector appropriati, permette di:
-\begin{itemize}
-    \item Decodificare frame Zigbee, Z-Wave (con chiavi di rete)
-    \item Misurare latenze end-to-end con precisione microsecondo
-    \item Identificare retransmissioni e pacchetti persi
-    \item Analizzare pattern di traffico e anomalie
-\end{itemize}
-
-Per Thread e Matter, strumenti specializzati come \textbf{Thread Network Analyzer} offrono visualizzazioni dedicate della topologia mesh e metriche di routing \cite{WiresharkTool}.
-
-\subsubsection{Monitoraggio energetico}
-
-Il \textbf{Power Profiler Kit II} di Nordic Semiconductor rappresenta lo stato dell'arte per la profilazione energetica:
-\begin{itemize}
-    \item Risoluzione di corrente fino a 1 nA
-    \item Frequenza di campionamento 100 kHz
-    \item Integrazione con ambiente di sviluppo per correlazione codice-consumo
-    \item Capacità di emulare batterie con impedenza variabile
-\end{itemize}
-
-Alternativa open-source: \textbf{Otii Arc} combina alimentatore programmabile e oscilloscopio per misurazioni precise a costo contenuto \cite{PowerProfiler}.
-
-\subsection{Strumenti hardware specializzati}
-
-\subsubsection{Sniffer radio multi-protocollo}
-
-Dispositivi come \textbf{Texas Instruments CC2531} o \textbf{Nordic nRF52840 Dongle} permettono di:
-\begin{itemize}
-    \item Catturare traffico radio raw su 2.4 GHz
-    \item Decodificare simultaneamente Zigbee, Thread, Bluetooth
-    \item Iniettare pacchetti per test di robustezza
-    \item Misurare RSSI e LQI per mappatura copertura
-\end{itemize}
-
-\subsubsection{Emulatori di rete e generatori di carico}
-
-Per test su larga scala, piattaforme come \textbf{Spirent Vertex} permettono di:
-\begin{itemize}
-    \item Emulare centinaia di dispositivi virtuali
-    \item Generare pattern di traffico realistici
-    \item Simulare condizioni di rete avverse (perdita pacchetti, jitter)
-    \item Automatizzare test di conformità e certificazione
-\end{itemize}
-
-\subsection{Metodologie di test strutturate}
-
-\subsubsection{Test di latenza e responsività}
-
-Protocollo di test standard:
-\begin{enumerate}
-    \item \textbf{Setup}: Rete isolata con 10, 50, 100, 200 dispositivi
-    \item \textbf{Stimolo}: Comando broadcast (es. "spegni tutte le luci")
-    \item \textbf{Misurazione}: Tempo dal comando all'ultima conferma
-    \item \textbf{Ripetizioni}: Minimo 1000 iterazioni per significatività statistica
-    \item \textbf{Analisi}: Media, mediana, 95° e 99° percentile
-\end{enumerate}
-
-\subsubsection{Stress test e resilienza}
-
-Scenari di test critici:
-\begin{itemize}
-    \item \textbf{Broadcast storm}: Tutti i dispositivi trasmettono simultaneamente
-    \item \textbf{Node failure}: Rimozione improvvisa del 20\% dei router
-    \item \textbf{Interferenza}: Introduzione di rumore controllato sul canale
-    \item \textbf{Power cycling}: Spegnimento/riaccensione casuale di dispositivi
-\end{itemize}
-
-\subsubsection{Test di interoperabilità}
-
-Per protocolli come Matter, essenziale verificare:
-\begin{itemize}
-    \item Commissioning cross-vendor
-    \item Mantenimento delle funzionalità base tra ecosistemi
-    \item Gestione aggiornamenti firmware misti
-    \item Comportamento in caso di versioni protocollo diverse
-\end{itemize}
-
-\subsection{Simulazione e modellazione}
-
-\subsubsection{Network Simulator 3 (NS-3)}
-
-NS-3 offre moduli dedicati per simulare reti IoT complete:
-\begin{itemize}
-    \item Modelli accurati per Zigbee, 6LoWPAN, Thread
-    \item Simulazione di propagazione radio realistica
-    \item Scalabilità fino a migliaia di nodi
-    \item Integrazione con trace reali per validazione
-\end{itemize}
-
-Esempio di scenario: simulazione di una smart city con 10.000 dispositivi per validare algoritmi di routing prima del deployment fisico \cite{NS3Simulator}.
-
-\subsubsection{MATLAB/Simulink per analisi predittiva}
-
-Per analisi avanzate:
-\begin{itemize}
-    \item Modellazione stocastica del traffico di rete
-    \item Ottimizzazione del posizionamento dei router
-    \item Predizione della durata batterie con profili d'uso variabili
-    \item Analisi Monte Carlo per affidabilità del sistema
-\end{itemize}
-
-\section{Best practice per l'ottimizzazione delle prestazioni}
-
-\subsection{Progettazione della topologia di rete}
-
-Una topologia ben progettata è fondamentale per prestazioni ottimali:
-
-\begin{enumerate}
-    \item \textbf{Posizionamento strategico dei router}: Garantire almeno 2 percorsi ridondanti per dispositivi critici
-    \item \textbf{Bilanciamento del carico}: Distribuire dispositivi end-device equamente tra router
-    \item \textbf{Minimizzazione degli hop}: Posizionare coordinator/hub centralmente
-    \item \textbf{Considerazione delle interferenze}: Mappare Wi-Fi e altri dispositivi 2.4 GHz
-\end{enumerate}
-
-\subsection{Ottimizzazione del consumo energetico}
-
-Strategie pratiche per massimizzare la durata delle batterie:
+Un'altra strategia efficace è la suddivisione dei dispositivi in reti logiche in base alla loro funzione:
 
 \begin{itemize}
-    \item \textbf{Polling adattivo}: Aumentare intervalli di reporting per dispositivi stabili
-    \item \textbf{Aggregazione dei dati}: Inviare multiple letture in un singolo pacchetto
-    \item \textbf{Wake-on-radio}: Utilizzare radio secondarie a bassissimo consumo per il risveglio
-    \item \textbf{Predizione e caching}: Anticipare richieste ricorrenti per ridurre comunicazioni
+    \item \textbf{Rete Sicurezza}: dispositivi critici come sensori di movimento, allarmi e serrature (dove l'affidabilità è prioritaria)
+    \item \textbf{Rete Comfort}: luci, termostati e tapparelle (ottimizzati per reattività e basso consumo)
+    \item \textbf{Rete Media}: smart TV, speaker, videocamere (dove la banda e la connessione stabile sono fondamentali)
 \end{itemize}
 
-\subsection{Gestione delle interferenze}
+In questo modo si ottimizzano i protocolli per ciascun gruppo: Z-Wave può essere usato per la sicurezza, Zigbee o Thread per l’illuminazione, e il Wi-Fi per streaming e intrattenimento.
 
-In ambienti 2.4 GHz congestionati:
+\subsection{Conclusioni sulla scalabilità}
 
-\begin{enumerate}
-    \item \textbf{Channel hopping}: Utilizzare tutti i canali disponibili (Zigbee: 11, 15, 20, 25)
-    \item \textbf{Frequency agility}: Implementare cambio dinamico di canale
-    \item \textbf{Time slotting}: Coordinare trasmissioni per evitare collisioni
-    \item \textbf{Power control}: Ridurre potenza TX al minimo necessario
-\end{enumerate}
+In sostanza quando ci troviamo a realizzazione di sistemi domotici complessi, la prima vera sfida è quella della scalabilità che non si esaurisce nei soli numeri dichiarati dai produttori. Al contrario, deve essere fondamentale che la rete sia in grado di mantenere buoni tempi di risposta, sia semplice nella gestione ed affidabilità, sopratutto  quando il numero di dispositivi collegati aumenta sensibilmente.\\
 
-\section{Conclusioni}
+Ogni protocollo che abbiamo visto finoea presenta caratteristiche diverse in questo scenario.\\
+Zigbee può scalare bene, ma richiede una buona esperienza nella progettazione di rete per evitare colli di bottiglia.\\
+Z-Wave, per la sua semplicità di configurazione e la sua stabilità, ottenuta sfruttando le banda sub-GHz con meno traffico, si adatta perfettamente a contesti residenziali di dimensioni medio-piccole.\\
+Thread e Matter, diversamente dai precedenti, offrono un approccio più moderno e flessibile, risultando particolarmente indicati per installazioni più grandi, complesse e in continua evoluzione, spinto anche dall'innovazione che le proncipali aziende stanno dando a questo protocollo.\\
 
-L'analisi delle prestazioni e dell'affidabilità dei protocolli IoT rivela un panorama complesso dove non esiste una soluzione universalmente superiore. La scelta del protocollo più adatto dipende strettamente dai requisiti specifici dell'applicazione:
-
-\begin{itemize}
-    \item Per dispositivi a batteria con requisiti di banda modesti, Z-Wave e Zigbee rimangono scelte eccellenti
-    \item Thread emerge come evoluzione naturale per chi cerca modernità e interoperabilità IP-native
-    \item Wi-Fi domina dove la banda è prioritaria e l'alimentazione non è un vincolo
-    \item Matter promette di semplificare l'ecosistema garantendo interoperabilità senza compromettere le prestazioni
-\end{itemize}
-
-Il futuro vedrà probabilmente una coesistenza di questi protocolli, ciascuno ottimizzato per specifici use case, unificati a livello applicativo da standard come Matter. La chiave del successo sta nel comprendere profondamente requisiti e vincoli, utilizzando gli strumenti e le metodologie descritte per validare le scelte progettuali prima del deployment su larga scala.
+In conclusione, per definire il successo di una rete domotica complessa e grande, non bisogna guardare solo dal protocollo che abbiamo scelto, ma soprattutto da come viene disegnata: una buona progettazione, cola presenza di segmentazioni funzionali, la definizione di una organizzazione gerarchica, consentono di ottenere risultati affidabili e duraturi, qualunque sia la tecnologia utilizzata.
