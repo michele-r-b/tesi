@@ -94,9 +94,9 @@ Anche \textbf{Z-Wave}, pur avendo una struttura mesh meno estesa, offre un vanta
 
 Per quanto riguarda il \textbf{Wi-Fi}, nonostante la sua ampia diffusione e le elevate prestazioni in termini di velocità, si dimostra talvolta meno resiliente in ambienti particolarmente congestionati. La stabilità complessiva della rete Wi-Fi dipende fortemente dalla qualità dell'infrastruttura (router, access point, gestione dei canali), e in caso di sovraccarico o malfunzionamenti può mostrare latenze elevate o perdita di pacchetti \cite{wifi6-spec}.\\
 
-Come illustrato nella Figura~\ref{fig:reti-mesh}, le reti mesh consentono a ogni nodo di fungere da ponte per altri dispositivi, garantendo comunicazione anche in caso di guasti o disconnessioni.
+Come illustrato nella Figura~\ref{fig:smart-home-mesh-vs-wifi}, le reti mesh consentono a ogni nodo di fungere da ponte per altri dispositivi, garantendo comunicazione anche in caso di guasti o disconnessioni.
 
-
+\begin{comment}
 
 \begin{figure}[h!]
     \centering
@@ -104,6 +104,77 @@ Come illustrato nella Figura~\ref{fig:reti-mesh}, le reti mesh consentono a ogni
     \caption{Interfaccia Apple Home con dispositivi configurati}
     \label{fig:reti-mesh}
 \end{figure}
+
+\end{comment}
+
+\clearpage
+\vspace*{2cm}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=1.8cm and 2.5cm,
+  every node/.style={font=\small},
+  mesh/.style={draw, fill=orange!20, circle, minimum size=1.2cm},
+  wifi/.style={draw, fill=blue!10, circle, minimum size=1.2cm},
+  hub/.style={draw, fill=green!20, rounded corners, minimum width=2.5cm, minimum height=1cm},
+  router/.style={draw, fill=gray!20, rounded corners, minimum width=2.5cm, minimum height=1cm}
+]
+
+% Titoli
+\node[draw=none] at (0,8) {\textbf{Point-to-point (es. Wi-Fi)}};
+\node[draw=none] at (10,8) {\textbf{Rete mesh (es. Zigbee / Thread)}};
+
+% Wi-Fi Section
+\node[router] (router) at (0,6.5) {Router Wi-Fi};
+
+\node[wifi] (tv) at (-2,4.8) {TV};
+\node[wifi] (cam) at (0.5,4.8) {Cam};
+\node[wifi] (light1) at (2,4.8) {Luce 1};
+\node[wifi] (light2) at (-2,3) {Luce 2};
+\node[wifi] (thermo) at (-0.4,3) {Termo};
+\node[wifi] (blind) at (2,3) {Finestra};
+
+\draw[-{Latex}] (router) -- (tv);
+\draw[-{Latex}] (router) -- (cam);
+\draw[-{Latex}] (router) -- (light1);
+\draw[-{Latex}] (router) -- (light2);
+\draw[-{Latex}] (router) -- (thermo);
+\draw[-{Latex}] (router) -- (blind);
+
+% Mesh Section
+\node[hub] (hub) at (10,6.5) {Hub};
+
+\node[mesh] (sensor) at (8,4.8) {Sensore};
+\node[mesh] (door) at (10,4.8) {Porta};
+\node[mesh] (thermoM) at (12,4.8) {Termo};
+
+\node[mesh] (lamp) at (9,3) {Lampada};
+\node[mesh] (lightM) at (11,3) {Luce 2};
+\node[mesh] (blind1) at (8.5,0.8) {Finestra 1};
+\node[mesh] (blind2) at (11.5,0.8) {Finestra 2};
+
+% Hub links
+\draw[-{Latex}] (hub) -- (sensor);
+\draw[-{Latex}] (hub) -- (door);
+\draw[-{Latex}] (hub) -- (thermoM);
+
+% Mesh links
+\draw[<->]  (sensor) -- (lamp);
+\draw[<->]  (sensor) -- (lightM);
+\draw[<->]  (door) -- (lamp);
+\draw[<->]  (door) -- (thermoM);
+\draw[<->]  (lamp) -- (blind1);
+\draw[<->]  (lightM) -- (blind2);
+\draw[<->]  (lamp) -- (lightM);
+\draw[<->]  (blind1) -- (blind2);
+\draw[<->]  (thermoM) -- (blind2);
+
+\end{tikzpicture}
+\caption{Confronto tra rete point-to-point (Wi-Fi) e rete mesh (Zigbee/Thread).}
+\label{fig:smart-home-mesh-vs-wifi}
+\end{figure}
+
+
 
 In definitiva, quando si progettano sistemi domotici destinati a durare nel tempo e ad adattarsi a contesti mutevoli, scegliere protocolli con meccanismi di recupero e adattamento diventa una garanzia di stabilità e continuità.
 

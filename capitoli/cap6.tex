@@ -2,356 +2,117 @@
 
 \section{Introduzione}
 
-Il panorama della domotica residenziale si trova in un momento di trasformazione epocale. Dopo anni di frammentazione, con ecosistemi chiusi e incompatibili tra loro, stiamo assistendo a una convergenza verso standard aperti e tecnologie unificate. Questo capitolo esplora le tendenze emergenti che plasmeranno il futuro delle nostre case intelligenti, analizzando non solo le opportunità tecnologiche ma anche le sfide che dovranno essere affrontate per realizzare pienamente la visione di abitazioni veramente smart, sicure e centrate sull'utente.
+Dopo aver esaminato nel Capitolo 5 le prestazioni, l'affidabilità e la scalabilità dei principali protocolli di comunicazione impiegati nelle abitazioni intelligenti, ora andiamo ad esplorare le tecologie emergenti per le smart home.
 
-L'evoluzione non riguarda solo l'introduzione di nuovi dispositivi o protocolli, ma rappresenta un cambio di paradigma nel modo in cui concepiamo l'interazione tra tecnologia e spazio abitativo. Le case del futuro non saranno semplicemente ``connesse'', ma diventeranno entità intelligenti capaci di apprendere, adattarsi e anticipare le esigenze dei loro abitanti, il tutto mantenendo la privacy e la sicurezza come principi fondamentali.
+Negli ultimi anni, la casa ha smesso di essere solo il nostro spazio abitato, ma si sta trasformando progressivamente in un ecosistema interattivo. Questo cambiamento segue una trasformazione culturale e tecnologica più ampia, che rispecchia ilnostro modo di vivere, oramai siamo abituati a lavoriamo e interagiamo con l’ambiente che ci circonda. La domotica quindinon è più appannaggio di pochi appassionati o early adopter ma è diventata una componente concreta dell’abitare contemporaneo.
 
-\section{Il ruolo dello standard Matter e dei protocolli basati su IP}
+Questa evoluzione tuttavia non è lineare né priva di ostacoli. L’interoperabilità tra dispositivi, la protezione dei dati personali, l’efficienza energetica e l’inclusività sono sfide reali. Ma sono anche i punti su cui costruire una nuova idea di casa.\\
 
-\subsection{Matter: la promessa dell'interoperabilità universale}
+Dopo anni in cui i vari produttori fornivano soluzioni frammentate e proprietarie, oggi una nuova visione orientata sta guidando gli sviluppi concentrandosi su interoperabilità, sostenibilità e intelligenza diffusa. Questa transizione non riguarda soltanto l’arrivo di nuovi dispositivi e nuove tecnologie, ma è un cambiamento più profondo, la casa interagisce con i suoi abitanti impara da loro e si adatta in modo intelligente.
 
-Matter rappresenta molto più di un nuovo protocollo: è il risultato di un'alleanza senza precedenti nell'industria tecnologica. Quando giganti come Apple, Google, Amazon e Samsung decidono di collaborare anziché competere, il messaggio è chiaro: l'era dei giardini murati nella domotica sta volgendo al termine.
+Le abitazioni del futuro saranno ambienti realmente smart, capaci di prevedere i nostri bisogni, reagire in tempo reale, proteggere dati sensibili e garantire accessibilità a tutti. In questo capitolo analizziamo le nuove tendenze emergenti, valutandone potenzialità e sfide.
 
-Nato dalle ceneri del progetto CHIP (Connected Home over IP), Matter si propone di risolvere il problema fondamentale che ha afflitto la domotica per oltre un decennio: l'incompatibilità. Immaginate di acquistare una lampadina smart e sapere con certezza che funzionerà con qualsiasi assistente vocale, hub o app di controllo già possediate. Questa è la promessa di Matter.
+\section{Lo standard Matter e i protocolli IP-native}
 
-\subsubsection{Architettura tecnica e innovazioni}
+\subsection{Matter: interoperabilità come fondamento}
 
-L'architettura di Matter si fonda su principi consolidati ma implementati con un'attenzione moderna alla sicurezza e all'efficienza:
+Matter non è soltanto un nuovo standard, ma è il simbolo di una storica alleanza tra le principali case produttrici dell’industria tecnologica quali Apple, Google, Amazon, Samsung, per superare i limiti della frammentazione e della interoperatività. Nasce come evoluzione del progetto CHIP (Connected Home over IP), con l'obiettivo di rendere compatibili tra loro dispositivi di diversi produttori.
 
-\begin{itemize}
-    \item \textbf{Modello applicativo unificato}: Un linguaggio comune per descrivere dispositivi e funzionalità, eliminando traduzioni e interpretazioni proprietarie
-    \item \textbf{Commissioning semplificato}: Setup tramite QR code o NFC, con procedura standardizzata che funziona identicamente su ogni piattaforma
-    \item \textbf{Multi-admin nativo}: Un dispositivo può essere controllato simultaneamente da più ecosistemi senza conflitti
-    \item \textbf{Controllo locale prioritario}: Funzionamento garantito anche senza connessione Internet, con il cloud come opzione aggiuntiva
-\end{itemize}
+Il punto di forza di Matter è basato su un modello applicativo standardizzato, che rende possibile un dialogo strutturato e uniforme tra tutti i componenti della rete domestica. La configurazione di nuovi dispositivi avviene in modo semplice e tramite dei wizard attivabili tramite QR code o NFC, supporta inolte il controllo multi-ecosistema, questo rende possibile l’utilizzo dello stesso dispositivo con più assistenti vocali o app differenti, senza conflitti, ad esmpio in casa posso controllare una luce sia da Siri che da Alexa. Inoltre, Matter supporta e privilegia il controllo locale, riuscendo così a garantire continuità anche in assenza di connessione Internet.
 
-La scelta di basarsi su IPv6 non è casuale: garantisce scalabilità praticamente illimitata e compatibilità con l'infrastruttura Internet esistente. L'utilizzo di TLS 1.3 per la sicurezza rappresenta lo stato dell'arte nella crittografia, con perfect forward secrecy e resistenza agli attacchi quantistici futuri \parencite{matterCSA}.
+Basato sul protocollo di rete IPv6 e protetto dallo standard di crittografia TLS 1.3, Matter combina la scalabilità con la sicurezza.
 
-\subsubsection{Impatto sull'ecosistema}
+\subsection{Thread: architettura distribuita e resiliente}
 
-L'adozione di Matter sta già trasformando il mercato:
+Il protocollo Thread, spesso utilizzato in abbinamento con Matter, è un protocollo basato su rete mesh IP-native, progettato specificatamente per l'utilizzo in ambiente IoT. Tra le sue caratteristiche principali, ogni nodo ha un indirizzo IP univoco, la rete si auto-configura e si auto-ripara, senza necessità di un coordinatore centrale. In caso di guasto del'Hub centrale leader, un nuovo leader viene eletto automaticamente, garantendo affidabilità e continuità.
 
-\textbf{Per i consumatori}:
-\begin{itemize}
-    \item Fine della ``app fatigue'': una sola app può controllare tutti i dispositivi
-    \item Libertà di scelta: nessun lock-in su specifici ecosistemi
-    \item Investimenti protetti: i dispositivi rimangono compatibili nel tempo
-\end{itemize}
+Thread, come già analizzato per la sua architettura mesh e sicurezza nativa, si afferma ad oggi come la componente centrale per le reti domestiche, in grado di garantire resilienza ed estendibilità, soprattutto in abbinamento allo standard Matter 
 
-\textbf{Per i produttori}:
-\begin{itemize}
-    \item Riduzione dei costi di sviluppo: un solo stack software per tutti i mercati
-    \item Accesso immediato a miliardi di utenti attraverso piattaforme esistenti
-    \item Certificazione unificata che sostituisce molteplici test proprietari
-\end{itemize}
+L’integrazione di Thread in dispositivi come Apple HomePod, Alexa e Google Home ne facilitano l’adozione domestica, senza bisogno di doversi munire di Hub dedicati.
 
-\textbf{Per gli sviluppatori}:
-\begin{itemize}
-    \item API standardizzate e ben documentate
-    \item Tool di sviluppo open source e community attiva
-    \item Possibilità di innovare sul valore aggiunto anziché sull'infrastruttura base
-\end{itemize}
+\section{Tecnologie emergenti per la casa intelligente}
 
-\subsection{L'evoluzione verso protocolli IP-native}
+\subsection{Intelligenza artificiale nella vita domestica}
 
-Il passaggio a protocolli basati su IP rappresenta una maturazione naturale dell'IoT domestico. Thread, in particolare, emerge come la risposta moderna alle limitazioni dei protocolli legacy.
+L'adozione dell’intelligenza artificiale sta trasformando l’esperienza abitativa da una serie di automatismi e scenari che apprendono, anticipano e si adattano al nostro stile di vita.
 
-\subsubsection{Thread: il meglio di due mondi}
+\textbf{Esempio evolutivo}: oggi noi quando rientriamo in casa, diciamo "Alexa, accendi la luce"; un domani non tanto lontano, la casa riconoscerà il nostro rientro, rileverà la scarsa luminosità e accenderà automaticamente la luce più adatta, predisponendo l’ambiente secondo le nostre abitudini.
 
-Thread combina l'efficienza energetica di Zigbee con la connettività IP nativa:
+L’adozione del \textit{machine learning on-device} permette l’elaborazione dei dati direttamente sul dispositivo, riducendo la dipendenza dal cloud e la trasmissione di dati. Questo porta benefici concreti come una minore latenza, una maggiore privacy ed una personalizzazione maggiore.
+
+\subsubsection{Apprendimento federato}
+
+Attraverso il \textit{federated learning}, i dispositivi intelligenti elaboreranno i dati localmente e comunicheranno solo gli aggiornamenti del modello, così garantiranno che nessuna informazione sensibile verrà mai trasferita o memorizzata nel cloud.
+
+\subsection{Reti mesh e Wi-Fi di nuova generazione}
+
+Dopo aver evidenziato i benefici di una rete mesh nel capitolo precedente, le reti mesh oggi evolvono con l’integrazione dei nuovi standard Wi-Fi e Thread, abilitando così scenari più reattivi e modulari.
+
+
+\textbf{Wi-Fi 6, 6E e 7} rappresentano tappe fondamentali nell’evoluzione delle reti:
 
 \begin{itemize}
-    \item \textbf{IPv6 mesh networking}: Ogni dispositivo ha un indirizzo IP globalmente unico
-    \item \textbf{Self-healing automatico}: La rete si riconfigura dinamicamente in caso di guasti
-    \item \textbf{Sicurezza banking-grade}: Crittografia AES-128 e autenticazione basata su DTLS
-    \item \textbf{Coesistenza pacifica}: Progettato per operare senza interferire con Wi-Fi sulla banda 2.4 GHz
+    \item \textbf{Wi-Fi 6}: introduce OFDMA, TWT e BSS Coloring, aumentando efficienza e riducendo la latenza.
+    \item \textbf{Wi-Fi 6E}: aggiunge la banda a 6 GHz, liberando nuovi canali per dispositivi smart.
+    \item \textbf{Wi-Fi 7}: promette latenze ultra-basse e velocità fino a 46 Gbps.
 \end{itemize}
 
-Un aspetto rivoluzionario di Thread è l'eliminazione del single point of failure: non esiste un coordinator centrale, ogni router può assumere il ruolo di leader se necessario, garantendo resilienza militare alla rete domestica \parencite{zillner2022matter}.
+Una breve tabella riassuntiva può essere utile nel capitolo:
 
-\section{Sviluppi tecnologici emergenti}
+\begin{table}[H]
+\centering
+\begin{tabular}{lccc}
+\toprule
+\textbf{Versione} & \textbf{Anno} & \textbf{Banda} & \textbf{Caratteristiche principali} \\
+\midrule
+Wi-Fi 5 & 2014 & 2.4 / 5 GHz & Alta velocità, no ottimizzazioni IoT \\
+Wi-Fi 6 & 2019 & 2.4 / 5 GHz & OFDMA, TWT, efficienza migliorata \\
+Wi-Fi 6E & 2020 & 6 GHz & Nuovi canali, meno interferenze \\
+Wi-Fi 7 & 2024 & 2.4 / 5 / 6 GHz & MLO, latenza bassa, throughput massimo \\
+\bottomrule
+\end{tabular}
+\caption{Evoluzione dello standard Wi-Fi per ambienti smart home}
+\end{table}
 
-\subsection{Intelligenza artificiale e apprendimento automatico nella smart home}
+\subsection{Edge e fog computing domestico}
 
-L'integrazione dell'IA nella domotica sta passando da semplici automazioni basate su regole a sistemi veramente intelligenti capaci di comprensione contestuale e predizione comportamentale.
-
-\subsubsection{Dall'automazione all'anticipazione}
-
-I sistemi attuali reagiscono a comandi o trigger predefiniti. I sistemi del futuro prossimo anticiperanno le necessità:
-
-\textbf{Scenario presente}: ``Alexa, accendi le luci del salotto''
-
-\textbf{Scenario futuro}: Il sistema nota che state tornando a casa (geolocalizzazione), è tramonto (sensore luminosità), state portando borse della spesa (computer vision dalla videocamera esterna) e automaticamente:
+L’elaborazione locale dei dati tramite fog computing consente:
 \begin{itemize}
-    \item Accende le luci sul percorso garage-cucina
-    \item Sblocca la porta d'ingresso al vostro avvicinarsi
-    \item Preimposta il forno alla temperatura abituale per l'orario di cena
-    \item Avvia la playlist ``cooking'' preferita
+    \item Risposte in tempo reale
+    \item Resilienza in caso di assenza di Internet
+    \item Protezione dei dati sensibili
+    \item Riduzione del traffico e costi cloud
 \end{itemize}
 
-\subsubsection{Machine Learning on-device}
+Progetti come K3s, una distribuzione leggera e semplificata di Kubernetes, pensata per ambienti IoT permetteranno l’orchestrazione di microservizi direttamente sugli hub domestici, trasformando così ogni stanza in un nodo intelligente.
 
-La tendenza emergente è spostare l'intelligenza direttamente sui dispositivi edge:
+\section{Privacy, sicurezza e fiducia digitale}
 
-\begin{itemize}
-    \item \textbf{Privacy by design}: I dati sensibili non lasciano mai la casa
-    \item \textbf{Latenza zero}: Decisioni istantanee senza round-trip al cloud
-    \item \textbf{Funzionamento offline}: L'intelligenza persiste anche senza Internet
-    \item \textbf{Apprendimento personalizzato}: Ogni casa sviluppa un ``carattere'' unico
-\end{itemize}
+\subsection{Le nuove sfide dell’abitazione intelligente}
 
-Chip specializzati come il Google Edge TPU o l'Apple Neural Engine stanno rendendo possibile l'esecuzione di modelli neurali complessi su dispositivi dalle dimensioni di una moneta \parencite{chen2023smart}.
+Sebbene l’intelligenza artificiale migliori l’automazione e l’efficienza dele nostre case, essa richiede un accesso costante ai nostri dati sensibili come le nostre abitudini quotidiane, i pattern di presenza nella casa e le nostre preferenze personali. Questa dipendenza  impone l’adozione di diverse rigorose misure di sicurezza e un approccio responsabile al trattamento dei dati.
 
-\subsubsection{Federated Learning per la smart home}
-
-Una delle innovazioni più promettenti è l'applicazione del federated learning:
-
-\begin{enumerate}
-    \item I dispositivi apprendono localmente dai pattern di utilizzo
-    \item Periodicamente condividono solo gli aggiornamenti del modello (non i dati raw) con un server centrale
-    \item Il server aggrega gli apprendimenti da migliaia di case
-    \item I modelli migliorati vengono redistribuiti a tutti i dispositivi
-\end{enumerate}
-
-Questo approccio permette di beneficiare dell'intelligenza collettiva mantenendo la privacy individuale. Ad esempio, un sistema di climatizzazione può imparare strategie di efficienza energetica dalle migliori pratiche di migliaia di utenti senza mai accedere ai loro dati personali \parencite{ieeeAI}.
-
-\subsection{Reti mesh e Wi-Fi 6/6E/7}
-
-L'evoluzione delle tecnologie di rete sta eliminando i colli di bottiglia che hanno limitato le smart home di prima generazione.
-
-\subsubsection{Reti mesh: da lusso a necessità}
-
-Le moderne abitazioni richiedono copertura wireless ubiqua e affidabile. Le reti mesh sono passate da soluzione premium a requisito fondamentale:
-
-\textbf{Caratteristiche delle mesh moderne}:
-\begin{itemize}
-    \item \textbf{Self-organizing}: I nodi si configurano automaticamente per ottimizzare la copertura
-    \item \textbf{Load balancing dinamico}: Il traffico viene distribuito intelligentemente tra i nodi
-    \item \textbf{Seamless roaming}: I dispositivi passano da un nodo all'altro senza interruzioni
-    \item \textbf{Backhaul dedicato}: Canali separati per comunicazione inter-nodo e client
-\end{itemize}
-
-\subsubsection{Wi-Fi 6 e oltre: la rivoluzione silenziosa}
-
-Wi-Fi 6 (802.11ax) non è solo ``Wi-Fi più veloce'', ma una riprogettazione fondamentale per l'era IoT:
-
-\textbf{OFDMA (Orthogonal Frequency Division Multiple Access)}:
-Permette di suddividere un canale in sotto-canali più piccoli, servendo simultaneamente dispositivi IoT a bassa banda senza sprecare risorse. È come passare da un autobus che deve fare il giro completo per ogni passeggero a un sistema di taxi condivisi che ottimizza i percorsi.
-
-\textbf{Target Wake Time (TWT)}:
-I dispositivi possono ``concordare'' con l'access point quando svegliarsi per trasmettere/ricevere, riducendo drasticamente il consumo energetico. Un sensore di temperatura può dormire per 59 minuti e 55 secondi ogni ora, svegliandosi solo per trasmettere la lettura.
-
-\textbf{BSS Coloring}:
-Riduce le interferenze in ambienti densi ``colorando'' le trasmissioni di ogni rete, permettendo il riuso spaziale delle frequenze. Essenziale in condomini dove decine di reti Wi-Fi si sovrappongono \parencite{zhang2021wifi6}.
-
-\subsubsection{Wi-Fi 6E e Wi-Fi 7: il futuro è già qui}
-
-\textbf{Wi-Fi 6E} aggiunge la banda 6 GHz, triplicando lo spettro disponibile:
-\begin{itemize}
-    \item 14 canali da 80 MHz o 7 da 160 MHz senza sovrapposizioni
-    \item Latenze sotto il millisecondo per VR/AR
-    \item Canali dedicati per backhaul mesh senza congestione
-\end{itemize}
-
-\textbf{Wi-Fi 7} (802.11be) porterà:
-\begin{itemize}
-    \item Multi-Link Operation: uso simultaneo di più bande per affidabilità
-    \item 320 MHz di larghezza canale: throughput teorici fino a 46 Gbps
-    \item Latenza garantita per applicazioni critiche
-\end{itemize}
-
-\subsection{Edge Computing e fog computing domestico}
-
-Il futuro della smart home non sarà né completamente cloud né completamente locale, ma una sintesi intelligente: il fog computing domestico.
-
-\subsubsection{Architettura fog a tre livelli}
-
-\begin{enumerate}
-    \item \textbf{Device Level}: Sensori e attuatori con capacità di pre-processing
-    \item \textbf{Fog Level}: Hub domestici potenti che aggregano e processano dati localmente
-    \item \textbf{Cloud Level}: Servizi remoti per storage a lungo termine e analytics avanzate
-\end{enumerate}
-
-Questa architettura permette:
-\begin{itemize}
-    \item Risposta in tempo reale per applicazioni critiche (allarmi, automazioni)
-    \item Funzionamento resiliente anche con Internet down
-    \item Privacy migliorata con dati sensibili che rimangono locali
-    \item Costi cloud ridotti processando localmente il 90\% dei dati
-\end{itemize}
-
-\subsubsection{Kubernetes per la casa}
-
-Progetti come K3s (Kubernetes leggero) stanno portando l'orchestrazione container a livello domestico:
+\subsection{Strategie di protezione}
 
 \begin{itemize}
-    \item Deploy automatico di servizi su dispositivi disponibili
-    \item Bilanciamento del carico tra hub multipli
-    \item Aggiornamenti rolling senza interruzioni
-    \item Isolamento tra applicazioni per sicurezza
+    \item \textbf{Zero Trust Architecture}: ogni richiesta è validata, anche all’interno della rete.
+    \item \textbf{Segmentazione delle reti}: per limitare i danni in caso di compromissione.
+    \item \textbf{Crittografia omomorfica}: elabora dati cifrati senza decifrarli.
+    \item \textbf{Blockchain per audit trail}: tracciabilità sicura delle azioni eseguite.
 \end{itemize}
+\section{Inclusività come principi guida}
 
-Immaginate una casa dove ogni stanza ha un mini-server che collabora con gli altri per fornire servizi distribuiti, con failover automatico se uno si guasta \parencite{etsiWifi6}.
+\subsection{Tecnologia accessibile a tutti}
 
-\section{Sfide legate alla privacy e alla sicurezza}
-
-Con grande potere viene grande responsabilità. Le smart home del futuro dovranno affrontare sfide di sicurezza e privacy senza precedenti.
-
-\subsection{Il paradosso della convenienza}
-
-Più i sistemi diventano intelligenti e anticipatori, più devono sapere su di noi. Questo crea un paradosso fondamentale:
-
+Domotica inclusiva significa:
 \begin{itemize}
-    \item Per suggerire quando andare a dormire, il sistema deve monitorare i pattern di sonno
-    \item Per ottimizzare i consumi, deve conoscere le routine quotidiane
-    \item Per garantire sicurezza, deve sapere chi è in casa e quando
+    \item Interfacce adattive per anziani e disabili
+    \item Supporto vocale, gestuale e aptico
+    \item Soluzioni retrofit per abitazioni esistenti
+    \item Promozione dell’open source e del fai-da-te
 \end{itemize}
 
-La sfida è bilanciare utilità e privacy senza compromettere nessuna delle due.
+\section{Conclusioni: la casa come alleata}
 
-\subsection{Vettori di attacco emergenti}
+Non si tratta più solo di rendere la casa “smart”, ma di saper costruire un ambiente che sia in grado di ascoltare, apprendere e rispondere in modo etico e personalizzato. Il futuro della domotica non si misura dal numero di dispositivi installati in una casa, ma dalla loro capacità di adattarsi all’ambiente domestico in cui sono inseriti, di rispettare e migliorare la vita dei suoi abitanti.
 
-Le smart home presentano superfici di attacco uniche:
-
-\subsubsection{Attacchi fisici alla supply chain}
-
-\begin{itemize}
-    \item \textbf{Hardware backdoors}: Chip modificati durante la produzione
-    \item \textbf{Firmware compromise}: Software malevolo pre-installato
-    \item \textbf{Counterfeit devices}: Dispositivi contraffatti che sembrano legittimi
-\end{itemize}
-
-\subsubsection{Attacchi basati su AI}
-
-\begin{itemize}
-    \item \textbf{Adversarial examples}: Input crafted per ingannare sistemi di riconoscimento
-    \item \textbf{Model extraction}: Rubare il comportamento di sistemi ML proprietari
-    \item \textbf{Privacy inference}: Dedurre informazioni private dai pattern di utilizzo
-\end{itemize}
-
-\subsubsection{Attacchi side-channel}
-
-\begin{itemize}
-    \item \textbf{Power analysis}: Dedurre attività dal consumo energetico
-    \item \textbf{RF emissions}: Intercettare dati da emissioni elettromagnetiche
-    \item \textbf{Acoustic cryptanalysis}: Dedurre password dai suoni della digitazione
-\end{itemize}
-
-\subsection{Strategie di mitigazione avanzate}
-
-\subsubsection{Zero Trust Architecture}
-
-Applicare i principi Zero Trust alla smart home:
-
-\begin{enumerate}
-    \item \textbf{Mai fidarsi, sempre verificare}: Ogni dispositivo deve autenticarsi per ogni azione
-    \item \textbf{Least privilege}: Dispositivi hanno solo i permessi minimi necessari
-    \item \textbf{Micro-segmentazione}: Isolamento granulare tra dispositivi e servizi
-    \item \textbf{Continuous verification}: Monitoraggio comportamentale per anomalie
-\end{enumerate}
-
-\subsubsection{Crittografia omomorfica}
-
-Permettere computazioni su dati cifrati senza decifrarli:
-
-\begin{itemize}
-    \item Il termostato può ottimizzare i consumi senza ``vedere'' le temperature reali
-    \item I sistemi di sicurezza possono rilevare intrusi senza accedere ai video raw
-    \item Gli assistenti vocali possono processare comandi senza decifrare l'audio
-\end{itemize}
-
-Benché computazionalmente intensiva oggi, l'hardware dedicato la renderà pratica entro 5 anni \parencite{liu2022homomorphic}.
-
-\subsubsection{Blockchain per l'audit trail}
-
-Utilizzare distributed ledger per:
-
-\begin{itemize}
-    \item Log immutabili di tutti gli accessi e modifiche
-    \item Gestione decentralizzata delle identità dispositivi
-    \item Smart contract per policy di sicurezza auto-enforcing
-    \item Consenso distribuito per azioni critiche
-\end{itemize}
-
-\subsection{Normative e compliance}
-
-Il panorama regolatorio sta evolvendo rapidamente:
-
-\subsubsection{GDPR e oltre}
-
-Il GDPR europeo ha posto le basi, ma nuove normative sono all'orizzonte:
-
-\begin{itemize}
-    \item \textbf{Data minimization}: Raccogliere solo dati strettamente necessari
-    \item \textbf{Purpose limitation}: Usare dati solo per scopi dichiarati
-    \item \textbf{Right to erasure}: Possibilità di cancellare completamente i propri dati
-    \item \textbf{Data portability}: Esportare dati in formato standard
-\end{itemize}
-
-\subsubsection{Certificazioni emergenti}
-
-Nuovi standard di certificazione per IoT sicuro:
-
-\begin{itemize}
-    \item \textbf{ETSI EN 303 645}: Baseline di sicurezza per dispositivi consumer IoT
-    \item \textbf{IoT Security Foundation}: Framework per security-by-design
-    \item \textbf{UL 2900}: Standard per la sicurezza del software in dispositivi connessi
-\end{itemize}
-
-I dispositivi futuri dovranno dimostrare conformità per accedere ai mercati principali \parencite{gdpr2016, nistIotSecurity}.
-
-\section{Verso un futuro sostenibile}
-
-\subsection{Smart home e sostenibilità ambientale}
-
-Le case intelligenti del futuro saranno anche case sostenibili:
-
-\subsubsection{Ottimizzazione energetica AI-driven}
-
-\begin{itemize}
-    \item Previsione dei consumi basata su meteo e occupazione
-    \item Bilanciamento dinamico tra fonti rinnovabili e rete
-    \item Partecipazione automatica a programmi demand-response
-    \item Gestione intelligente di batterie domestiche
-\end{itemize}
-
-\subsubsection{Economia circolare}
-
-\begin{itemize}
-    \item Dispositivi modulari e riparabili
-    \item Aggiornamenti software che estendono la vita utile
-    \item Programmi di riciclo integrati
-    \item Materials passport digitali per ogni componente
-\end{itemize}
-
-\subsection{Inclusività e accessibilità}
-
-La domotica del futuro deve essere per tutti:
-
-\subsubsection{Design universale}
-
-\begin{itemize}
-    \item Interfacce adattive per diverse abilità
-    \item Controlli vocali, gestuali e aptici
-    \item Feedback multisensoriali
-    \item Personalizzazione estrema
-\end{itemize}
-
-\subsubsection{Democratizzazione della tecnologia}
-
-\begin{itemize}
-    \item Soluzioni entry-level accessibili
-    \item Retrofit per case esistenti
-    \item Open source e DIY supportati
-    \item Community-driven innovation
-\end{itemize}
-
-\section{Conclusioni: la casa che ci comprende}
-
-Il futuro della domotica residenziale non riguarda solo l'aggiunta di più gadget connessi, ma la creazione di ambienti che comprendono e si adattano ai loro abitanti in modo naturale e non invasivo. Le tecnologie emergenti -- da Matter all'IA edge, dalle reti mesh avanzate alla crittografia omomorfica -- sono i mattoni con cui costruiremo questa visione.
-
-Le sfide sono reali e significative, dalla privacy alla sicurezza, dalla sostenibilità all'inclusività. Ma l'industria sta dimostrando una maturità senza precedenti nel affrontarle collaborativamente. Il successo di iniziative come Matter dimostra che quando l'ecosistema si unisce attorno a obiettivi comuni, il progresso accelera esponenzialmente.
-
-Nei prossimi anni vedremo le nostre case trasformarsi da semplici contenitori di tecnologia a partner intelligenti nella nostra vita quotidiana. Case che non solo rispondono ai comandi, ma anticipano necessità, ottimizzano risorse, proteggono la privacy e migliorano il benessere. Case che imparano, si evolvono e, soprattutto, si adattano all'unicità di ogni famiglia che le abita.
-
-Il futuro della domotica è luminoso, connesso e centrato sull'umano. E sta arrivando più velocemente di quanto possiamo immaginare.

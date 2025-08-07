@@ -1,5 +1,10 @@
 {
     "ltex.language": "it",
     "ltex.enabled": ["latex", "tex"],
-    "ltex.additionalRules.enablePickyRules": true
+    "ltex.additionalRules.enablePickyRules": true,
+    "latex-workshop.latex.autoBuild.run": "never",
+    "latex-workshop.latex.watch.enabled": false,
+    "latex-workshop.latex.autoBuild.cleanAndRetry.enabled": false,
+    "latex-workshop.latex.build.forceRecipeUsage": false,
+    "latex-workshop.synctex.afterBuild.enabled": false
 }
