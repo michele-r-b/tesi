@@ -1,634 +1,153 @@
-\chapter{Caso di Studio: Sistema Domotico Integrato BTicino-Netatmo con Apple HomeKit}
+\chapter{Caso di Studio: Sistema Domotico Integrato con Apple HomeKit}
 
-\section{Introduzione}
+\section{Obiettivi e contesto}
+Questo caso di studio documenta l’implementazione di un sistema domotico per una residenza unifamiliare su due piani, integrato nativamente con Apple HomeKit. 
 
-Questo capitolo presenta l'implementazione reale di un sistema domotico completo basato sull'ecosistema BTicino Living Now con Netatmo, perfettamente integrato in Apple HomeKit. Il caso di studio documenta la trasformazione di un'abitazione tradizionale in una smart home utilizzando esclusivamente dispositivi di alta qualità con certificazione HomeKit nativa.
+I requisiti riguardano: (i) controllo accessi sicuro; (ii) gestione dell’illuminazione e delle tapparelle; (iii) videosorveglianza perimetrale con notifiche mirate; (iv) monitoraggio ambientale e automazioni meteo; (v) audio multi stanza; (vi) facilità d’uso tramite app Casa e comandi vocali; (vii) riduzione dei consumi energetici senza impattare il comfort.
 
-Il progetto riguarda Villa Moderna, una residenza unifamiliare di 200 m² su due piani situata alle porte di Milano. I proprietari, una coppia di professionisti con due figli adolescenti, desideravano un sistema che combinasse:
+\section{Analisi dell’abitazione}
+\textbf{Piano terra} (100 m²): ingresso, soggiorno open-space (40 m²), cucina abitabile (25 m²), bagno ospiti, studio/ufficio (15 m²), garage doppio.\\
+\textbf{Piano primo} (100 m²): camera matrimoniale con bagno, due camere singole, bagno principale, terrazzo (20 m²).\\
+\textbf{Esterno}: giardino perimetrale, vialetto d’accesso, due accessi carrabili, area barbecue.
 
+Vincoli progettuali: distribuzione su due piani (copertura Wi‑Fi e latenza), esposizioni est/ovest (controllo solare), necessità di integrazione non invasiva su impianto esistente e preferenza per controllo nativo da ecosistema Apple. Facilità di gestione e condivisione con i membri della famiglia.
+
+\section{Architettura del sistema}
+L’architettura è organizzata su tre livelli: (a) \textit{dispositivi e sensori}; (b) \textit{hub/controller e gateway}; (c) \textit{automazioni e interfacce}.
+
+\subsection{Rete e infrastruttura}
 \begin{itemize}
-    \item Design italiano elegante e integrato nell'architettura
-    \item Affidabilità e qualità costruttiva superiore
-    \item Integrazione nativa con l'ecosistema Apple
-    \item Controllo totale di illuminazione, clima, sicurezza e accessi
-    \item Facilità d'uso per tutti i membri della famiglia
+  \item \textbf{LAN IoT dedicata}: VLAN 192.168.20.0/24, SSID dedicato (WPA3), segmentazione del traffico verso la LAN principale.
+  \item \textbf{Hub HomeKit}: HomePod in soggiorno come hub primario; HomePod mini in cucina, studio e camera matrimoniale come hub di failover e per audio locale.
+  \item \textbf{Gateway BTicino}: modulo DIN collegato alla rete Wi-Fi per la configurazione dei dispositivi su home control e condivisione con HomeKit.
 \end{itemize}
 
-La scelta è ricaduta sulla linea BTicino Living Now with Netatmo per la sua perfetta fusione tra estetica italiana, tecnologia avanzata e compatibilità HomeKit certificata.
-
-\section{Analisi dell'abitazione e pianificazione}
-
-\subsection{Struttura dell'immobile}
-
-\textbf{Piano terra} (100 m²):
+\subsection{Protocolli e integrazione}
 \begin{itemize}
-    \item Ingresso con porta blindata
-    \item Soggiorno open space (40 m²)
-    \item Cucina abitabile (25 m²)
-    \item Bagno ospiti
-    \item Studio/ufficio (15 m²)
-    \item Garage doppio
+  \item \textbf{Bus SCS (BTicino)}: utilizzato per la comunicazione tra moduli Living Now cablati (interruttori, dimmer e comandi tapparelle) e il gateway, quando l’impianto lo prevede. Garantisce bassa latenza e funzionalità anche in assenza di rete IP.
+  \item \textbf{Wi-Fi}: impiegato dai dispositivi Living Now connessi \textit{pre-Matter} (installati in questa abitazione), dal Nuki Smart Lock 3.0 Pro, dalle telecamere Netatmo e dalla stazione meteo Netatmo. È il principale canale di comunicazione verso HomeKit in questa configurazione.
+  \item \textbf{Thread}: utilizzato esclusivamente da dispositivi compatibili Matter o nativamente Thread, come le Nanoleaf Lines. La rete Thread è gestita dai Border Router integrati in HomePod mini e HomePod (2ª gen), garantendo bassa latenza e consumo energetico ridotto.
+  \item \textbf{Interruttori BTicino wireless}: modelli da parete privi di cablaggio, alimentati a batteria con comunicazione radio diretta con il gateway via Thread.
+  \item \textbf{HomeKit su IP}: protocollo applicativo utilizzato per automazioni e controlli, con cifratura end-to-end e pairing tramite codice QR.
+  \item \textbf{HomeKit Secure Video (HKSV)}: per le telecamere Netatmo, con analisi video on-device e registrazione cifrata su iCloud.
 \end{itemize}
 
-\textbf{Piano primo} (100 m²):
+\section{Dotazione installata (per categoria)}
+\subsection*{Accesso e sicurezza}
 \begin{itemize}
-    \item Camera matrimoniale con bagno en suite
-    \item Due camere singole
-    \item Bagno principale
-    \item Terrazzo (20 m²)
+  \item \textbf{Serratura smart}: Nuki Smart Lock 3.0 Pro (integrazione HomeKit via Wi‑Fi). Funzioni: blocco/sblocco, stato porta, automazioni in base a presenza e orario. La gestione delle credenziali ospiti avviene nell’app Nuki; HomeKit fornisce controllo e notifiche.
+  \item \textbf{Videosorveglianza esterna}: 4 telecamere Netatmo Outdoor con sirena. In HomeKit Secure Video: rilevamento persone/animali/veicoli, zone di attività, timeline cifrata. Posizionamento: ingresso, garage, giardino posteriore, lato secondario.
 \end{itemize}
 
-\textbf{Esterno}:
+\subsection*{Illuminazione e schermature}
 \begin{itemize}
-    \item Giardino perimetrale
-    \item Vialetto d'accesso
-    \item Due accessi carrabili
-    \item Area barbecue
+  \item \textbf{Punti luce e dimmer}: serie BTicino Living Now per 32 punti luce (on/off e dimmerazione). Comandi scenari locali per richiamo rapido.
+  \item \textbf{Tapparelle}: 18 motorizzazioni con controllo salita/discesa/stop e posizionamento percentuale; scenari alba/tramonto.
 \end{itemize}
 
-\subsection{Requisiti funzionali identificati}
+\subsection*{Monitoraggio ambientale e meteo}
+\begin{itemize}
+  \item \textbf{Stazione meteo Netatmo}: modulo interno (temperatura, umidità, CO\textsubscript{2}, pressione, rumore) e modulo esterno (temperatura/umidità). Dati usati per automazioni (protezione solare, avvisi vento/calore).
+  \item \textbf{Sensori integrati HomePod}: temperatura/umidità ambientale disponibili in HomeKit per regole semplici di comfort.
+\end{itemize}
 
-Dopo un'analisi dettagliata con i proprietari, sono emersi i seguenti requisiti:
+\subsection*{Audio, interazione e notifiche}
+\begin{itemize}
+  \item \textbf{HomePod / HomePod mini}: audio multi-room, comandi vocali, Intercom, hub HomeKit con failover. Integrazione con scene (es. modalità cinema, sveglia graduale).
+\end{itemize}
 
+\subsection*{Illuminazione decorativa}
+\begin{itemize}
+  \item \textbf{Nanoleaf Lines}: installazione a parete in soggiorno (dietro TV). Integrazione con HomeKit per scene; effetti dinamici per notifiche e modalità cinema. Connessione di rete via Wi‑Fi; supporto a protocolli low-latency ove disponibile.
+\end{itemize}
+
+\section{Implementazione}
+\subsection{Fase 1 — Infrastruttura elettrica e di rete}
 \begin{enumerate}
-    \item \textbf{Controllo accessi}: Gestione sicura e flessibile della porta d'ingresso
-    \item \textbf{Illuminazione}: Controllo scene e dimmerazione in ogni ambiente
-    \item \textbf{Climatizzazione}: Gestione tapparelle per controllo solare
-    \item \textbf{Sicurezza}: Videosorveglianza perimetrale con notifiche intelligenti
-    \item \textbf{Monitoraggio ambientale}: Qualità aria e condizioni meteo
-    \item \textbf{Entertainment}: Audio multi-room di qualità
-    \item \textbf{Efficienza energetica}: Ottimizzazione consumi
+  \item Installazione del gateway BTicino su barra DIN e predisposizione protezioni dedicate.
+  \item Alimentazioni per telecamere esterne.
+  \item Configurazione VLAN/SSID IoT, indirizzamento statico per dispositivi fissi (telecamere, gateway), WPA3.
 \end{enumerate}
 
-\section{Componenti del sistema}
-
-\subsection{Nuki Smart Lock 3.0 Pro - Il cuore della sicurezza}
-
-Il Nuki Smart Lock 3.0 Pro è stato scelto come soluzione per il controllo accessi per diversi motivi:
-
-\textbf{Caratteristiche tecniche}:
+\subsection{Fase 2 — Installazione dispositivi}
 \begin{itemize}
-    \item Compatibilità HomeKit nativa (no bridge richiesto)
-    \item Motore potente e silenzioso (< 40 dB)
-    \item Batteria ricaricabile con autonomia 4-6 mesi
-    \item Wi-Fi integrato per controllo remoto
-    \item Sensore porta integrato per stato in tempo reale
+  \item Sostituzione interruttori tradizionali con moduli Living Now; configurazione dimmer nelle zone principali; comandi tapparelle.
+  \item Montaggio Nuki su porta blindata con calibrazione.
+  \item Installazione telecamere Netatmo e definizione delle zone di attività.
+  \item Posizionamento HomePod/HomePod mini e installazione Nanoleaf Lines.
 \end{itemize}
 
-\textbf{Installazione}:
-\begin{itemize}
-    \item Montaggio sopra serratura esistente (no modifiche)
-    \item Tempo installazione: 15 minuti
-    \item Calibrazione automatica della serratura
-    \item Nessun intervento di fabbro richiesto
-\end{itemize}
-
-\textbf{Funzionalità in HomeKit}:
-\begin{itemize}
-    \item Apertura/chiusura da iPhone, Apple Watch, Siri
-    \item Auto-unlock basato su geolocalizzazione
-    \item Condivisione accessi temporanei via app Casa
-    \item Notifiche apertura/chiusura in tempo reale
-    \item Integrazione con automazioni HomeKit
-\end{itemize}
-
-\subsection{BTicino Living Now - L'eleganza del controllo}
-
-La serie Living Now rappresenta il top di gamma BTicino per la domotica residenziale, con design minimale e tecnologia all'avanguardia.
-
-\subsubsection{Gateway with Netatmo}
-
-Il cuore del sistema BTicino:
-\begin{itemize}
-    \item Certificazione HomeKit nativa
-    \item Gestisce fino a 100 dispositivi Living Now
-    \item Connessione Wi-Fi dual band
-    \item Aggiornamenti firmware automatici
-    \item Installazione su barra DIN nel quadro elettrico
-\end{itemize}
-
-\subsubsection{Interruttori connessi}
-
-Installati in tutta la casa (32 punti luce):
-\begin{itemize}
-    \item Design ultrasottile (spessore 7mm)
-    \item Disponibili in bianco, nero e sabbia
-    \item LED di stato personalizzabile
-    \item Controllo locale anche senza connessione
-    \item Installazione su scatola 503 standard
-\end{itemize}
-
-\textbf{Configurazione tipo per stanza}:
-\begin{verbatim}
-Soggiorno:
-- 2x Deviatore connesso (luci principali)
-- 1x Dimmer connesso (luci ambiente)
-- 1x Comando scenari 2 moduli (4 scene)
-
-Camera matrimoniale:
-- 1x Interruttore connesso (luce centrale)
-- 2x Dimmer connesso (abat-jour comodini)
-- 1x Comando scenari (Giorno/Notte/Lettura/Cinema)
-\end{verbatim}
-
-\subsubsection{Comandi per tapparelle}
-
-Controllo motorizzazioni in ogni stanza (18 tapparelle totali):
-\begin{itemize}
-    \item Comando salita/discesa/stop
-    \item Posizionamento percentuale preciso
-    \item Orientamento lamelle (per veneziane)
-    \item Protezione motore integrata
-    \item Scenari alba/tramonto automatici
-\end{itemize}
-
-\subsubsection{Comandi scenari}
-
-Pulsanti dedicati per attivazione rapida:
-\begin{itemize}
-    \item 2 o 4 scene per dispositivo
-    \item LED RGB per feedback visivo
-    \item Configurazione scene via app
-    \item Attivazione anche offline
-\end{itemize}
-
-Scene implementate:
-\begin{verbatim}
-Ingresso:
-- "Arrivo": Luci ingresso 100%, disattiva allarme
-- "Esco": Spegni tutto piano terra, attiva allarme
-- "Notte": Luci percorso notturno 20%
-- "Ospiti": Luci esterne e ingresso
-
-Soggiorno:
-- "Relax": Luci soffuse, tapparelle 50%
-- "TV": Luci spente, bias light TV on
-- "Cena": Luci tavolo 80%, altre 40%
-- "Party": Luci colorate Nanoleaf, volume HomePod
-\end{verbatim}
-
-\subsection{Netatmo - Sicurezza e comfort ambientale}
-
-\subsubsection{Telecamere Outdoor con sirena}
-
-Installate 4 telecamere per copertura perimetrale completa:
-
-\textbf{Specifiche tecniche}:
-\begin{itemize}
-    \item Risoluzione Full HD 1080p
-    \item Visione notturna a infrarossi
-    \item Rilevamento persone/auto/animali con AI
-    \item Sirena integrata 105 dB
-    \item IP66 per resistenza intemperie
-    \item Faretto LED integrato
-\end{itemize}
-
-\textbf{Posizionamento strategico}:
-\begin{itemize}
-    \item Camera 1: Ingresso principale (riconosce volti familiari)
-    \item Camera 2: Garage (alert per veicoli sconosciuti)
-    \item Camera 3: Giardino posteriore (ignora animali domestici)
-    \item Camera 4: Lato secondario casa
-\end{itemize}
-
-\textbf{Integrazione HomeKit Secure Video}:
-\begin{itemize}
-    \item Registrazione crittografata su iCloud
-    \item Analisi video on-device (privacy garantita)
-    \item Zone di attività personalizzabili
-    \item Notifiche intelligenti con anteprima
-    \item Timeline nell'app Casa
-\end{itemize}
-
-\subsubsection{Stazione Meteo Smart}
-
-Sistema completo per monitoraggio ambientale:
-
-\textbf{Modulo interno}:
-\begin{itemize}
-    \item Temperatura e umidità
-    \item Qualità aria (CO2)
-    \item Livello rumore
-    \item Pressione atmosferica
-    \item Design elegante in alluminio
-\end{itemize}
-
-\textbf{Modulo esterno}:
-\begin{itemize}
-    \item Temperatura e umidità esterne
-    \item Alimentazione solare (no cavi)
-    \item Portata wireless 100m
-    \item Resistente UV e intemperie
-\end{itemize}
-
-\textbf{Automazioni meteo}:
-\begin{verbatim}
-SE temperatura_esterna > 25°C 
-   E ora > alba + 2h
-   E qualcuno_in_casa = true
-ALLORA:
-   - Chiudi tapparelle lato sud al 70%
-   - Notifica: "Protezione solare attivata"
-
-SE vento > 50 km/h
-ALLORA:
-   - Chiudi tutte le tapparelle
-   - Notifica urgente famiglia
-   - Attiva luci sicurezza esterne
-\end{verbatim}
-
-\subsection{Apple HomePod - L'intelligenza distribuita}
-
-Configurazione multi-room con 4 HomePod:
-
-\textbf{HomePod (2° gen) - Soggiorno}:
-\begin{itemize}
-    \item Audio spaziale per home theater
-    \item Hub HomeKit principale
-    \item Sensore temperatura/umidità integrato
-    \item Riconoscimento suoni (allarmi, vetri rotti)
-\end{itemize}
-
-\textbf{HomePod mini - Altri ambienti}:
-\begin{itemize}
-    \item Cucina: Timer, ricette, interfono
-    \item Studio: Musica focus, chiamate
-    \item Camera principale: Sveglie personalizzate
-\end{itemize}
-
-\textbf{Funzionalità Intercom}:
-\begin{itemize}
-    \item Annunci in tutta la casa
-    \item Messaggi a stanze specifiche
-    \item Integrazione con iPhone fuori casa
-\end{itemize}
-
-\subsection{Nanoleaf Lines - L'arte luminosa}
-
-Installazione artistica nel soggiorno:
-
-\textbf{Configurazione}:
-\begin{itemize}
-    \item 18 Lines in pattern geometrico
-    \item Montaggio a parete dietro TV
-    \item Connessione Thread per bassa latenza
-    \item 16 milioni di colori
-\end{itemize}
-
-\textbf{Scene dinamiche}:
-\begin{itemize}
-    \item Sincronizzazione con musica
-    \item Modalità cinema (bias lighting)
-    \item Alba/tramonto simulati
-    \item Notifiche visive (campanello, allarmi)
-\end{itemize}
-
-\section{Implementazione del sistema}
-
-\subsection{Fase 1: Infrastruttura elettrica e di rete}
-
-\subsubsection{Preparazione quadro elettrico}
-
+\subsection{Fase 3 — Configurazione HomeKit}
 \begin{enumerate}
-    \item Installazione Gateway BTicino su barra DIN
-    \item Configurazione protezioni dedicate per domotica
-    \item Predisposizione alimentazioni per telecamere
-    \item Cablaggio bus SCS per dispositivi BTicino
+  \item Aggiunta del gateway BTicino tramite codice HomeKit; rilevamento automatico dei dispositivi collegati.
+  \item Pairing di telecamere e stazione meteo Netatmo; abilitazione HKSV.
+  \item Configurazione Nuki via QR e verifica controlli da app Casa.
+  \item Impostazione HomePod come hub primario e verifica dei servizi remoti.
+  \item Organizzazione in stanze/piani e definizione di zone (interno/esterno).
 \end{enumerate}
 
-\subsubsection{Rete dedicata}
+\section{Automazioni rappresentative}
+Le automazioni sono progettate con logica "\textit{evento-condizione-azione}", utilizzando trigger affidabili e preferendo esecuzione locale quando possibile.
 
-Creazione VLAN IoT separata:
+\subsection*{Protezione notturna}
 \begin{verbatim}
-Network: 192.168.20.0/24
-SSID: SmartHome_IoT
-Sicurezza: WPA3
-Dispositivi:
-  - Gateway BTicino: 192.168.20.10
-  - Telecamere Netatmo: 192.168.20.20-23
-  - HomePod: 192.168.20.30-33
-  - Nanoleaf: 192.168.20.40
-  - Nuki: 192.168.20.50
+Trigger: tramonto + 30 min; presenza = true
+Azioni: chiusura tapparelle piano terra; accensione luci esterne;
+        telecamere in alta sensibilità; blocco automatico serratura.
+Notifiche: sintesi eventi su iPhone dei genitori.
 \end{verbatim}
 
-\subsection{Fase 2: Installazione dispositivi}
-
-\subsubsection{Giorno 1-2: Impianto elettrico}
-
-\begin{itemize}
-    \item Sostituzione interruttori tradizionali con Living Now
-    \item Installazione dimmer nelle zone principali
-    \item Configurazione comandi tapparelle
-    \item Test comunicazione con gateway
-\end{itemize}
-
-\subsubsection{Giorno 3: Sicurezza e accesso}
-
-\begin{itemize}
-    \item Montaggio Nuki sulla porta blindata
-    \item Calibrazione e test apertura
-    \item Installazione telecamere Netatmo
-    \item Configurazione zone sorveglianza
-\end{itemize}
-
-\subsubsection{Giorno 4: Comfort e controllo}
-
-\begin{itemize}
-    \item Setup HomePod in ogni zona
-    \item Installazione stazione meteo
-    \item Montaggio Nanoleaf Lines
-    \item Configurazione scene iniziali
-\end{itemize}
-
-\subsection{Fase 3: Configurazione HomeKit}
-
-\subsubsection{Setup iniziale}
-
-\begin{enumerate}
-    \item Scansione codice HomeKit Gateway BTicino
-    \item Aggiunta automatica tutti dispositivi Living Now
-    \item Scansione codici Netatmo (telecamere e meteo)
-    \item Configurazione Nuki con codice QR
-    \item Setup HomePod come hub
-    \item Aggiunta Nanoleaf via Thread
-\end{enumerate}
-
-\subsubsection{Organizzazione in stanze}
-
+\subsection*{Arrivo familiare (riconoscimento)}
 \begin{verbatim}
-Casa Famiglia Rossi
-+-- Piano Terra
-|   +-- Ingresso
-|   |   +-- Nuki Smart Lock
-|   |   +-- Luce ingresso (Living Now)
-|   |   +-- Comando scene 4 tasti
-|   |   +-- Telecamera Ingresso (Netatmo)
-|   +-- Soggiorno
-|   |   +-- Luci principali (dimmer)
-|   |   +-- Luci ambiente (dimmer)
-|   |   +-- Tapparelle (3x)
-|   |   +-- HomePod
-|   |   +-- Nanoleaf Lines
-|   |   +-- Stazione meteo interno
-|   +-- Cucina
-|   |   +-- Luci piano lavoro
-|   |   +-- Luce tavolo (dimmer)
-|   |   +-- Tapparella
-|   |   +-- HomePod mini
-|   +-- Studio
-|       +-- Luce scrivania
-|       +-- Tapparella
-|       +-- HomePod mini
-+-- Piano Primo
-|   +-- Camera Matrimoniale
-|   |   +-- Luci (dimmer)
-|   |   +-- Tapparelle (2x)
-|   |   +-- HomePod mini
-|   |   +-- Comando scene
-|   +-- Camera Ragazzi 1
-|   |   +-- Luci
-|   |   +-- Tapparella
-|   +-- Camera Ragazzi 2
-|       +-- Luci
-|       +-- Tapparella
-+-- Esterno
-    +-- Telecamera Garage
-    +-- Telecamera Giardino
-    +-- Telecamera Laterale
-    +-- Stazione meteo esterno
+Trigger: Netatmo ingresso -> persona riconosciuta; fascia oraria: 18:00-23:00
+Azioni: luce ingresso 100% a 3000K; avviso su HomePod (Intercom);
+        sblocco manuale facilitato (notifica azionabile da Apple Watch/iPhone).
 \end{verbatim}
 
-\section{Automazioni e scene avanzate}
-
-\subsection{Automazioni di sicurezza}
-
-\textbf{``Protezione notturna intelligente''}:
+\subsection*{Ottimizzazione solare estiva}
 \begin{verbatim}
-trigger:
-  - time: sunset + 30min
-  - condition: someone_home = true
-actions:
-  - tapparelle.piano_terra: close_all
-  - luci.esterne: on
-  - telecamere.all: 
-      motion_detection: high_sensitivity
-      notifications: all_events
-  - nuki: 
-      auto_lock: immediate
-      notifications: any_access
+Trigger: temperatura esterna > 26°C; meteo soleggiato
+Condizioni: stagione = estate; qualcuno in casa = true
+Azioni progressive: lato est 70% (10:00); lato sud 80% (12:00);
+                   lato ovest 70% (15:00); apertura al tramonto.
 \end{verbatim}
 
-\textbf{``Riconoscimento familiare''}:
+\subsection*{Sveglia graduale}
 \begin{verbatim}
-trigger:
-  - netatmo.camera_ingresso: known_face_detected
-  - time: between sunset and sunrise
-actions:
-  - luci.ingresso: on(100%, 3000K)
-  - nuki: prepare_unlock (riduce tempo apertura)
-  - homepod.ingresso: 
-      announce: "Bentornato [nome]"
-      volume: 30%
-  - after 5 minutes:
-      luci.ingresso: dim_to(20%)
+Trigger: 07:00 (feriali) / 08:30 (weekend)
+Azioni: tapparelle camera 30% con apertura lenta; luce 20% a 2700K (5 min);
+        HomePod: riproduzione playlist con volume in fade-in.
 \end{verbatim}
 
-\subsection{Gestione energetica intelligente}
-
-\textbf{``Ottimizzazione solare estate''}:
+\subsection*{Modalità cinema}
 \begin{verbatim}
-trigger:
-  - netatmo.meteo: temperatura_esterna > 26°C
-  - time: after 10:00
-conditions:
-  - stagione: estate
-  - previsioni: soleggiato
-actions:
-  progressive:
-    - 10:00: tapparelle.lato_est: 70%
-    - 12:00: tapparelle.lato_sud: 80%
-    - 15:00: tapparelle.lato_ovest: 70%
-    - sunset: tapparelle.all: open
-  notifications:
-    - "Protezione solare attiva, risparmio stimato 15%"
+Trigger: comando vocale "Ehi Siri, modalità cinema" o pulsante scena
+Azioni: chiusura tapparelle soggiorno; spegnimento luci;
+        Nanoleaf Lines in Screen/Mirror a 30%;
+        HomePod in modalità Home Theater; notifiche familiari silenziate (2 ore).
 \end{verbatim}
 
-\subsection{Scene per ogni momento}
-
-\textbf{``Sveglia intelligente''}:
-\begin{verbatim}
-trigger:
-  - time: 07:00 (feriali) / 08:30 (weekend)
-  - o motion.camera_matrimoniale dopo le 06:30
-actions:
-  - tapparelle.camera: open(30%) slowly
-  - luci.camera: fade_in(20%, 2700K) over 5min
-  - homepod.camera: 
-      play: "Playlist Risveglio"
-      volume: fade_in to 20%
-  - nanoleaf.soggiorno: 
-      effect: "Aurora boreale"
-      brightness: 40%
-  - dopo 15min:
-      tapparelle.camera: open(100%)
-      luci.bagno: on(60%, 4000K)
-\end{verbatim}
-
-\textbf{``Cinema perfetto''}:
-\begin{verbatim}
-trigger:
-  - vocale: "Ehi Siri, modalità cinema"
-  - o scene_button.soggiorno: "Cinema"
-actions:
-  - tapparelle.soggiorno: close_all
-  - luci.soggiorno: off
-  - nanoleaf: 
-      mode: "Screen Mirror"
-      brightness: 30%
-  - homepod.soggiorno:
-      audio_mode: "Home Theater"
-  - notifiche.famiglia: 
-      silent_mode: on
-      durata: 2 ore
-\end{verbatim}
-
-\section{Condivisione e gestione familiare}
-
-\subsection{Configurazione accessi differenziati}
-
-La famiglia è composta da 4 persone con esigenze diverse:
-
-\textbf{Genitori (amministratori)}:
+\section{Gestione utenti, permessi e privacy}
 \begin{itemize}
-    \item Controllo completo su tutti i dispositivi
-    \item Gestione automazioni e scene
-    \item Accesso alle registrazioni telecamere
-    \item Controllo Nuki e inviti ospiti
+  \item \textbf{Ruoli HomeKit}: genitori come amministratori (gestione dispositivi, automazioni, registrazioni video); figli come membri con accesso a luci/tapparelle e audio nelle loro stanze; esclusi controlli su serratura e telecamere.
+  \item \textbf{HKSV e dati}: analisi movimento on-device, video cifrati end-to-end con storage iCloud; definizione di zone sensibili per ridurre notifiche superflue.
+  \item \textbf{Accessi ospiti}: gestione credenziali temporanee tramite app Nuki; revoca immediata; log accessi consultabile.
 \end{itemize}
 
-\textbf{Figli adolescenti (membri)}:
+\section{Conclusioni: vantaggi dell'integrazione multimarca}
+L'adozione di un'architettura HomeKit in un contesto multimarca, come quello descritto in questo caso di studio, ha permesso di ottenere un impianto coerente, sicuro e facile da gestire.
+
+\paragraph{Principali vantaggi osservati}
 \begin{itemize}
-    \item Controllo luci e tapparelle propria stanza
-    \item Controllo zone comuni (no telecamere)
-    \item Uso HomePod per musica
-    \item NO accesso a Nuki e sicurezza
+  \item \textbf{Gestione centralizzata}: controllo di dispositivi BTicino, Netatmo, Nuki e Nanoleaf da un'unica interfaccia (app Casa), senza necessità di app separate per l'uso quotidiano su ogni device.
+  \item \textbf{Condivisione semplificata}: accesso esteso a tutti i membri della famiglia tramite Condivisione in famiglia Apple, senza configurazioni aggiuntive.
+  \item \textbf{Privacy e sicurezza}: automazioni locali e cifratura end-to-end nativa di HomeKit; per i video, HomeKit Secure Video con analisi on-device e archiviazione cifrata.
+  \item \textbf{Riduzione della complessità}: eliminazione di gateway e bridge multipli, con aggiornamenti e notifiche centralizzati.
+  \item \textbf{Affidabilità operativa}: continuità di funzionamento locale per luci, tapparelle e scenari principali anche in assenza di connessione Internet.
+  \item \textbf{Esperienza uniforme}: interfaccia e comandi vocali coerenti su iPhone, iPad, Mac e Apple Watch.
+  \item \textbf{Scalabilità futura}: predisposizione della rete per dispositivi Matter/Thread, grazie alla presenza di border router integrati (HomePod).
+  \item \textbf{Efficienza energetica}: automazioni di illuminazione e schermature solari che contribuiscono alla riduzione dei consumi e al miglioramento del comfort abitativo.
+  \item \textbf{Maggiore sicurezza di rete}: segmentazione VLAN dedicata all'IoT e isolamento del traffico rispetto alla rete principale.
 \end{itemize}
 
-\subsection{Il vantaggio dell'ecosistema integrato}
-
-Grazie alla certificazione HomeKit nativa di tutti i dispositivi:
-
-\begin{itemize}
-    \item \textbf{Zero app aggiuntive}: Tutto gestito dall'app Casa
-    \item \textbf{Un solo account}: Condivisione famiglia Apple
-    \item \textbf{Privacy garantita}: Elaborazione locale, crittografia end-to-end
-    \item \textbf{Backup automatico}: Configurazione salvata in iCloud
-    \item \textbf{Controllo unificato}: Stessa interfaccia su iPhone, iPad, Mac, Apple Watch
-\end{itemize}
-
-\subsection{Gestione ospiti con Nuki}
-
-Sistema flessibile per accessi temporanei:
-
-\begin{verbatim}
-Esempio: Dog sitter
-- Accesso: Lunedì-Venerdì 15:00-16:00
-- Notifiche: Push quando entra/esce
-- Limitazioni: Solo porta ingresso
-- Scadenza: Automatica dopo periodo
-
-Esempio: Ospiti weekend
-- Generazione codice PIN temporaneo
-- Validità: 48 ore
-- Condivisione: via WhatsApp
-- Revoca: Immediata da remoto
-\end{verbatim}
-
-\section{Manutenzione e ottimizzazione}
-
-\subsection{Monitoraggio prestazioni}
-
-Dashboard personalizzata su iPad in cucina mostra:
-\begin{itemize}
-    \item Stato tutti i dispositivi
-    \item Qualità aria interna/esterna
-    \item Consumo energetico real-time
-    \item Eventi sicurezza ultimi 7 giorni
-    \item Previsioni meteo 3 giorni
-\end{itemize}
-
-\subsection{Routine di manutenzione}
-
-\textbf{Settimanale}:
-\begin{itemize}
-    \item Verifica stato batteria Nuki
-    \item Pulizia lenti telecamere
-    \item Check connettività dispositivi
-\end{itemize}
-
-\textbf{Mensile}:
-\begin{itemize}
-    \item Test scene di emergenza
-    \item Verifica backup automazioni
-    \item Analisi log accessi
-    \item Ottimizzazione consumi
-\end{itemize}
-
-\textbf{Trimestrale}:
-\begin{itemize}
-    \item Aggiornamento firmware (se disponibile)
-    \item Calibrazione sensori meteo
-    \item Revisione automazioni stagionali
-\end{itemize}
-
-\section{Risultati ottenuti}
-
-\subsection{Benefici quantificabili}
-
-Dopo 6 mesi di utilizzo:
-
-\begin{itemize}
-    \item \textbf{Risparmio energetico}: 28\% riduzione consumi (gestione intelligente tapparelle)
-    \item \textbf{Sicurezza migliorata}: 100\% copertura perimetrale, zero falsi allarmi
-    \item \textbf{Comfort abitativo}: Temperatura ideale mantenuta con 20\% energia in meno
-    \item \textbf{Tempo risparmiato}: 1 ora/giorno in routine automatizzate
-    \item \textbf{Valore immobile}: +8\% secondo valutazione agente immobiliare
-\end{itemize}
-
-\subsection{Feedback della famiglia}
-
-\textbf{``La casa che si adatta a noi''}
-
-I proprietari sottolineano come il sistema si sia perfettamente integrato nelle loro abitudini quotidiane, migliorandole senza stravolgerle. La possibilità di controllare tutto con Siri o automaticamente ha reso la tecnologia invisibile ma sempre presente quando serve.
-
-\textbf{Aspetti più apprezzati}:
-\begin{itemize}
-    \item Design elegante BTicino che valorizza gli interni
-    \item Affidabilità del sistema (zero malfunzionamenti)
-    \item Facilità d'uso per tutti i membri famiglia
-    \item Sensazione di sicurezza con Netatmo
-    \item Qualità audio HomePod per musica in casa
-\end{itemize}
-
-\section{Conclusioni e sviluppi futuri}
-
-Questo caso di studio dimostra come l'integrazione di dispositivi premium con certificazione HomeKit nativa possa creare un ecosistema domotico affidabile, elegante e facile da usare. La scelta di BTicino Living Now con Netatmo ha garantito:
-
-\begin{itemize}
-    \item Design italiano senza compromessi
-    \item Integrazione perfetta con Apple
-    \item Affidabilità di marchi consolidati
-    \item Supporto e assistenza locale
-    \item Valore aggiunto all'immobile
-\end{itemize}
-
-\subsection{Prossime espansioni pianificate}
-
-\begin{itemize}
-    \item \textbf{Videocitofono Netatmo}: Integrazione con Nuki per apertura remota
-    \item \textbf{Sensori finestre BTicino}: Completamento sicurezza perimetrale
-    \item \textbf{Valvole termostatiche Netatmo}: Controllo zona per zona
-    \item \textbf{Prese smart BTicino}: Monitoraggio consumi per elettrodomestico
-\end{itemize}
-
-Il sistema realizzato rappresenta lo stato dell'arte della domotica residenziale, combinando il meglio del design italiano con l'innovazione tecnologica di Apple, creando una casa che è al contempo bella, intelligente e sicura.
+\noindent In sintesi, la soluzione implementata dimostra come un ecosistema aperto e interoperabile, basato su standard consolidati come HomeKit, possa integrare tecnologie di produttori diversi garantendo facilità d'uso, sicurezza e possibilità di evoluzione nel tempo.
