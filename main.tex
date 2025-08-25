@@ -10,7 +10,8 @@
 \usepackage{booktabs}
 \usepackage{lipsum}
 \setlength{\headheight}{27pt}
-\usepackage[backend=biber,style=authoryear]{biblatex}
+% \usepackage[backend=biber,style=authoryear]{biblatex}
+\usepackage[backend=biber,style=verbose-ibid]{biblatex}
 \setlength{\bibitemsep}{12pt}
 \usepackage{csquotes}
 
@@ -32,8 +33,9 @@
 \lhead{\leftmark}
 
 % Impostazioni corpo testo e citazioni
+\setlength{\skip\footins}{30pt} % distanza fra testo e note
 \renewcommand{\normalsize}{\fontsize{12pt}{14pt}\selectfont}
-\renewcommand{\footnotesize}{\fontsize{10pt}{12pt}\selectfont}
+\renewcommand{\footnotesize}{\fontsize{9pt}{11pt}\selectfont}
 \renewenvironment{quote}{\list{}{\rightmargin=1cm \leftmargin=1cm}\item\relax\fontsize{11pt}{13pt}\selectfont}{\endlist}
 
 \setcounter{secnumdepth}{3}

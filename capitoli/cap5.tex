@@ -14,7 +14,7 @@ Per capire davvero quanto un protocollo di comunicazione IoT sia efficace all’
 
 Uno degli aspetti che più influisce sull’esperienza d’uso quotidiana è la \textbf{latenza}, ovvero il tempo che passa tra l’invio di un comando e la sua esecuzione. In altre parole, quanto velocemente la casa “risponde” quando chiediamo qualcosa. È un po’ come premere l’interruttore della luce: se dopo averlo fatto ci vogliono più di 200-300 millisecondi perché la lampada si accenda, la sensazione immediata è che qualcosa non funzioni a dovere – anche se tecnicamente tutto è sotto controllo. Questo breve ritardo può sembrare irrilevante, ma oltre una certa soglia diventa fastidioso e può minare la fiducia nel sistema.\\
 
-Naturalmente, non tutti i protocolli si comportano allo stesso modo. \textbf{Zigbee}, ad esempio, è generalmente molto reattivo nelle comunicazioni dirette, con latenze comprese tra i 15 e i 30 millisecondi. Tuttavia, quando la rete diventa più complessa, come nel caso di una struttura mesh con più passaggi intermedi (i cosiddetti multi-hop), il tempo di risposta può allungarsi fino a 50-100 millisecondi.\\
+Ogni protocollo si comporta in maniera diversa, ad esempio \textbf{Zigbee} è generalmente molto reattivo quando si tratta di comunicazioni dirette, con una latenze comprese tra i 15 e i 30 millisecondi. Tuttavia, all'aumentare della complessità  della rete, come nel caso di una struttura mesh con più passaggi intermedi (multi-hop), il tempo di risposta può allungarsi fino a 50-100 millisecondi.\\
 
 Il \textbf{Wi-Fi}, se ottimizzato per applicazioni in tempo reale, può offrire prestazioni ancora migliori, arrivando a latenze inferiori ai 10 millisecondi. Ma c’è un prezzo da pagare: questi risultati richiedono un consumo energetico decisamente più elevato, rendendo il Wi-Fi meno adatto per dispositivi alimentati a batteria, come sensori o piccoli attuatori che devono funzionare per anni senza manutenzione.\\
 
@@ -23,7 +23,8 @@ In definitiva, la scelta del protocollo deve sempre tenere conto di un equilibri
 
 \subsection{Consumo energetico: la sfida dell’autonomia}
 
-Tra le principali sfide dell’Internet of Things applicato alla domotica, il consumo energetico occupa un ruolo di primo piano. In particolare, numerosi dispositivi domestici, come sensori di movimento, di temperatura, o di apertura porte e finestre, devono poter funzionare per lunghi periodi, spesso per anni, con una singola batteria di piccole dimensioni. In questo scenario, l’efficienza energetica non rappresenta solo un vantaggio, ma un requisito fondamentale per garantire la sostenibilità e l’affidabilità dell’intero ecosistema smart.
+Quando parliamo di smart home, una delle sfide più rilevanti riguarda la gestione dei consumi energetici dei diversi dispositivi. Non è affatto un aspetto marginale: molti dispositivi smart installati nelle nostre abitazioni, come i sensori di movimento, i sensori di temperatura o i sensori di apertura di porte e di finestre, devono poter funzionare per lunghi periodi senza la necessità di interventi di manutenzione. In generale, questi dispositivi sono alimentati da batterie di piccole dimensioni che dovrebbero durare diversi anni. Appunto in questo scenario, l’efficienza energetica deve rappresentare un requisito imprescindibile per garantire sia la sostenibilità d’uso sia l’affidabilità complessiva dell’ecosistema domotico.
+
 
 I protocolli di comunicazione IoT si distinguono nettamente per quanto riguarda l’impatto energetico, in funzione del loro design, delle modalità di trasmissione e della gestione dei cicli di attività e standby. Di seguito, una panoramica comparativa delle principali soluzioni:
 
@@ -69,9 +70,9 @@ Wi-Fi 6 & 9.6 Gbps & 1–2 Gbps \\
 \caption{Confronto tra velocità teoriche e throughput pratico dei principali protocolli IoT}
 \end{table}
 
-Come si osserva, \textbf{Wi-Fi} domina nettamente per capacità di banda. Tuttavia, nella maggior parte degli impianti domotici, questa potenza risulta sovradimensionata: un semplice comando per accendere una luce o inviare una lettura della temperatura richiede pochi byte, rendendo il Wi-Fi inefficiente in termini energetici per compiti così semplici \cite{wifi6-spec}. 
+Come si osserva, \textbf{Wi-Fi} domina nettamente per capacità di banda. Tuttavia, nella maggior parte degli impianti domotici, questa potenza risulta sovradimensionata: un semplice comando per accendere una luce o inviare una lettura della temperatura richiede pochi byte, rendendo il Wi-Fi inefficiente in termini energetici per compiti così semplici \footcite{wifi6-spec}. 
 
-In altre parole, usare il Wi-Fi per trasmettere dati minimi è come utilizzare un camion per consegnare una cartolina: funziona, ma è chiaramente uno spreco.
+In altre parole, voler utilizzare il Wi-Fi per trasmettere pochi dati è come voler utilizzare un camion per consegnare una cartolina, si funziona, ma è chiaramente uno spreco.
 
 \vspace{0.5cm}
 
@@ -79,20 +80,16 @@ In altre parole, usare il Wi-Fi per trasmettere dati minimi è come utilizzare u
 
 Perché un sistema domotico possa davvero definirsi affidabile, non basta che funzioni “quando tutto va bene”: deve essere in grado di reagire e adattarsi anche quando qualcosa non va come previsto. È in queste situazioni che entrano in gioco due concetti fondamentali: \textbf{affidabilità} e \textbf{resilienza}.
 
-In termini pratici, un protocollo di comunicazione deve possedere alcune capacità essenziali:
+In termini pratici, un protocollo di comunicazione non si limita solo a trasmettere dati, ma deve anche essere in grado di adattarsi a condizioni che non sono sempre ideali quando si calano nelle nostre case. Alcune delle loro caratteristiche diventano quindi fondamentali. Per esempio, la capacità di gestire le interferenze è fondamentale in un ambiente domestico, dove Wi-Fi, Bluetooth e altri segnali convivono uno stesso spazio, un protocollo deve essere in grado si mantenere stabile la comunicazione senza avere interruzioni percepibili.  
 
-\begin{itemize}
-    \item \textbf{Gestione delle interferenze}: saper mantenere la comunicazione anche in ambienti ricchi di segnali wireless (Wi-Fi, Bluetooth, ecc.)
-    \item \textbf{Ritrasmissione automatica}: garantire che i pacchetti persi vengano inviati di nuovo senza necessità di intervento
-    \item \textbf{Routing dinamico}: trovare percorsi alternativi se un nodo della rete diventa inattivo o instabile
-    \item \textbf{Prioritizzazione del traffico}: assegnare maggiore importanza ai messaggi critici tramite meccanismi di \textit{Quality of Service} (QoS)
-\end{itemize}
+Un altro aspetto è la ritrasmissione automatica dei pacchetti andati persi, in questo modo l’utente non si accorgersi di eventuali errori o malfunzionamenti. Allo stesso modo, la rete deve poter ricalcolare i percorsi dei messaggi in maniera dinamica: se un nodo smette di funzionare o viene rimosso, il traffico deve trovare da sé una strada alternativa. Infine, per alcune applicazioni è necessario introdurre meccanismi di prioritizzazione del traffico (\textit{Quality of Service}), che permettano di dare precedenza ai messaggi più critici rispetto a quelli meno urgenti.  
 
-Le reti \textit{mesh} basate su \textbf{Zigbee} e \textbf{Thread} sono progettate proprio per affrontare queste sfide: grazie ad algoritmi di routing intelligente, sono in grado di riorganizzarsi in autonomia e reindirizzare i messaggi qualora un dispositivo venga rimosso, sostituito o risulti non raggiungibile \cite{zigbee-spec,thread-spec}. Questo approccio rende il sistema più flessibile e robusto nel tempo.\\
+Le reti \textit{mesh} basate su \textbf{Zigbee} e \textbf{Thread} rispondono esattamente a queste esigenze. Grazie ad algoritmi di instradamento intelligente, sono in grado di auto-organizzarsi e di reindirizzare i messaggi anche quando un dispositivo viene scollegato, sostituito o risulta temporaneamente non disponibile \footcite{zigbee-spec,thread-spec}. Questa caratteristica rende tali soluzioni particolarmente robuste e affidabili nel tempo.
 
-Anche \textbf{Z-Wave}, pur avendo una struttura mesh meno estesa, offre un vantaggio rilevante: opera su frequenze \textbf{sub-GHz}, in particolare intorno agli 868 MHz in Europa, una banda meno affollata rispetto alla classica 2.4 GHz utilizzata da molti altri protocolli. Ciò si traduce in una maggiore immunità alle interferenze, che spesso rappresentano un problema negli ambienti domestici saturi di dispositivi wireless \cite{zwave-spec}.\\
 
-Per quanto riguarda il \textbf{Wi-Fi}, nonostante la sua ampia diffusione e le elevate prestazioni in termini di velocità, si dimostra talvolta meno resiliente in ambienti particolarmente congestionati. La stabilità complessiva della rete Wi-Fi dipende fortemente dalla qualità dell'infrastruttura (router, access point, gestione dei canali), e in caso di sovraccarico o malfunzionamenti può mostrare latenze elevate o perdita di pacchetti \cite{wifi6-spec}.\\
+Anche \textbf{Z-Wave}, pur avendo una struttura mesh meno estesa, offre un vantaggio rilevante: opera su frequenze \textbf{sub-GHz}, in particolare intorno agli 868 MHz in Europa, una banda meno affollata rispetto alla classica 2.4 GHz utilizzata da molti altri protocolli. Ciò si traduce in una maggiore immunità alle interferenze, che spesso rappresentano un problema negli ambienti domestici saturi di dispositivi wireless \footcite{zwave-spec}.\\
+
+Per quanto riguarda il \textbf{Wi-Fi}, nonostante la sua ampia diffusione e le elevate prestazioni in termini di velocità, si dimostra talvolta meno resiliente in ambienti particolarmente congestionati. La stabilità complessiva della rete Wi-Fi dipende fortemente dalla qualità dell'infrastruttura (router, access point, gestione dei canali), e in caso di sovraccarico o malfunzionamenti può mostrare latenze elevate o perdita di pacchetti \footcite{wifi6-spec}.\\
 
 Come illustrato nella Figura~\ref{fig:smart-home-mesh-vs-wifi}, le reti mesh consentono a ogni nodo di fungere da ponte per altri dispositivi, garantendo comunicazione anche in caso di guasti o disconnessioni.
 
@@ -182,7 +179,7 @@ In definitiva, quando si progettano sistemi domotici destinati a durare nel temp
 
 \subsection{Zigbee: il veterano delle reti mesh}
 
-Zigbee è considerato uno dei protocolli più consolidati nell’ambito della domotica, grazie alla sua lunga presenza sul mercato e alla vasta adozione da parte dei produttori. Basato sullo standard IEEE 802.15.4, opera principalmente sulla banda a 2.4 GHz, la stessa condivisa con Wi-Fi e Bluetooth.
+Zigbee è considerato uno dei protocolli più maturi e diffusi nell’ambito della domotica residenziale. La sua larga diffusione sul mercato con un’ampio supporto da parte dei produttori ne hanno di fatto diventare una scelta quasi “classica” per chi sviluppa soluzioni di automazione residenziale. Dal punto di vista tecnico, si basa sullo standard IEEE 802.15.4 e utilizza principalmente la banda a 2.4 GHz, la stessa su cui operano anche Wi-Fi e Bluetooth.
 
 \textbf{Punti di forza:}
 \begin{itemize}
@@ -218,7 +215,8 @@ La sua velocità massima, pari a 100 kbps, lo rende inadatto a carichi di dati e
 
 \subsection{Wi-Fi: potenza e versatilità}
 
-Il Wi-Fi domina per capacità di banda e diffusione. La presenza capillare di router domestici riduce la necessità di infrastrutture dedicate, rendendolo ideale per dispositivi che richiedono elevato throughput.
+Wi-Fi si distingue dagli altri protocolli soprattutto per la capacità di offrire larghezze di banda elevate e per la sua diffusione ormai capillare. La presenza in ogni casa di router domestici fa sì che non siano necessarie infrastrutture dedicate, un aspetto che ne ha favorito la crescita e l’adozione. Questa sue caratteristica rendeno il Wi-Fi particolarmente adatto ai dispositivi che devono gestire grandi quantità di dati o alle applicazioni che richiedono un throughput elevato, come le videocamere di sorveglianza o sistemi di streaming multimediale.
+
 
 \textbf{Vantaggi competitivi:}
 \begin{itemize}
@@ -236,7 +234,7 @@ Il Wi-Fi domina per capacità di banda e diffusione. La presenza capillare di ro
     \item Hardware più costoso rispetto ad alternative low-power
 \end{itemize}
 
-Le videocamere IP rappresentano un'applicazione ideale: richiedono banda elevata e sono alimentate da rete elettrica, eliminando il vincolo energetico \cite{WiFiVsIoT}.
+Le videocamere IP rappresentano un'applicazione ideale: richiedono banda elevata e sono alimentate da rete elettrica, eliminando il vincolo energetico \footcite{WiFiVsIoT}.
 
 \subsection{Thread: l'evoluzione IP-native}
 
@@ -250,11 +248,12 @@ Thread è un protocollo mesh moderno progettato per supportare IPv6 nativamente,
     \item Mesh self-healing con tempi di riconvergenza rapidi
 \end{itemize}
 
-Le sue latenze sono paragonabili a Zigbee (20–50 ms), ma con un’architettura più moderna e scalabile. Dispositivi come Apple HomePod mini o Google Nest Hub fungono da border router per reti Thread, facilitando l’adozione senza componenti aggiuntivi \cite{thread-spec}.
+Le sue latenze sono paragonabili a Zigbee (20–50 ms), ma con un’architettura più moderna e scalabile. Dispositivi come Apple HomePod mini o Google Nest Hub fungono da border router per reti Thread, facilitando l’adozione senza componenti aggiuntivi \footcite{thread-spec}.
 
 \subsection{Matter: l’unificatore dell’ecosistema}
 
-Matter si propone come livello applicativo universale, operando sopra protocolli esistenti come Thread, Wi-Fi ed Ethernet. Il suo obiettivo è garantire interoperabilità trasparente tra piattaforme e produttori.
+Matter vuole essere un livello applicativo universale, progettato per lavorare sopra i protocolli già presenti come Thread, Wi-Fi ed Ethernet. Il suo scopo non è quindi sostituire ciò che esiste, ma andare a fornire uno strato comune superiore in grado di unire mondi spesso frammentati. 
+
 
 \textbf{Punti di forza:}
 \begin{itemize}
@@ -264,7 +263,7 @@ Matter si propone come livello applicativo universale, operando sopra protocolli
     \item Comunicazione locale senza necessità di cloud
 \end{itemize}
 
-Matter introduce un overhead minimo (circa 5–10\% di latenza aggiuntiva), ma il vantaggio in termini di compatibilità compensa ampiamente. Un termostato compatibile può essere gestito indistintamente da Siri, Google Assistant o Alexa, mantenendo la stessa qualità d’interazione \cite{MatterWhitePaper}.
+Matter introduce un overhead minimo (circa 5–10\% di latenza aggiuntiva), ma il vantaggio in termini di compatibilità compensa ampiamente. Un termostato compatibile può essere gestito indistintamente da Siri, Google Assistant o Alexa, mantenendo la stessa qualità d’interazione \footcite{MatterWhitePaper}.
 
 \begin{table}[htbp]
 \centering
@@ -291,7 +290,8 @@ Man mano che le abitazioni intelligenti si arricchiscono di sensori, attuatori e
 
 \subsubsection{Zigbee: tra teoria e realtà}
 
-Zigbee dichiara il supporto fino a 65.000 dispositivi per rete, un numero che, sulla carta, garantirebbe ampie possibilità di espansione. Tuttavia, in ambito residenziale, questa soglia è ben lontana dalla realtà operativa.
+Zigbee dichiara, almeno a livello teorico, la possibilità di poter gestire fino a 65.000 dispositivi all’interno della stessa rete. Una cifra davvero impressionante, che evidenzia le potenzialità di espansione di questo protocollo. Nella pratica quotidiana, però, questo valore resta lontano dall’esperienza reale: nelle nostre case difficilmente si supera qualche decina di dispositivi attivi, e già oltre tale soglia emergergono alcuni limiti legati a prestazioni, stabilità o complessità di gestione.wifi6-spec
+
 
 Già superata la soglia dei 200-300 dispositivi, cominciano a emergere difficoltà pratiche:
 \begin{itemize}

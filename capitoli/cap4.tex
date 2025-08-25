@@ -1,8 +1,8 @@
 \chapter{Sicurezza e Privacy nella Domotica Residenziale}
 
-\section{Introduzione alla sicurezza IoT domestica}
+\section{Introduzione alla sicurezza IoT nella domotica residenziale}
 
-La tecnologia ha reso le nostre case più comode e facili da gestire: dal riscaldamento controllato a distanza alle luci che si regolano da sole. Ma insieme a questi benefici ci sono anche aspetti meno visibili, come la grande quantità di dati personali che questi sistemi raccolgono e trattano ogni giorno.
+La tecnologia nella domotica ha trasformato le nostre case in case più comode e più facili da gestire, dal controllo del riscaldamento, dalla gestione delle luci in base alle ore del giorno. Assieme a questi benefici però ci sono anche aspetti meno visibili, uno di questi è la grande quantità di dati personali che questi sistemi raccolgono e trattano ogni giorno.
 
 È interessante riflettere sulla quantità di informazioni che fluiscono attraverso una casa intelligente: orari di presenza, preferenze climatiche, abitudini di illuminazione, fino ad arrivare ai dati biometrici raccolti dalle telecamere di ultima generazione. Ogni componente del sistema - dal termostato intelligente all'assistente vocale - rappresenta contemporaneamente un'opportunità e una potenziale vulnerabilità.\\
 
@@ -32,7 +32,7 @@ L'eterogeneità dei protocolli wireless nella domotica - ZigBee, Z-Wave, Wi-Fi, 
 
 \subsection{Il caso Mirai: una lezione da non dimenticare}
 
-L'epidemia del botnet Mirai nel 2016 rimane un caso di studio fondamentale per comprendere le vulnerabilità sistemiche dell'IoT. Questo malware ha dimostrato come la combinazione di credenziali predefinite e mancanza di aggiornamenti di sicurezza possa trasformare centinaia di migliaia di dispositivi domestici in armi per attacchi DDoS di scala globale. La semplicità dell'attacco - basato essenzialmente sul tentativo sistematico di credenziali note - evidenzia come problemi apparentemente banali possano avere conseguenze devastanti \parencite{miraiBotnet}.
+L'epidemia del botnet Mirai nel 2016 rimane un caso di studio fondamentale per comprendere le vulnerabilità sistemiche dell'IoT. Questo malware ha dimostrato come la combinazione di credenziali predefinite e mancanza di aggiornamenti di sicurezza possa trasformare centinaia di migliaia di dispositivi domestici in armi per attacchi DDoS di scala globale. La semplicità dell'attacco - basato essenzialmente sul tentativo sistematico di credenziali note - evidenzia come problemi apparentemente banali possano avere conseguenze devastanti \footcite{miraiBotnet}.
 
 \section{Best practice per garantire sicurezza e privacy}
 
@@ -44,27 +44,11 @@ La gestione sistematica degli aggiornamenti rappresenta la prima linea di difesa
 
 \subsection{Segmentazione della rete}
 
-L'isolamento logico dei dispositivi attraverso la segmentazione di rete offre benefici significativi con un impegno implementativo relativamente contenuto:
-
-\begin{itemize}
-    \item \textbf{Rete principale protetta}: riservata a dispositivi contenenti dati sensibili e sistemi IoT verificati
-    \item \textbf{Rete ospiti isolata}: per visitatori occasionali, impedendo accessi non autorizzati all'infrastruttura principale
-\end{itemize}
-
-Questa separazione limita la propagazione di eventuali compromissioni e facilita il monitoraggio del traffico anomalo.
+L’isolamento logico dei dispositivi tramite la segmentazione della rete rappresenta una delle misure di sicurezza più efficaci, poiché permette di ottenere benefici significativi con un impegno tecnico e organizzativo relativamente ridotto. In questo configurazione della rete, la rete domestica può essere suddivisa in più ambienti con delle funzioni distinte. Ad esempio, si puo avere una rete principale che può essere riservata ai dispositivi che gestiscono dati sensibili o ai sistemi IoT considerati più affidabili, mentre una seconda rete separata e isolata può essere destinata agli ospiti della casa, così da impedire accessi indesiderati alle risorse critiche. Una configurazione di questo tipo contribuisce non solo a contenere la propagazione di eventuali compromissioni, ma anche a semplificare l’attività di monitoraggio del traffico anomalo.
 
 \subsection{Firewall e sistemi di monitoraggio}
 
-I router consumer moderni hanno fatto passi significativi nell'integrazione di funzionalità di sicurezza precedentemente riservate ad ambienti enterprise. Produttori come ASUS, Netgear e AVM (Fritz!Box) offrono oggi:
-    \
-\begin{itemize}
-    \item Sistemi di prevenzione delle intrusioni (IPS) integrati
-    \item Analisi comportamentale del traffico di rete
-    \item Filtri per contenuti malevoli aggiornati in tempo reale
-    \item Sistemi di notifica per eventi di sicurezza rilevanti
-\end{itemize}
-
-L'attivazione di queste funzionalità, spesso disponibili ma disabilitate di default, può incrementare significativamente il livello di protezione con uno sforzo minimo. Alcuni provider hanno iniziato a fornire dispositivi preconfigurati con queste protezioni attive, semplificando ulteriormente l'adozione.
+Negli ultimi anni hanno avuto uno sviluppo importante anche i router destinati all’uso domestico, integrando nuove funzioni di sicurezza che in passato erano tipiche solo dei router professionali. I principali produttori come ASUS, Netgear o AVM (Fritz!Box) oggi includono nei loro dispositivi delle soluzioni che spaziano dai sistemi di prevenzione delle intrusioni fino ad analisi del traffico, oltre a servizi in continuo aggiornamento sui filtri del traffico per contenuti potenzialmente malevoli. A tutte queste funzioni si aggiungono poi anche sistemi di notifica in grado di segnalare all’utente eventi di sicurezza rilevanti. Infine alcuni provider della connettività hanno iniziato a proporre direttamente dispositivi preconfigurati con queste funzionalità già attive, rendendo ancora più immediata l’adozione da parte degli utenti meno esperti.
 
 \subsection{Gestione degli accessi e autenticazione forte}
 
@@ -115,15 +99,15 @@ L'adattamento dei protocolli di sicurezza tradizionali alle necessità e caratte
 
 \subsection{Standard di autenticazione nell'era IoT}
 
-La convergenza verso standard aperti facilita l'interoperabilità dei dispositivi di produttori differenti senza compromettere la sicurezza:
+La tendenza all’adozione di standard aperti ha reso sempre più semplice l’interoperabilità tra i dispositivi di produttori differenti, garantendo allo stesso tempo i livelli di sicurezza. Tra queste tecnologie oggi tra le più significative rientrano:
 
 \begin{itemize}
-    \item \textbf{OAuth 2.0 e OpenID Connect}: permettono di concedere permessi specifici a un servizio senza dover condividere direttamente la password, aumentando la sicurezza.
-    \item \textbf{JWT e CBOR Web Tokens}: piccoli “pacchetti” di informazioni firmati digitalmente che contengono tutto ciò che serve per l’autenticazione, riducendo la necessità di mantenere dati lato server.
-    \item \textbf{FIDO2/WebAuthn}: sistemi di autenticazione senza password, che usano metodi come impronte digitali o riconoscimento facciale, sempre più adottati anche nei dispositivi IoT.
+\item \textbf{OAuth 2.0 e OpenID Connect}: questi protocolli consentono di autorizzare un servizio esterno per poter  accedere solo a specifiche risorse, senza dover condividere la password principale. Con questo metodo l’utente riesce a mantenere un controllo più granulare sui propri dati.
+\item \textbf{JWT e CBOR Web Tokens}: si tratta di formati molto leggeri che racchiudono al loro interno tutte le informazioni necessarie all’autenticazione, riducendo la dipendenza da database centrali e semplificando la gestione delle varie sessioni.
+\item \textbf{FIDO2 e WebAuthn}: è lo standard che  l’agestisce l'utenticazione senza password, utilizzando i metodi biometrici come l’impronta digitale o il riconoscimento facciale dei nostri smartphone.
 \end{itemize}
 
-La selezione di dispositivi che implementano questi standard non solo garantisce maggiore sicurezza ma anche migliore integrazione futura.
+La scelta dei vari dispositivi che integrano queste tecnologie ci permette di gestire al meglio la protezione contro accessi non autorizzati, e costituisce anche una garanzia per la compatibilità con le soluzioni future, favorendo ecosistemi più eterogenei e flessibili.
 
 \section{Analisi di casi di violazione della sicurezza in ambito domestico}
 
@@ -154,20 +138,17 @@ Il caso Ring del 2019 ha evidenziato come la sicurezza debba estendersi oltre il
 
 La risposta di Amazon - rendere obbligatoria l'autenticazione a due fattori dopo l'azione legale collettiva - dimostra come la pressione regolatoria e sociale possa accelerare l'adozione di misure di sicurezza basilari ma efficaci.
 
-\subsection{Lezioni apprese e raccomandazioni}
+\subsection*{4.5.3 Lezioni apprese e raccomandazioni}
 
-L'analisi trasversale di questi incidenti rivela pattern ricorrenti:
+L’analisi degli incidenti esaminati finora mette in evidenza una serie di aspetti ricorrenti che possono essere considerati vere e proprie lezioni. Da questi incidenti emergono alcune raccomandazioni utili per poter rafforzare la sicurezza dei nostri sistemi domotici e quindi della nostra casa:
+	1.	Security by default. La configurazione iniziale di un dispositivo dovrebbe già garantire un livello di protezione adeguato, non deve  richiedere all’utente interventi aggiuntivi, anche perchè spesso questi non vengono effettuati.
+	2.	Trasparenza proattiva. È fondamentale che gli utenti siano informati in maniera chiara su quali dati vengono raccolti e in che modo questi dati vengono trattati e protetti.
+	3.	Responsabilità condivisa. La sicurezza non può essere gestita da un solo attore: deve richiede la collaborazione continua tra tutti i diversi produttori, dai provider di servizi e dagli utilizzatori finali.
+	4.	Resilienza operativa. La predisposizione di piani di risposta agli incidenti, testati periodicamnete, riduce in maniera significativa l’impatto di eventuali violazioni.
 
-\begin{enumerate}
-    \item \textbf{Security by default}: la configurazione sicura deve essere lo stato iniziale, non un'opzione
-    \item \textbf{Trasparenza proattiva}: gli utenti devono comprendere quali dati vengono raccolti e come vengono protetti
-    \item \textbf{Modello di responsabilità condivisa}: successo richiede collaborazione tra produttori, provider e utenti finali
-    \item \textbf{Resilienza operativa}: piani di incident response testati minimizzano l'impatto di eventuali breach
-\end{enumerate}
+\subsection*{4.6 Conclusioni e prospettive future}
 
-\section{Conclusioni e prospettive future}
-
-In ambito domotico, la sicurezza va vista come un processo in continua evoluzione. Ogni progresso tecnologico porta con sé nuove opportunità, ma anche rischi che richiedono un aggiornamento costante delle strategie di difesa.
+Nel contesto della domotica residenziale, la sicurezza deve essere intesa come un processo dinamico e in costante evoluzione. Ogni nuovo progresso tecnologico porta con sé nuove opportunità di miglioramento, ma introduce anche nuove potenziali vulnerabilità che richiedono un aggiornamento continuo delle strategie di difesa. Solo mantenendo un approccio proattivo  e adattivo tra i diversi attori sarà possibile garantire un equilibrio sostenibile tra l'innovazione e la protezione.
 
 Le direzioni future più promettenti includono:
 

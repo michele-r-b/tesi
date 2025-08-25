@@ -26,9 +26,9 @@ L’architettura è organizzata su tre livelli: (a) \textit{dispositivi e sensor
 \begin{itemize}
   \item \textbf{Bus SCS (BTicino)}: utilizzato per la comunicazione tra moduli Living Now cablati (interruttori, dimmer e comandi tapparelle) e il gateway, quando l’impianto lo prevede. Garantisce bassa latenza e funzionalità anche in assenza di rete IP.
   \item \textbf{Wi-Fi}: impiegato dai dispositivi Living Now connessi \textit{pre-Matter} (installati in questa abitazione), dal Nuki Smart Lock 3.0 Pro, dalle telecamere Netatmo e dalla stazione meteo Netatmo. È il principale canale di comunicazione verso HomeKit in questa configurazione.
-  \item \textbf{Thread}: utilizzato esclusivamente da dispositivi compatibili Matter o nativamente Thread, come le Nanoleaf Lines. La rete Thread è gestita dai Border Router integrati in HomePod mini e HomePod (2ª gen), garantendo bassa latenza e consumo energetico ridotto.
+  \item \textbf{Thread}: viene utilizzato esclusivamente da dispositivi compatibili con lo standard Matter o nativamente basati su Thread, come ad esempio le \emph{Nanoleaf Lines}. La gestione della rete è affidata ai \textit{Border Router}, già integrati in dispositivi di largo consumo come l’\emph{HomePod mini} e l’\emph{HomePod} di seconda generazione. Questa architettura consente di ottenere comunicazioni a bassa latenza e con un consumo energetico ridotto, due caratteristiche fondamentali per garantire un’esperienza fluida e sostenibile all’interno della smart home.
   \item \textbf{Interruttori BTicino wireless}: modelli da parete privi di cablaggio, alimentati a batteria con comunicazione radio diretta con il gateway via Thread.
-  \item \textbf{HomeKit su IP}: protocollo applicativo utilizzato per automazioni e controlli, con cifratura end-to-end e pairing tramite codice QR.
+  \item \textbf{HomeKit su IP} rappresenta il protocollo applicativo di Apple dedicato all’automazione domestica e al controllo dei dispositivi smart. Si basa su un sistema di cifratura end-to-end, che assicura la protezione dei dati durante tutta la comunicazione, e utilizza un meccanismo di pairing semplice e sicuro tramite codice QR. Questo approccio riduce al minimo i rischi di accesso non autorizzato e rende l’esperienza di configurazione più intuitiva per l’utente finale.
   \item \textbf{HomeKit Secure Video (HKSV)}: per le telecamere Netatmo, con analisi video on-device e registrazione cifrata su iCloud.
 \end{itemize}
 
@@ -130,7 +130,8 @@ Azioni: chiusura tapparelle soggiorno; spegnimento luci;
 \section{Gestione utenti, permessi e privacy}
 \begin{itemize}
   \item \textbf{Ruoli HomeKit}: genitori come amministratori (gestione dispositivi, automazioni, registrazioni video); figli come membri con accesso a luci/tapparelle e audio nelle loro stanze; esclusi controlli su serratura e telecamere.
-  \item \textbf{HKSV e dati}: analisi movimento on-device, video cifrati end-to-end con storage iCloud; definizione di zone sensibili per ridurre notifiche superflue.
+  \item \textbf{HKSV e dati}: Tra le funzionalità avanzate di HomeKit rientra l’analisi del movimento eseguita direttamente \textit{on-device}, che consente di elaborare i dati in locale senza doverli inviare a server esterni su cloud. I flussi video sono inoltre protetti grazie a una cifratura end-to-end e possono essere archiviati in modo sicuro su iCloud. L’utente ha anche la possibilità di definire \textbf{zone sensibili} all’interno dell’inquadratura, riducendo così il numero di notifiche superflue e concentrando l’attenzione solo sugli eventi realmente rilevanti.
+
   \item \textbf{Accessi ospiti}: gestione credenziali temporanee tramite app Nuki; revoca immediata; log accessi consultabile.
 \end{itemize}
 
@@ -138,16 +139,18 @@ Azioni: chiusura tapparelle soggiorno; spegnimento luci;
 L'adozione di un'architettura HomeKit in un contesto multimarca, come quello descritto in questo caso di studio, ha permesso di ottenere un impianto coerente, sicuro e facile da gestire.
 
 \paragraph{Principali vantaggi osservati}
-\begin{itemize}
-  \item \textbf{Gestione centralizzata}: controllo di dispositivi BTicino, Netatmo, Nuki e Nanoleaf da un'unica interfaccia (app Casa), senza necessità di app separate per l'uso quotidiano su ogni device.
-  \item \textbf{Condivisione semplificata}: accesso esteso a tutti i membri della famiglia tramite Condivisione in famiglia Apple, senza configurazioni aggiuntive.
-  \item \textbf{Privacy e sicurezza}: automazioni locali e cifratura end-to-end nativa di HomeKit; per i video, HomeKit Secure Video con analisi on-device e archiviazione cifrata.
-  \item \textbf{Riduzione della complessità}: eliminazione di gateway e bridge multipli, con aggiornamenti e notifiche centralizzati.
-  \item \textbf{Affidabilità operativa}: continuità di funzionamento locale per luci, tapparelle e scenari principali anche in assenza di connessione Internet.
-  \item \textbf{Esperienza uniforme}: interfaccia e comandi vocali coerenti su iPhone, iPad, Mac e Apple Watch.
-  \item \textbf{Scalabilità futura}: predisposizione della rete per dispositivi Matter/Thread, grazie alla presenza di border router integrati (HomePod).
-  \item \textbf{Efficienza energetica}: automazioni di illuminazione e schermature solari che contribuiscono alla riduzione dei consumi e al miglioramento del comfort abitativo.
-  \item \textbf{Maggiore sicurezza di rete}: segmentazione VLAN dedicata all'IoT e isolamento del traffico rispetto alla rete principale.
-\end{itemize}
+
+Dall’analisi delle soluzioni integrate in ambiente HomeKit emergono diversi vantaggi rilevanti. Innanzitutto, la possibilità di una \textbf{gestione centralizzata} semplifica notevolmente l’esperienza d’uso: dispositivi eterogenei come quelli di BTicino, Netatmo, Nuki o Nanoleaf possono essere controllati da un’unica interfaccia, l’app Casa, evitando la frammentazione in applicazioni separate per ogni produttore.  
+
+Un ulteriore beneficio riguarda la \textbf{condivisione semplificata}. Grazie alla funzione di Condivisione in famiglia di Apple, l’accesso ai dispositivi può essere esteso automaticamente a tutti i membri della famiglia, senza necessità di configurazioni aggiuntive.  
+
+Particolarmente significativo è l’aspetto legato a \textbf{privacy e sicurezza}: HomeKit adotta nativamente meccanismi di cifratura end-to-end e automazioni locali. Nel caso dei flussi video, la funzione HomeKit Secure Video assicura che l’analisi venga eseguita direttamente on-device, con archiviazione protetta su iCloud.  
+
+La piattaforma contribuisce inoltre alla \textbf{riduzione della complessità}, eliminando la necessità di gateway o bridge multipli, e centralizzando sia gli aggiornamenti sia le notifiche di sistema. A ciò si affianca una comprovata \textbf{affidabilità operativa}: luci, tapparelle e scenari principali continuano a funzionare anche in assenza di connessione Internet, garantendo continuità all’utente.  
+
+L’\textbf{esperienza uniforme} rappresenta un ulteriore valore aggiunto, grazie a un’interfaccia coerente e comandi vocali disponibili su tutti i dispositivi Apple (iPhone, iPad, Mac e Apple Watch). Allo stesso tempo, l’ecosistema è orientato alla \textbf{scalabilità futura}: la presenza di border router integrati, come quelli degli HomePod, rende la rete pronta ad accogliere dispositivi Matter e Thread.  
+
+Non mancano vantaggi in termini di \textbf{efficienza energetica}, con automazioni dedicate all’illuminazione e alle schermature solari che permettono di ridurre i consumi migliorando al tempo stesso il comfort abitativo. Infine, l’adozione di pratiche di \textbf{sicurezza di rete}, come la segmentazione VLAN per i dispositivi IoT e l’isolamento del traffico rispetto alla rete principale, contribuisce a rafforzare ulteriormente l’affidabilità dell’intero sistema.
+
 
 \noindent In sintesi, la soluzione implementata dimostra come un ecosistema aperto e interoperabile, basato su standard consolidati come HomeKit, possa integrare tecnologie di produttori diversi garantendo facilità d'uso, sicurezza e possibilità di evoluzione nel tempo.
